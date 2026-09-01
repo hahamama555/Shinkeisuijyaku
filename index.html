@@ -2,9 +2,9 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<title>数字カード神経衰弱</title>
+<title>神経衰弱ライブゲーム</title>
 
 <style>
 *{
@@ -12,7 +12,8 @@
   -webkit-tap-highlight-color:transparent;
 }
 
-html,body{
+html,
+body{
   margin:0;
   padding:0;
   width:100%;
@@ -22,17 +23,24 @@ html,body{
   font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Yu Gothic",sans-serif;
 }
 
-button,input{
+button,
+input{
   font-family:inherit;
 }
 
+/* ==================================================
+   9:16 STAGE
+================================================== */
+
 #stage{
   position:fixed;
-  width:min(100vw,56.25vh);
-  height:min(100vh,177.777vw);
   left:50%;
   top:50%;
   transform:translate(-50%,-50%);
+
+  width:min(100vw,56.25vh);
+  height:min(100vh,177.777vw);
+
   background:#111;
   overflow:hidden;
 }
@@ -41,22 +49,25 @@ button,input{
   width:100%;
   height:100%;
   padding:7px;
+
   display:flex;
   flex-direction:column;
+
   overflow:hidden;
 }
 
-
-/* =========================
+/* ==================================================
    HEADER
-========================= */
+================================================== */
 
 .header{
   flex:0 0 6%;
+
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
+
   overflow:hidden;
 }
 
@@ -74,19 +85,21 @@ button,input{
   white-space:nowrap;
 }
 
-
-/* =========================
+/* ==================================================
    STATUS
-========================= */
+================================================== */
 
 .status{
   flex:0 0 7%;
+
   border-radius:9px;
   background:#222;
+
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
+
   overflow:hidden;
 }
 
@@ -102,25 +115,28 @@ button,input{
   color:#aaa;
 }
 
-
-/* =========================
-   CANDIDATE
-========================= */
+/* ==================================================
+   CANDIDATE PANEL
+================================================== */
 
 #candidateArea{
   flex:0 0 12%;
   min-height:0;
+
   display:none;
   flex-direction:column;
+
   overflow:hidden;
 }
 
 .candidate-title{
   flex:0 0 28%;
+
   display:flex;
   justify-content:center;
   align-items:center;
-  color:#ffd400;
+
+  color:#fff;
   font-size:13px;
   font-weight:900;
 }
@@ -128,106 +144,121 @@ button,input{
 .candidates{
   flex:1;
   min-height:0;
+
   display:flex;
   justify-content:center;
   align-items:center;
+
   gap:6px;
+
   overflow:hidden;
 }
 
+/* ★ 紫背景＋白文字 */
+
 .candidate{
   height:88%;
-  aspect-ratio:1/1;
-  border:2px solid #ffd400;
+  aspect-ratio:1 / 1;
+
+  border:2px solid #b56cff;
   border-radius:9px;
-  background:#333;
+
+  background:#7b3fa0;
   color:#fff;
+
   display:flex;
   justify-content:center;
   align-items:center;
+
   font-size:25px;
   font-weight:900;
+
   cursor:pointer;
+
+  box-shadow:0 2px 6px rgba(0,0,0,.35);
 }
 
 .candidate:active{
   transform:scale(.9);
-  background:#ffd400;
-  color:#111;
+  background:#9b59b6;
+  color:#fff;
 }
 
-
-/* =========================
+/* ==================================================
    BOARD
-========================= */
+================================================== */
 
 .board-area{
   flex:1;
   min-height:0;
+
   display:flex;
   justify-content:center;
   align-items:center;
+
   overflow:hidden;
 }
 
 #board{
   width:100%;
   height:100%;
+
   display:grid;
   align-content:center;
   justify-content:center;
+
   overflow:hidden;
 }
 
-
-/* 16 */
+/* 16枚 */
 
 #board.c16{
   grid-template-columns:repeat(4,1fr);
   gap:5px;
 }
 
-
-/* 24 */
+/* 24枚 */
 
 #board.c24{
   grid-template-columns:repeat(6,1fr);
   gap:4px;
 }
 
-
-/* 36 */
+/* 36枚 */
 
 #board.c36{
   grid-template-columns:repeat(6,1fr);
   gap:3px;
 }
 
-
-/* 48 */
+/* 48枚 */
 
 #board.c48{
   grid-template-columns:repeat(8,1fr);
   gap:2px;
 }
 
-
-/* =========================
+/* ==================================================
    CARD
-========================= */
+================================================== */
 
 .card{
   width:100%;
-  aspect-ratio:1/1;
+  aspect-ratio:1 / 1;
+
   perspective:800px;
+
   cursor:pointer;
 }
 
 .card-inner{
   position:relative;
+
   width:100%;
   height:100%;
+
   transform-style:preserve-3d;
+
   transition:transform .28s ease;
 }
 
@@ -236,8 +267,11 @@ button,input{
   transform:rotateY(180deg);
 }
 
-
-/* ★ 数字のカード裏面 */
+/* ==================================================
+   CARD BACK
+   ★ 花札なし
+   ★ 大きな数字
+================================================== */
 
 .card-back{
   position:absolute;
@@ -257,13 +291,16 @@ button,input{
 
 .card-back-number{
   color:#fff;
+
   font-size:28px;
   font-weight:900;
+
   line-height:1;
 }
 
-
-/* カード表 */
+/* ==================================================
+   CARD FRONT
+================================================== */
 
 .card-front{
   position:absolute;
@@ -295,55 +332,70 @@ button,input{
 .card-text{
   width:100%;
   padding:4px;
+
   color:#111;
+
   font-size:14px;
   font-weight:900;
+
   line-height:1.15;
+
   word-break:break-word;
 }
 
 .card.matched .card-front{
   border:2px solid #ffd400;
-  box-shadow:0 0 10px #ffd400;
+
+  box-shadow:
+    0 0 10px #ffd400;
 }
 
-
-/* =========================
+/* ==================================================
    BOTTOM
-========================= */
+================================================== */
 
 .bottom{
   flex:0 0 13%;
   min-height:0;
+
   display:flex;
   flex-direction:column;
+
   overflow:hidden;
 }
 
-
-/* =========================
-   GIFTS
-========================= */
+/* ==================================================
+   GIFT BUTTONS
+================================================== */
 
 .gifts{
   flex:0 0 48%;
+
   display:grid;
   grid-template-columns:repeat(4,1fr);
+
   gap:5px;
+
   align-items:center;
+
   overflow:hidden;
 }
 
 .gift-btn{
   width:100%;
   height:70%;
+
   padding:0;
+
   border:0;
   border-radius:7px;
+
   background:#333;
   color:#fff;
+
   font-size:11px;
   font-weight:900;
+
   white-space:nowrap;
   overflow:hidden;
 }
@@ -353,26 +405,31 @@ button,input{
   color:#111;
 }
 
-
-/* =========================
-   CONTROLS
-========================= */
+/* ==================================================
+   CONTROL BUTTONS
+================================================== */
 
 .controls{
   flex:0 0 52%;
+
   display:grid;
   grid-template-columns:repeat(3,1fr);
+
   gap:5px;
+
   align-items:center;
 }
 
 .control{
   width:100%;
   height:70%;
+
   border:0;
   border-radius:7px;
+
   font-size:13px;
   font-weight:900;
+
   white-space:nowrap;
 }
 
@@ -391,14 +448,14 @@ button,input{
   color:#fff;
 }
 
-
-/* =========================
+/* ==================================================
    SETTINGS
-========================= */
+================================================== */
 
 #settings{
   position:fixed;
   inset:0;
+
   z-index:5000;
 
   display:none;
@@ -407,6 +464,7 @@ button,input{
   color:#fff;
 
   overflow-y:auto;
+
   -webkit-overflow-scrolling:touch;
 
   padding:14px 12px 35px;
@@ -424,52 +482,68 @@ button,input{
 
 .settings-title{
   margin:0 0 15px;
+
   text-align:center;
+
   font-size:28px !important;
   font-weight:900;
+
   line-height:1.2;
 }
 
 .section{
   margin-bottom:12px;
+
   padding:14px;
+
   background:#222;
+
   border-radius:12px;
 }
 
 .section-title{
   margin:0 0 12px;
+
   text-align:center;
+
   font-size:21px !important;
   font-weight:900;
+
   line-height:1.3;
 }
 
 .gift-info{
   margin:0 0 12px;
+
   text-align:center;
+
   color:#ddd;
+
   font-size:15px !important;
+
   line-height:1.7;
 }
 
-
-/* =========================
+/* ==================================================
    CARD COUNT
-========================= */
+================================================== */
 
 .count-grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
+
   gap:7px;
 }
 
 .count-btn{
   min-height:50px;
+
   border:0;
   border-radius:8px;
+
   background:#444;
   color:#fff;
+
   font-size:18px !important;
   font-weight:900;
 }
@@ -479,73 +553,98 @@ button,input{
   color:#111;
 }
 
-
-/* =========================
-   PAIRS
-========================= */
+/* ==================================================
+   PAIR SETTINGS
+================================================== */
 
 .pair-box{
   margin-bottom:11px;
+
   padding:11px;
+
   background:#171717;
+
   border-radius:10px;
 }
 
 .pair-header{
   margin-bottom:9px;
-  color:#ffd400;
+
+  color:#c77dff;
+
   font-size:19px !important;
   font-weight:900;
 }
 
 .pair-name{
   width:100%;
+
   min-height:47px;
+
   margin-bottom:9px;
+
   padding:8px;
+
   border:1px solid #666;
   border-radius:7px;
+
   background:#333;
   color:#fff;
+
   font-size:17px !important;
 }
 
 .card-settings{
   display:grid;
   grid-template-columns:repeat(2,1fr);
+
   gap:8px;
 }
 
 .card-setting{
   padding:8px;
+
   background:#292929;
+
   border-radius:8px;
 }
 
 .card-label{
   margin-bottom:6px;
+
   color:#fff;
+
   font-size:17px !important;
   font-weight:900;
 }
 
 .card-text-input{
   width:100%;
+
   min-height:44px;
+
   margin-bottom:7px;
+
   padding:7px;
+
   border:1px solid #666;
   border-radius:7px;
+
   background:#333;
   color:#fff;
+
   font-size:17px !important;
 }
 
 .preview{
   width:100%;
-  aspect-ratio:1/1;
+
+  aspect-ratio:1 / 1;
+
   margin-bottom:7px;
+
   border-radius:7px;
+
   background:#333;
   color:#fff;
 
@@ -554,6 +653,7 @@ button,input{
   align-items:center;
 
   text-align:center;
+
   overflow:hidden;
 
   font-size:17px !important;
@@ -563,20 +663,29 @@ button,input{
 .preview img{
   width:100%;
   height:100%;
+
   object-fit:cover;
 }
 
 .image-label{
   display:block;
+
   width:100%;
+
   min-height:45px;
+
   padding:10px 3px;
+
   border-radius:7px;
+
   background:#444;
   color:#fff;
+
   text-align:center;
+
   font-size:16px !important;
   font-weight:900;
+
   line-height:1.3;
 }
 
@@ -584,27 +693,33 @@ button,input{
   display:none;
 }
 
-
-/* =========================
+/* ==================================================
    GIFT SETTINGS
-========================= */
+================================================== */
 
 .gift-setting-row{
   display:grid;
   grid-template-columns:1fr 85px;
+
   gap:8px;
+
   margin-bottom:9px;
 }
 
 .gift-name-input,
 .gift-count-input{
   width:100%;
+
   min-height:47px;
+
   padding:8px;
+
   border:1px solid #666;
   border-radius:7px;
+
   background:#333;
   color:#fff;
+
   font-size:17px !important;
 }
 
@@ -613,19 +728,19 @@ button,input{
   font-weight:900;
 }
 
-
-/* =========================
+/* ==================================================
    COMPLETE IMAGE
-========================= */
+================================================== */
 
 .complete-preview{
   width:100%;
   height:160px;
+
   margin-bottom:9px;
 
   border-radius:9px;
-  background:#333;
 
+  background:#333;
   color:#aaa;
 
   display:flex;
@@ -633,6 +748,7 @@ button,input{
   align-items:center;
 
   text-align:center;
+
   overflow:hidden;
 
   font-size:15px !important;
@@ -641,17 +757,24 @@ button,input{
 .complete-preview img{
   width:100%;
   height:100%;
+
   object-fit:contain;
 }
 
 .complete-label{
   display:block;
+
   min-height:50px;
+
   padding:12px;
+
   border-radius:8px;
+
   background:#444;
   color:#fff;
+
   text-align:center;
+
   font-size:17px !important;
   font-weight:900;
 }
@@ -660,19 +783,23 @@ button,input{
   display:none;
 }
 
-
-/* =========================
+/* ==================================================
    SETTING BUTTONS
-========================= */
+================================================== */
 
 .save-btn,
 .close-btn{
   width:100%;
+
   min-height:54px;
+
   margin-top:8px;
+
   padding:12px;
+
   border:0;
   border-radius:9px;
+
   font-size:18px !important;
   font-weight:900;
 }
@@ -687,14 +814,14 @@ button,input{
   color:#fff;
 }
 
-
-/* =========================
+/* ==================================================
    COMPLETE SCREEN
-========================= */
+================================================== */
 
 #completeScreen{
   position:fixed;
   inset:0;
+
   z-index:6000;
 
   display:none;
@@ -714,12 +841,15 @@ button,input{
 .complete-box{
   width:100%;
   max-width:600px;
+
   text-align:center;
 }
 
 .complete-title{
   margin-bottom:11px;
+
   color:#ffd400;
+
   font-size:32px;
   font-weight:900;
 }
@@ -727,34 +857,43 @@ button,input{
 #completeImage{
   width:100%;
   max-height:70vh;
+
   object-fit:contain;
+
   border:3px solid #fff;
   border-radius:9px;
+
   background:#222;
 }
 
 .complete-message{
   margin-top:9px;
+
   color:#fff;
+
   font-size:16px;
 }
 
 .complete-close{
   width:100%;
+
   margin-top:11px;
+
   padding:13px;
+
   border:0;
   border-radius:9px;
+
   background:#ffd400;
   color:#111;
+
   font-size:18px;
   font-weight:900;
 }
 
-
-/* =========================
+/* ==================================================
    SMALL SCREEN
-========================= */
+================================================== */
 
 @media(max-height:650px){
 
@@ -795,18 +934,17 @@ button,input{
   .image-label{
     font-size:15px !important;
   }
+
 }
 
 </style>
 </head>
 
-
 <body>
 
-
-<!-- =====================================================
+<!-- ==================================================
      GAME
-===================================================== -->
+================================================== -->
 
 <div id="stage">
 
@@ -863,7 +1001,7 @@ button,input{
     </div>
 
 
-    <!-- カード -->
+    <!-- カードボード -->
 
     <div class="board-area">
 
@@ -944,9 +1082,9 @@ button,input{
 </div>
 
 
-<!-- =====================================================
+<!-- ==================================================
      SETTINGS
-===================================================== -->
+================================================== -->
 
 <div id="settings">
 
@@ -1009,9 +1147,12 @@ button,input{
       </div>
 
       <div class="gift-info">
-        例えば「京都」と「八ツ橋」を<br>
-        1つのペアにできます。<br>
+
+        例えば<br>
+        「京都」＋「八ツ橋」<br>
+        のようなペアを自由に作れます。<br>
         文字または画像を設定できます。
+
       </div>
 
       <div id="pairList"></div>
@@ -1028,7 +1169,9 @@ button,input{
       </div>
 
       <div class="gift-info">
-        ギフト名と候補枚数を変更できます。
+
+        ギフト名と候補カード枚数を設定できます。
+
       </div>
 
 
@@ -1161,9 +1304,9 @@ button,input{
 </div>
 
 
-<!-- =====================================================
+<!-- ==================================================
      COMPLETE
-===================================================== -->
+================================================== -->
 
 <div id="completeScreen">
 
@@ -1196,9 +1339,9 @@ button,input{
 
 <script>
 
-/* =====================================================
+/* ==================================================
    VARIABLES
-===================================================== */
+================================================== */
 
 let cardCount = 16;
 
@@ -1216,9 +1359,9 @@ let candidateIndexes = [];
 let completeImageData = null;
 
 
-/* =====================================================
+/* ==================================================
    GIFTS
-===================================================== */
+================================================== */
 
 let gifts = [
 
@@ -1245,9 +1388,9 @@ let gifts = [
 ];
 
 
-/* =====================================================
+/* ==================================================
    PAIRS
-===================================================== */
+================================================== */
 
 let pairs = [
 
@@ -1282,9 +1425,9 @@ let pairs = [
 let pairImages = [];
 
 
-/* =====================================================
+/* ==================================================
    ESCAPE
-===================================================== */
+================================================== */
 
 function esc(text){
 
@@ -1297,9 +1440,9 @@ function esc(text){
 }
 
 
-/* =====================================================
+/* ==================================================
    SHUFFLE
-===================================================== */
+================================================== */
 
 function shuffle(array){
 
@@ -1328,9 +1471,9 @@ function shuffle(array){
 }
 
 
-/* =====================================================
-   SETTINGS
-===================================================== */
+/* ==================================================
+   OPEN SETTINGS
+================================================== */
 
 function openSettings(){
 
@@ -1343,6 +1486,10 @@ function openSettings(){
 }
 
 
+/* ==================================================
+   CLOSE SETTINGS
+================================================== */
+
 function closeSettings(){
 
   document
@@ -1352,14 +1499,16 @@ function closeSettings(){
 }
 
 
-/* =====================================================
-   CREATE PAIR SETTINGS
-===================================================== */
+/* ==================================================
+   PAIR SETTINGS
+================================================== */
 
 function createPairSettings(){
 
   const list =
-    document.getElementById("pairList");
+    document.getElementById(
+      "pairList"
+    );
 
   list.innerHTML="";
 
@@ -1390,7 +1539,9 @@ function createPairSettings(){
 
 
     const box =
-      document.createElement("div");
+      document.createElement(
+        "div"
+      );
 
     box.className="pair-box";
 
@@ -1517,51 +1668,50 @@ function createPairSettings(){
     }
 
 
-    const inputA =
-      document.getElementById(
+    document
+      .getElementById(
         `pairA${i}`
+      )
+      .addEventListener(
+        "input",
+        function(){
+
+          if(!pairImages[i].a){
+
+            document
+              .getElementById(
+                `previewA${i}`
+              )
+              .textContent=
+              this.value;
+
+          }
+
+        }
       );
 
-    const inputB =
-      document.getElementById(
+
+    document
+      .getElementById(
         `pairB${i}`
+      )
+      .addEventListener(
+        "input",
+        function(){
+
+          if(!pairImages[i].b){
+
+            document
+              .getElementById(
+                `previewB${i}`
+              )
+              .textContent=
+              this.value;
+
+          }
+
+        }
       );
-
-
-    inputA.addEventListener(
-      "input",
-      function(){
-
-        if(!pairImages[i].a){
-
-          document
-            .getElementById(
-              `previewA${i}`
-            )
-            .textContent=this.value;
-
-        }
-
-      }
-    );
-
-
-    inputB.addEventListener(
-      "input",
-      function(){
-
-        if(!pairImages[i].b){
-
-          document
-            .getElementById(
-              `previewB${i}`
-            )
-            .textContent=this.value;
-
-        }
-
-      }
-    );
 
   }
 
@@ -1606,7 +1756,7 @@ function createPairSettings(){
               );
 
 
-            preview.innerHTML =
+            preview.innerHTML=
               `<img src="${e.target.result}" alt="">`;
 
           };
@@ -1622,9 +1772,9 @@ function createPairSettings(){
 }
 
 
-/* =====================================================
-   COUNT BUTTONS
-===================================================== */
+/* ==================================================
+   CARD COUNT
+================================================== */
 
 document
   .querySelectorAll(".count-btn")
@@ -1662,9 +1812,9 @@ document
   });
 
 
-/* =====================================================
+/* ==================================================
    COMPLETE IMAGE
-===================================================== */
+================================================== */
 
 document
   .getElementById("completeInput")
@@ -1703,9 +1853,9 @@ document
   );
 
 
-/* =====================================================
-   SAVE
-===================================================== */
+/* ==================================================
+   SAVE SETTINGS
+================================================== */
 
 function saveSettings(){
 
@@ -1719,30 +1869,26 @@ function saveSettings(){
     i++
   ){
 
-    const inputA =
+    const a =
       document.getElementById(
         `pairA${i}`
       );
 
-    const inputB =
+    const b =
       document.getElementById(
         `pairB${i}`
       );
 
 
-    if(inputA){
-
-      pairs[i][0] =
-        inputA.value.trim();
-
+    if(a){
+      pairs[i][0]=
+        a.value.trim();
     }
 
 
-    if(inputB){
-
-      pairs[i][1] =
-        inputB.value.trim();
-
+    if(b){
+      pairs[i][1]=
+        b.value.trim();
     }
 
   }
@@ -1790,9 +1936,9 @@ function saveSettings(){
 }
 
 
-/* =====================================================
-   GIFT BUTTONS
-===================================================== */
+/* ==================================================
+   UPDATE GIFT BUTTONS
+================================================== */
 
 function updateGiftButtons(){
 
@@ -1801,7 +1947,7 @@ function updateGiftButtons(){
     .forEach(
       (btn,index)=>{
 
-        btn.textContent =
+        btn.textContent=
           gifts[index].name;
 
       }
@@ -1810,18 +1956,20 @@ function updateGiftButtons(){
 }
 
 
-/* =====================================================
+/* ==================================================
    CREATE CARDS
-===================================================== */
+================================================== */
 
 function createCards(){
 
   const board =
-    document.getElementById("board");
+    document.getElementById(
+      "board"
+    );
 
   board.innerHTML="";
 
-  board.className =
+  board.className=
     "c"+cardCount;
 
 
@@ -1876,20 +2024,23 @@ function createCards(){
     (item,index)=>{
 
       const card =
-        document.createElement("div");
+        document.createElement(
+          "div"
+        );
 
 
       card.className="card";
 
 
       /*
-         ★ カード番号
+        ★ カード番号
       */
 
-      card.dataset.index=index;
+      card.dataset.index=
+        index;
 
 
-      card.dataset.pairId =
+      card.dataset.pairId=
         item.pairId;
 
 
@@ -1918,9 +2069,6 @@ function createCards(){
 
         <div class="card-inner">
 
-
-          <!-- ★ 数字の裏面 -->
-
           <div class="card-back">
 
             <div class="card-back-number">
@@ -1929,15 +2077,9 @@ function createCards(){
 
           </div>
 
-
-          <!-- 表面 -->
-
           <div class="card-front">
-
             ${front}
-
           </div>
-
 
         </div>
 
@@ -1962,9 +2104,9 @@ function createCards(){
 }
 
 
-/* =====================================================
+/* ==================================================
    SELECT CARD
-===================================================== */
+================================================== */
 
 function selectCard(card){
 
@@ -1974,23 +2116,19 @@ function selectCard(card){
   if(
     card.classList.contains("matched")
   ){
-
     return;
-
   }
 
 
   if(
     card.classList.contains("flipped")
   ){
-
     return;
-
   }
 
 
   /*
-     ギフト候補制限
+    候補制限中
   */
 
   if(
@@ -2013,7 +2151,7 @@ function selectCard(card){
           "message"
         )
         .textContent=
-        "候補の数字から選んでね！";
+        "紫の候補から選んでね！";
 
       return;
 
@@ -2054,9 +2192,9 @@ function selectCard(card){
 }
 
 
-/* =====================================================
-   MATCH
-===================================================== */
+/* ==================================================
+   CHECK MATCH
+================================================== */
 
 function checkMatch(){
 
@@ -2089,6 +2227,7 @@ function checkMatch(){
 
 
     firstCard=null;
+
     secondCard=null;
 
 
@@ -2125,7 +2264,7 @@ function checkMatch(){
         "statusMain"
       )
       .textContent=
-      "もう一度！";
+      "残念！";
 
 
     setTimeout(
@@ -2150,6 +2289,7 @@ function checkMatch(){
 
 
         firstCard=null;
+
         secondCard=null;
 
         lockBoard=false;
@@ -2171,9 +2311,9 @@ function checkMatch(){
 }
 
 
-/* =====================================================
-   ★ GIFT CANDIDATES
-===================================================== */
+/* ==================================================
+   GIFT CANDIDATES
+================================================== */
 
 function activateGift(giftIndex){
 
@@ -2233,7 +2373,7 @@ function activateGift(giftIndex){
         })
       )
       .filter(
-        item =>
+        item=>
 
           !item.card.classList.contains(
             "matched"
@@ -2251,9 +2391,7 @@ function activateGift(giftIndex){
   if(
     available.length<2
   ){
-
     return;
-
   }
 
 
@@ -2274,14 +2412,14 @@ function activateGift(giftIndex){
   }
 
 
-  candidateCount =
+  candidateCount=
     Math.max(
       2,
       candidateCount
     );
 
 
-  candidateCount =
+  candidateCount=
     Math.min(
       candidateCount,
       available.length
@@ -2289,7 +2427,7 @@ function activateGift(giftIndex){
 
 
   /*
-     ペアごとに分類
+    ペア分類
   */
 
   const pairMap={};
@@ -2316,7 +2454,7 @@ function activateGift(giftIndex){
 
 
   /*
-     完成しているペア
+    完成しているペアを探す
   */
 
   const completePairs =
@@ -2330,7 +2468,7 @@ function activateGift(giftIndex){
 
 
   /*
-     ★ 必ず正解ペアを1組入れる
+    ★ 候補2枚でも必ず揃う
   */
 
   if(
@@ -2347,13 +2485,14 @@ function activateGift(giftIndex){
 
 
     selected.push(pair[0]);
+
     selected.push(pair[1]);
 
   }
 
 
   /*
-     残りを追加
+    残りを追加
   */
 
   const used =
@@ -2366,7 +2505,7 @@ function activateGift(giftIndex){
 
   const remaining =
     available.filter(
-      item =>
+      item=>
         !used.has(
           item.index
         )
@@ -2406,7 +2545,7 @@ function activateGift(giftIndex){
       "statusMain"
     )
     .textContent=
-    "候補から2枚選んでね！";
+    "紫の候補から2枚選んでね！";
 
 
   document
@@ -2420,9 +2559,9 @@ function activateGift(giftIndex){
 }
 
 
-/* =====================================================
-   ★ CANDIDATE PANEL
-===================================================== */
+/* ==================================================
+   SHOW CANDIDATES
+================================================== */
 
 function showCandidates(){
 
@@ -2455,7 +2594,7 @@ function showCandidates(){
 
 
       /*
-         ★ 大きな数字
+        ★ 大きな白数字
       */
 
       button.textContent=
@@ -2498,9 +2637,9 @@ function showCandidates(){
 }
 
 
-/* =====================================================
+/* ==================================================
    CLEAR CANDIDATES
-===================================================== */
+================================================== */
 
 function clearCandidates(){
 
@@ -2530,9 +2669,9 @@ function clearCandidates(){
 }
 
 
-/* =====================================================
+/* ==================================================
    STATUS
-===================================================== */
+================================================== */
 
 function updateStatus(){
 
@@ -2549,9 +2688,9 @@ function updateStatus(){
 }
 
 
-/* =====================================================
-   START
-===================================================== */
+/* ==================================================
+   START GAME
+================================================== */
 
 function startGame(){
 
@@ -2588,9 +2727,9 @@ function startGame(){
 }
 
 
-/* =====================================================
+/* ==================================================
    COMPLETE
-===================================================== */
+================================================== */
 
 function showComplete(){
 
@@ -2633,9 +2772,9 @@ function showComplete(){
 }
 
 
-/* =====================================================
+/* ==================================================
    EVENTS
-===================================================== */
+================================================== */
 
 document
   .getElementById(
@@ -2731,9 +2870,9 @@ document
   });
 
 
-/* =====================================================
-   INITIAL
-===================================================== */
+/* ==================================================
+   INITIALIZE
+================================================== */
 
 updateGiftButtons();
 
