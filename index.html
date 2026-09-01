@@ -1,1 +1,1324 @@
-# Shinkeisuijyaku
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>画像神経衰弱 LIVE GAME</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+body{
+  margin:0;
+  background:#111;
+  color:#fff;
+  font-family:-apple-system,BlinkMacSystemFont,
+  "Helvetica Neue","Hiragino Kaku Gothic ProN",
+  "Yu Gothic",sans-serif;
+}
+
+button,input{
+  font:inherit;
+}
+
+.app{
+  width:100%;
+  max-width:720px;
+  margin:auto;
+  padding:10px;
+}
+
+/* =========================
+タイトル
+========================= */
+
+.title{
+  text-align:center;
+  font-size:25px;
+  font-weight:900;
+  margin:4px 0;
+}
+
+.subtitle{
+  text-align:center;
+  font-size:13px;
+  color:#aaa;
+  margin-bottom:10px;
+}
+
+
+/* =========================
+設定
+========================= */
+
+.settings{
+  background:#222;
+  border-radius:14px;
+  padding:12px;
+  margin-bottom:10px;
+}
+
+.setting-title{
+  text-align:center;
+  font-size:16px;
+  font-weight:bold;
+  margin-bottom:8px;
+}
+
+
+/* =========================
+枚数
+========================= */
+
+.count-buttons{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:6px;
+}
+
+.count-btn{
+  background:#444;
+  color:#fff;
+  border:0;
+  border-radius:8px;
+  padding:9px 3px;
+  font-weight:bold;
+}
+
+.count-btn.active{
+  background:#ffd400;
+  color:#111;
+}
+
+
+/* =========================
+絵柄設定
+========================= */
+
+.symbol-list{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:7px;
+}
+
+.symbol-row{
+  display:grid;
+  grid-template-columns:28px 70px 1fr;
+  gap:6px;
+  align-items:center;
+}
+
+.symbol-number{
+  color:#ffd400;
+  font-weight:bold;
+  text-align:center;
+}
+
+.preview{
+  width:70px;
+  height:55px;
+  border-radius:7px;
+  background:#333;
+  border:1px solid #555;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  font-size:28px;
+}
+
+.preview img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.file-label{
+  display:block;
+  width:100%;
+  background:#444;
+  border-radius:7px;
+  padding:7px;
+  text-align:center;
+  font-size:12px;
+  cursor:pointer;
+}
+
+.file-input{
+  display:none;
+}
+
+.text-input{
+  width:100%;
+  margin-top:4px;
+  padding:7px;
+  background:#333;
+  color:#fff;
+  border:1px solid #555;
+  border-radius:7px;
+}
+
+.apply{
+  width:100%;
+  border:0;
+  border-radius:8px;
+  background:#555;
+  color:#fff;
+  padding:10px;
+  margin-top:9px;
+  font-weight:bold;
+}
+
+
+/* =========================
+完成画像
+========================= */
+
+.complete-options{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:6px;
+}
+
+.complete-option{
+  height:65px;
+  border:3px solid transparent;
+  border-radius:8px;
+  overflow:hidden;
+  background:#333;
+  cursor:pointer;
+}
+
+.complete-option.selected{
+  border-color:#ffd400;
+}
+
+.complete-option img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.upload-complete{
+  display:block;
+  margin-top:7px;
+  background:#333;
+  padding:9px;
+  border-radius:8px;
+  text-align:center;
+  font-size:13px;
+}
+
+.upload-complete input{
+  display:none;
+}
+
+
+/* =========================
+ステータス
+========================= */
+
+.status{
+  background:#1e1e1e;
+  border-radius:10px;
+  padding:9px;
+  text-align:center;
+  margin-bottom:8px;
+}
+
+.status-main{
+  font-weight:bold;
+  font-size:17px;
+}
+
+.status-sub{
+  font-size:12px;
+  color:#aaa;
+  margin-top:2px;
+}
+
+
+/* =========================
+ゲーム盤
+========================= */
+
+.board{
+  display:grid;
+  gap:5px;
+}
+
+.board.c16{
+  grid-template-columns:repeat(4,1fr);
+}
+
+.board.c24{
+  grid-template-columns:repeat(6,1fr);
+}
+
+.board.c36{
+  grid-template-columns:repeat(6,1fr);
+}
+
+.board.c48{
+  grid-template-columns:repeat(8,1fr);
+}
+
+
+/* =========================
+カード
+========================= */
+
+.card{
+  aspect-ratio:1/1;
+  perspective:800px;
+  cursor:pointer;
+}
+
+.card-inner{
+  position:relative;
+  width:100%;
+  height:100%;
+  transform-style:preserve-3d;
+  transition:transform .35s;
+}
+
+.card.flipped .card-inner,
+.card.matched .card-inner{
+  transform:rotateY(180deg);
+}
+
+.card-front,
+.card-back{
+  position:absolute;
+  inset:0;
+  backface-visibility:hidden;
+  border-radius:8px;
+  overflow:hidden;
+}
+
+
+/* 裏 */
+
+.card-back{
+  background:linear-gradient(135deg,#5142c7,#ad31d0);
+  border:2px solid #fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.card-number{
+  font-size:clamp(12px,3.3vw,23px);
+  font-weight:900;
+  text-shadow:0 2px 3px #000;
+}
+
+
+/* 表 */
+
+.card-front{
+  transform:rotateY(180deg);
+  background:#fff;
+  border:2px solid #fff;
+  color:#111;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:3px;
+}
+
+.card-front img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.card-content{
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  font-size:clamp(13px,4vw,32px);
+  font-weight:bold;
+  word-break:break-word;
+}
+
+.card-content span{
+  font-size:clamp(9px,2.5vw,15px);
+  margin-top:2px;
+}
+
+.card.matched .card-front{
+  border-color:#ffd400;
+  box-shadow:0 0 10px #ffd400;
+}
+
+
+/* =========================
+ボタン
+========================= */
+
+.controls{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px;
+  margin-top:10px;
+}
+
+.control-btn{
+  border:0;
+  border-radius:9px;
+  padding:12px;
+  font-weight:bold;
+}
+
+.start{
+  background:#ffd400;
+  color:#111;
+}
+
+.reset{
+  background:#444;
+  color:#fff;
+}
+
+
+/* =========================
+完成画面
+========================= */
+
+.complete{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.94);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+  padding:15px;
+}
+
+.complete.show{
+  display:flex;
+}
+
+.complete-box{
+  width:100%;
+  max-width:650px;
+  text-align:center;
+}
+
+.complete-title{
+  font-size:32px;
+  font-weight:900;
+  color:#ffd400;
+  margin-bottom:10px;
+}
+
+.complete-image{
+  width:100%;
+  max-height:72vh;
+  object-fit:contain;
+  border:3px solid #fff;
+  border-radius:12px;
+  background:#222;
+}
+
+.close-complete{
+  width:100%;
+  border:0;
+  border-radius:9px;
+  padding:12px;
+  margin-top:10px;
+  font-weight:bold;
+}
+
+
+/* =========================
+スマホ
+========================= */
+
+@media(max-width:480px){
+
+  .app{
+    padding:7px;
+  }
+
+  .title{
+    font-size:22px;
+  }
+
+  .board{
+    gap:4px;
+  }
+
+  .symbol-row{
+    grid-template-columns:25px 65px 1fr;
+  }
+
+  .preview{
+    width:65px;
+    height:50px;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<div class="title">
+🎴 画像神経衰弱 LIVE
+</div>
+
+<div class="subtitle">
+カードを全部揃えて完成画像を出そう！
+</div>
+
+
+<!-- =====================
+カード枚数
+===================== -->
+
+<div class="settings">
+
+<div class="setting-title">
+🎴 カード枚数
+</div>
+
+<div class="count-buttons">
+
+<button class="count-btn active" data-count="16">
+16枚
+</button>
+
+<button class="count-btn" data-count="24">
+24枚
+</button>
+
+<button class="count-btn" data-count="36">
+36枚
+</button>
+
+<button class="count-btn" data-count="48">
+48枚
+</button>
+
+</div>
+
+
+<!-- =====================
+絵柄設定
+===================== -->
+
+<div style="margin-top:14px">
+
+<div class="setting-title">
+🖼️ 絵柄を自由設定
+</div>
+
+<div id="symbolList"
+     class="symbol-list">
+</div>
+
+<button class="apply"
+        onclick="applySymbols()">
+絵柄を設定する
+</button>
+
+</div>
+
+
+<!-- =====================
+完成画像
+===================== -->
+
+<div style="margin-top:14px">
+
+<div class="setting-title">
+🎉 全部揃った時の完成画像
+</div>
+
+<div class="complete-options">
+
+<div class="complete-option selected"
+     data-image="0">
+
+<img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=800&q=80">
+
+</div>
+
+<div class="complete-option"
+     data-image="1">
+
+<img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=800&q=80">
+
+</div>
+
+<div class="complete-option"
+     data-image="2">
+
+<img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=800&q=80">
+
+</div>
+
+</div>
+
+<label class="upload-complete">
+
+📷 オリジナル完成画像を選択
+
+<input type="file"
+       id="completeUpload"
+       accept="image/*">
+
+</label>
+
+</div>
+
+</div>
+
+
+<!-- =====================
+ステータス
+===================== -->
+
+<div class="status">
+
+<div class="status-main"
+     id="statusMain">
+「ゲーム開始」を押してね！
+</div>
+
+<div class="status-sub"
+     id="statusSub">
+ペア：0 / 8
+</div>
+
+</div>
+
+
+<!-- =====================
+ゲーム
+===================== -->
+
+<div id="board"
+     class="board c16">
+</div>
+
+
+<div class="controls">
+
+<button class="control-btn start"
+        onclick="startGame()">
+🎮 ゲーム開始
+</button>
+
+<button class="control-btn reset"
+        onclick="resetGame()">
+🔄 リセット
+</button>
+
+</div>
+
+</div>
+
+
+<!-- =====================
+完成画面
+===================== -->
+
+<div class="complete"
+     id="complete">
+
+<div class="complete-box">
+
+<div class="complete-title">
+🎉 全部完成！ 🎉
+</div>
+
+<img id="completeImage"
+     class="complete-image">
+
+<button class="close-complete"
+        onclick="closeComplete()">
+もう一度ゲームする
+</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =================================
+設定
+================================= */
+
+let cardCount=16;
+
+let symbols=[
+  {text:"🍎",image:null},
+  {text:"🍩",image:null},
+  {text:"🍓",image:null},
+  {text:"🍔",image:null},
+  {text:"🚗",image:null},
+  {text:"⭐",image:null},
+  {text:"🎁",image:null},
+  {text:"❤️",image:null},
+  {text:"🐱",image:null},
+  {text:"🍕",image:null},
+  {text:"🎈",image:null},
+  {text:"🌈",image:null},
+  {text:"🐶",image:null},
+  {text:"🍀",image:null},
+  {text:"⚽",image:null},
+  {text:"🎵",image:null},
+  {text:"🌸",image:null},
+  {text:"🍰",image:null},
+  {text:"🚀",image:null},
+  {text:"🦄",image:null},
+  {text:"🐼",image:null},
+  {text:"🍉",image:null},
+  {text:"🌻",image:null},
+  {text:"🎂",image:null}
+];
+
+let cards=[];
+
+let firstCard=null;
+let secondCard=null;
+
+let lockBoard=false;
+
+let matchedPairs=0;
+
+let selectedCompleteImage=0;
+
+let customCompleteImage=null;
+
+
+/* =================================
+完成画像
+================================= */
+
+const completionImages=[
+
+"https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=1200&q=90",
+
+"https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1200&q=90",
+
+"https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=1200&q=90"
+
+];
+
+
+/* =================================
+設定欄作成
+================================= */
+
+function createSymbolInputs(){
+
+  const list=document.getElementById("symbolList");
+
+  list.innerHTML="";
+
+  const pairCount=cardCount/2;
+
+  for(let i=0;i<pairCount;i++){
+
+    if(!symbols[i]){
+      symbols[i]={
+        text:"",
+        image:null
+      };
+    }
+
+    const row=document.createElement("div");
+
+    row.className="symbol-row";
+
+    row.innerHTML=`
+
+      <div class="symbol-number">
+        ${i+1}
+      </div>
+
+      <div class="preview"
+           id="preview-${i}">
+      </div>
+
+      <div>
+
+        <label class="file-label">
+
+          📷 画像を選択
+
+          <input
+            class="file-input"
+            type="file"
+            accept="image/*"
+            data-index="${i}">
+
+        </label>
+
+        <input
+          class="text-input"
+          id="text-${i}"
+          value="${symbols[i].text || ""}"
+          placeholder="文字・絵文字">
+
+      </div>
+    `;
+
+    list.appendChild(row);
+
+    updatePreview(i);
+
+  }
+
+  document.querySelectorAll(".file-input")
+  .forEach(input=>{
+
+    input.addEventListener("change",function(e){
+
+      const index=
+        Number(this.dataset.index);
+
+      const file=this.files[0];
+
+      if(!file)return;
+
+      const reader=new FileReader();
+
+      reader.onload=function(event){
+
+        symbols[index].image=
+          event.target.result;
+
+        updatePreview(index);
+
+      };
+
+      reader.readAsDataURL(file);
+
+    });
+
+  });
+
+}
+
+
+/* =================================
+プレビュー
+================================= */
+
+function updatePreview(index){
+
+  const preview=
+    document.getElementById(
+      "preview-"+index
+    );
+
+  if(!preview)return;
+
+  if(symbols[index].image){
+
+    preview.innerHTML=`
+      <img src="${symbols[index].image}">
+    `;
+
+  }else{
+
+    preview.textContent=
+      symbols[index].text || "？";
+
+  }
+
+}
+
+
+/* =================================
+絵柄設定
+================================= */
+
+function applySymbols(){
+
+  const pairCount=cardCount/2;
+
+  for(let i=0;i<pairCount;i++){
+
+    const input=
+      document.getElementById("text-"+i);
+
+    symbols[i].text=
+      input.value.trim();
+
+  }
+
+  startGame();
+
+}
+
+
+/* =================================
+枚数変更
+================================= */
+
+document.querySelectorAll(".count-btn")
+.forEach(btn=>{
+
+  btn.addEventListener("click",()=>{
+
+    document.querySelectorAll(".count-btn")
+    .forEach(b=>{
+      b.classList.remove("active");
+    });
+
+    btn.classList.add("active");
+
+    cardCount=
+      Number(btn.dataset.count);
+
+    createSymbolInputs();
+
+    resetGame();
+
+  });
+
+});
+
+
+/* =================================
+シャッフル
+================================= */
+
+function shuffle(array){
+
+  for(let i=array.length-1;i>0;i--){
+
+    const j=
+      Math.floor(Math.random()*(i+1));
+
+    [array[i],array[j]]=
+    [array[j],array[i]];
+
+  }
+
+}
+
+
+/* =================================
+カード作成
+================================= */
+
+function createCards(){
+
+  const board=
+    document.getElementById("board");
+
+  board.innerHTML="";
+
+  board.className=
+    "board c"+cardCount;
+
+  cards=[];
+
+  const pairCount=cardCount/2;
+
+  for(let i=0;i<pairCount;i++){
+
+    cards.push({
+      id:i,
+      data:symbols[i]
+    });
+
+    cards.push({
+      id:i,
+      data:symbols[i]
+    });
+
+  }
+
+  shuffle(cards);
+
+  cards.forEach((data,index)=>{
+
+    const card=
+      document.createElement("div");
+
+    card.className="card";
+
+    card.dataset.id=data.id;
+
+    let front="";
+
+    if(data.data.image){
+
+      front=`
+        <img src="${data.data.image}">
+      `;
+
+    }else{
+
+      front=`
+        <div class="card-content">
+          ${escapeHTML(
+            data.data.text || "？"
+          )}
+        </div>
+      `;
+
+    }
+
+    card.innerHTML=`
+
+      <div class="card-inner">
+
+        <div class="card-back">
+
+          <div class="card-number">
+            ${index+1}
+          </div>
+
+        </div>
+
+        <div class="card-front">
+
+          ${front}
+
+        </div>
+
+      </div>
+
+    `;
+
+    card.addEventListener(
+      "click",
+      ()=>flipCard(card)
+    );
+
+    board.appendChild(card);
+
+  });
+
+}
+
+
+/* =================================
+HTMLエスケープ
+================================= */
+
+function escapeHTML(text){
+
+  const div=
+    document.createElement("div");
+
+  div.textContent=text;
+
+  return div.innerHTML;
+
+}
+
+
+/* =================================
+ゲーム開始
+================================= */
+
+function startGame(){
+
+  document.getElementById("complete")
+  .classList.remove("show");
+
+  matchedPairs=0;
+
+  firstCard=null;
+
+  secondCard=null;
+
+  lockBoard=false;
+
+  createCards();
+
+  updateStatus();
+
+  document.getElementById("statusMain")
+  .textContent=
+  "カードを2枚選んでね！";
+
+}
+
+
+/* =================================
+カードをめくる
+================================= */
+
+function flipCard(card){
+
+  if(lockBoard)return;
+
+  if(card===firstCard)return;
+
+  if(card.classList.contains("matched"))
+    return;
+
+  card.classList.add("flipped");
+
+  if(!firstCard){
+
+    firstCard=card;
+
+    document.getElementById("statusMain")
+    .textContent=
+    "もう1枚選んでね！";
+
+    return;
+
+  }
+
+  secondCard=card;
+
+  checkMatch();
+
+}
+
+
+/* =================================
+判定
+================================= */
+
+function checkMatch(){
+
+  if(
+    firstCard.dataset.id===
+    secondCard.dataset.id
+  ){
+
+    matchCards();
+
+  }else{
+
+    unflipCards();
+
+  }
+
+}
+
+
+/* =================================
+ペア成立
+================================= */
+
+function matchCards(){
+
+  firstCard.classList.add("matched");
+
+  secondCard.classList.add("matched");
+
+  matchedPairs++;
+
+  updateStatus();
+
+  firstCard=null;
+  secondCard=null;
+
+  if(
+    matchedPairs===
+    cardCount/2
+  ){
+
+    setTimeout(
+      showComplete,
+      600
+    );
+
+  }
+
+}
+
+
+/* =================================
+ハズレ
+================================= */
+
+function unflipCards(){
+
+  lockBoard=true;
+
+  setTimeout(()=>{
+
+    firstCard.classList.remove("flipped");
+
+    secondCard.classList.remove("flipped");
+
+    firstCard=null;
+
+    secondCard=null;
+
+    lockBoard=false;
+
+    document.getElementById("statusMain")
+    .textContent=
+    "もう一度カードを選んでね！";
+
+  },850);
+
+}
+
+
+/* =================================
+ステータス
+================================= */
+
+function updateStatus(){
+
+  document.getElementById("statusSub")
+  .textContent=
+  "ペア："+matchedPairs+
+  " / "+(cardCount/2);
+
+}
+
+
+/* =================================
+リセット
+================================= */
+
+function resetGame(){
+
+  matchedPairs=0;
+
+  firstCard=null;
+
+  secondCard=null;
+
+  lockBoard=false;
+
+  createCards();
+
+  updateStatus();
+
+  document.getElementById("statusMain")
+  .textContent=
+  "「ゲーム開始」を押してね！";
+
+}
+
+
+/* =================================
+完成画像選択
+================================= */
+
+document.querySelectorAll(".complete-option")
+.forEach(option=>{
+
+  option.addEventListener("click",()=>{
+
+    document.querySelectorAll(".complete-option")
+    .forEach(o=>{
+      o.classList.remove("selected");
+    });
+
+    option.classList.add("selected");
+
+    selectedCompleteImage=
+      Number(option.dataset.image);
+
+    customCompleteImage=null;
+
+  });
+
+});
+
+
+/* =================================
+完成画像アップロード
+================================= */
+
+document.getElementById("completeUpload")
+.addEventListener("change",function(){
+
+  const file=this.files[0];
+
+  if(!file)return;
+
+  const reader=new FileReader();
+
+  reader.onload=function(e){
+
+    customCompleteImage=
+      e.target.result;
+
+    document.querySelectorAll(".complete-option")
+    .forEach(o=>{
+      o.classList.remove("selected");
+    });
+
+  };
+
+  reader.readAsDataURL(file);
+
+});
+
+
+/* =================================
+完成
+================================= */
+
+function showComplete(){
+
+  const image=
+    customCompleteImage ||
+    completionImages[
+      selectedCompleteImage
+    ];
+
+  document.getElementById("completeImage")
+  .src=image;
+
+  document.getElementById("complete")
+  .classList.add("show");
+
+}
+
+
+/* =================================
+完成画面を閉じる
+================================= */
+
+function closeComplete(){
+
+  document.getElementById("complete")
+  .classList.remove("show");
+
+  startGame();
+
+}
+
+
+/* =================================
+初期化
+================================= */
+
+createSymbolInputs();
+
+createCards();
+
+updateStatus();
+
+</script>
+
+</body>
+</html>
