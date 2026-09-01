@@ -2,288 +2,180 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 
-<meta
-  name="viewport"
-  content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
->
-
-<title>ギフト神経衰弱</title>
+<title>数字カード神経衰弱</title>
 
 <style>
-
-/* =====================================================
-   RESET
-===================================================== */
-
 *{
   box-sizing:border-box;
   -webkit-tap-highlight-color:transparent;
 }
 
-html,
-body{
-  width:100%;
-  height:100%;
+html,body{
   margin:0;
   padding:0;
-
-  background:#000;
-
+  width:100%;
+  height:100%;
   overflow:hidden;
-
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Helvetica Neue",
-    "Yu Gothic",
-    sans-serif;
+  background:#000;
+  font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Yu Gothic",sans-serif;
 }
 
-button,
-input{
+button,input{
   font-family:inherit;
 }
 
-
-/* =====================================================
-   9:16 STAGE
-===================================================== */
-
 #stage{
-
   position:fixed;
-
   width:min(100vw,56.25vh);
   height:min(100vh,177.777vw);
-
   left:50%;
   top:50%;
-
   transform:translate(-50%,-50%);
-
   background:#111;
-
   overflow:hidden;
 }
-
-
-/* =====================================================
-   GAME
-===================================================== */
 
 #game{
-
   width:100%;
   height:100%;
-
-  padding:8px;
-
+  padding:7px;
   display:flex;
   flex-direction:column;
-
   overflow:hidden;
 }
 
 
-/* =====================================================
+/* =========================
    HEADER
-===================================================== */
+========================= */
 
 .header{
-
-  flex:0 0 7%;
-
+  flex:0 0 6%;
   display:flex;
   flex-direction:column;
-
-  align-items:center;
   justify-content:center;
-
+  align-items:center;
   overflow:hidden;
 }
 
 .title{
-
-  font-size:22px;
-
+  font-size:21px;
   font-weight:900;
-
   line-height:1;
-
   white-space:nowrap;
 }
 
 .subtitle{
-
-  margin-top:5px;
-
-  font-size:12px;
-
+  margin-top:4px;
+  font-size:11px;
   color:#aaa;
-
   white-space:nowrap;
 }
 
 
-/* =====================================================
+/* =========================
    STATUS
-===================================================== */
+========================= */
 
 .status{
-
   flex:0 0 7%;
-
   border-radius:9px;
-
   background:#222;
-
   display:flex;
   flex-direction:column;
-
   justify-content:center;
   align-items:center;
-
   overflow:hidden;
 }
 
 .status-main{
-
-  font-size:16px;
-
+  font-size:15px;
   font-weight:900;
-
   white-space:nowrap;
 }
 
 .status-sub{
-
   margin-top:3px;
-
-  font-size:12px;
-
+  font-size:11px;
   color:#aaa;
-
-  white-space:nowrap;
 }
 
 
-/* =====================================================
-   CANDIDATE AREA
-===================================================== */
+/* =========================
+   CANDIDATE
+========================= */
 
 #candidateArea{
-
-  flex:0 0 11%;
-
+  flex:0 0 12%;
   min-height:0;
-
   display:none;
-
   flex-direction:column;
-
   overflow:hidden;
 }
 
 .candidate-title{
-
-  flex:0 0 30%;
-
+  flex:0 0 28%;
   display:flex;
-
-  align-items:center;
   justify-content:center;
-
+  align-items:center;
   color:#ffd400;
-
-  font-size:14px;
-
+  font-size:13px;
   font-weight:900;
 }
 
 .candidates{
-
   flex:1;
-
   min-height:0;
-
   display:flex;
-
   justify-content:center;
   align-items:center;
-
   gap:6px;
-
   overflow:hidden;
 }
 
 .candidate{
-
-  height:90%;
-
+  height:88%;
   aspect-ratio:1/1;
-
   border:2px solid #ffd400;
-
   border-radius:9px;
-
   background:#333;
-
   color:#fff;
-
   display:flex;
-
   justify-content:center;
   align-items:center;
-
-  font-size:24px;
-
+  font-size:25px;
   font-weight:900;
-
   cursor:pointer;
-
-  box-shadow:
-    0 0 8px rgba(255,212,0,.4);
 }
 
 .candidate:active{
-
   transform:scale(.9);
-
   background:#ffd400;
-
   color:#111;
 }
 
 
-/* =====================================================
+/* =========================
    BOARD
-===================================================== */
+========================= */
 
 .board-area{
-
   flex:1;
-
   min-height:0;
-
   display:flex;
-
   justify-content:center;
   align-items:center;
-
   overflow:hidden;
 }
 
 #board{
-
   width:100%;
   height:100%;
-
   display:grid;
-
   align-content:center;
   justify-content:center;
-
   overflow:hidden;
 }
 
@@ -291,10 +183,7 @@ input{
 /* 16 */
 
 #board.c16{
-
-  grid-template-columns:
-    repeat(4,1fr);
-
+  grid-template-columns:repeat(4,1fr);
   gap:5px;
 }
 
@@ -302,10 +191,7 @@ input{
 /* 24 */
 
 #board.c24{
-
-  grid-template-columns:
-    repeat(6,1fr);
-
+  grid-template-columns:repeat(6,1fr);
   gap:4px;
 }
 
@@ -313,10 +199,7 @@ input{
 /* 36 */
 
 #board.c36{
-
-  grid-template-columns:
-    repeat(6,1fr);
-
+  grid-template-columns:repeat(6,1fr);
   gap:3px;
 }
 
@@ -324,754 +207,494 @@ input{
 /* 48 */
 
 #board.c48{
-
-  grid-template-columns:
-    repeat(8,1fr);
-
+  grid-template-columns:repeat(8,1fr);
   gap:2px;
 }
 
 
-/* =====================================================
+/* =========================
    CARD
-===================================================== */
+========================= */
 
 .card{
-
   width:100%;
-
   aspect-ratio:1/1;
-
   perspective:800px;
-
   cursor:pointer;
 }
 
 .card-inner{
-
   position:relative;
-
   width:100%;
   height:100%;
-
   transform-style:preserve-3d;
-
-  transition:
-    transform .28s ease;
+  transition:transform .28s ease;
 }
 
 .card.flipped .card-inner,
 .card.matched .card-inner{
-
   transform:rotateY(180deg);
 }
 
-.card-front,
+
+/* ★ 数字のカード裏面 */
+
 .card-back{
-
   position:absolute;
-
   inset:0;
 
+  background:#333;
+
+  border:2px solid #fff;
   border-radius:7px;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  backface-visibility:hidden;
+}
+
+.card-back-number{
+  color:#fff;
+  font-size:28px;
+  font-weight:900;
+  line-height:1;
+}
+
+
+/* カード表 */
+
+.card-front{
+  position:absolute;
+  inset:0;
+
+  background:#fff;
+
+  border-radius:7px;
+
+  transform:rotateY(180deg);
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  text-align:center;
 
   overflow:hidden;
 
   backface-visibility:hidden;
 }
 
-.card-back{
-
-  background:
-    linear-gradient(
-      135deg,
-      #3d2ab8,
-      #a52bc7
-    );
-
-  border:1px solid #fff;
-
-  display:flex;
-
-  justify-content:center;
-  align-items:center;
-}
-
-.card-back-mark{
-
-  width:65%;
-
-  height:65%;
-
-  border:2px solid rgba(255,255,255,.7);
-
-  border-radius:10px;
-
-  display:flex;
-
-  justify-content:center;
-  align-items:center;
-
-  color:#fff;
-
-  font-size:16px;
-
-  font-weight:900;
-}
-
-.card-front{
-
-  background:#fff;
-
-  transform:rotateY(180deg);
-
-  display:flex;
-
-  justify-content:center;
-  align-items:center;
-
-  text-align:center;
-}
-
 .card-front img{
-
   width:100%;
   height:100%;
-
   object-fit:cover;
 }
 
 .card-text{
-
   width:100%;
-
-  padding:5px;
-
+  padding:4px;
   color:#111;
-
-  font-size:15px;
-
+  font-size:14px;
   font-weight:900;
-
   line-height:1.15;
-
   word-break:break-word;
 }
 
 .card.matched .card-front{
-
   border:2px solid #ffd400;
-
-  box-shadow:
-    0 0 10px #ffd400;
+  box-shadow:0 0 10px #ffd400;
 }
 
 
-/* =====================================================
+/* =========================
    BOTTOM
-===================================================== */
+========================= */
 
 .bottom{
-
   flex:0 0 13%;
-
   min-height:0;
-
   display:flex;
-
   flex-direction:column;
-
   overflow:hidden;
 }
 
 
-/* =====================================================
+/* =========================
    GIFTS
-===================================================== */
+========================= */
 
 .gifts{
-
   flex:0 0 48%;
-
   display:grid;
-
-  grid-template-columns:
-    repeat(4,1fr);
-
+  grid-template-columns:repeat(4,1fr);
   gap:5px;
-
   align-items:center;
-
   overflow:hidden;
 }
 
 .gift-btn{
-
   width:100%;
-
   height:70%;
-
   padding:0;
-
   border:0;
-
   border-radius:7px;
-
   background:#333;
-
   color:#fff;
-
   font-size:11px;
-
   font-weight:900;
-
   white-space:nowrap;
-
   overflow:hidden;
 }
 
 .gift-btn.active{
-
   background:#ffd400;
-
   color:#111;
 }
 
 
-/* =====================================================
+/* =========================
    CONTROLS
-===================================================== */
+========================= */
 
 .controls{
-
   flex:0 0 52%;
-
   display:grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
-
+  grid-template-columns:repeat(3,1fr);
   gap:5px;
-
   align-items:center;
 }
 
 .control{
-
   width:100%;
-
   height:70%;
-
   border:0;
-
   border-radius:7px;
-
-  font-size:14px;
-
+  font-size:13px;
   font-weight:900;
-
   white-space:nowrap;
 }
 
 .start{
-
   background:#ffd400;
-
   color:#111;
 }
 
 .reset{
-
   background:#444;
-
   color:#fff;
 }
 
 .setting{
-
   background:#333;
-
   color:#fff;
 }
 
 
-/* =====================================================
+/* =========================
    SETTINGS
-===================================================== */
+========================= */
 
 #settings{
-
   position:fixed;
-
   inset:0;
-
   z-index:5000;
 
   display:none;
 
   background:#111;
-
   color:#fff;
 
   overflow-y:auto;
-
   -webkit-overflow-scrolling:touch;
 
-  padding:
-    15px
-    13px
-    35px;
+  padding:14px 12px 35px;
 }
 
 #settings.show{
-
   display:block;
 }
 
 .settings-inner{
-
   width:100%;
-
   max-width:600px;
-
   margin:0 auto;
 }
 
-
-/* =====================================================
-   SETTINGS TITLE
-===================================================== */
-
 .settings-title{
-
-  margin:
-    0
-    0
-    18px;
-
+  margin:0 0 15px;
   text-align:center;
-
-  font-size:30px !important;
-
+  font-size:28px !important;
   font-weight:900;
-
   line-height:1.2;
 }
 
-
-/* =====================================================
-   SECTION
-===================================================== */
-
 .section{
-
-  margin-bottom:13px;
-
-  padding:15px;
-
+  margin-bottom:12px;
+  padding:14px;
   background:#222;
-
   border-radius:12px;
 }
 
 .section-title{
-
-  margin:
-    0
-    0
-    13px;
-
+  margin:0 0 12px;
   text-align:center;
-
-  font-size:22px !important;
-
+  font-size:21px !important;
   font-weight:900;
-
   line-height:1.3;
 }
 
 .gift-info{
-
-  margin:
-    0
-    0
-    13px;
-
+  margin:0 0 12px;
   text-align:center;
-
   color:#ddd;
-
-  font-size:16px !important;
-
+  font-size:15px !important;
   line-height:1.7;
 }
 
 
-/* =====================================================
-   COUNT
-===================================================== */
+/* =========================
+   CARD COUNT
+========================= */
 
 .count-grid{
-
   display:grid;
-
-  grid-template-columns:
-    repeat(4,1fr);
-
-  gap:8px;
+  grid-template-columns:repeat(4,1fr);
+  gap:7px;
 }
 
 .count-btn{
-
-  min-height:52px;
-
+  min-height:50px;
   border:0;
-
   border-radius:8px;
-
   background:#444;
-
   color:#fff;
-
   font-size:18px !important;
-
   font-weight:900;
 }
 
 .count-btn.selected{
-
   background:#ffd400;
-
   color:#111;
 }
 
 
-/* =====================================================
-   PAIR
-===================================================== */
+/* =========================
+   PAIRS
+========================= */
 
 .pair-box{
-
-  margin-bottom:12px;
-
-  padding:12px;
-
+  margin-bottom:11px;
+  padding:11px;
   background:#171717;
-
   border-radius:10px;
 }
 
 .pair-header{
-
-  margin-bottom:10px;
-
+  margin-bottom:9px;
   color:#ffd400;
-
-  font-size:20px !important;
-
+  font-size:19px !important;
   font-weight:900;
-
-  line-height:1.3;
 }
 
 .pair-name{
-
   width:100%;
-
-  min-height:50px;
-
-  margin-bottom:10px;
-
-  padding:9px;
-
+  min-height:47px;
+  margin-bottom:9px;
+  padding:8px;
   border:1px solid #666;
-
   border-radius:7px;
-
   background:#333;
-
   color:#fff;
-
-  font-size:18px !important;
+  font-size:17px !important;
 }
 
 .card-settings{
-
   display:grid;
-
-  grid-template-columns:
-    repeat(2,1fr);
-
-  gap:9px;
+  grid-template-columns:repeat(2,1fr);
+  gap:8px;
 }
 
 .card-setting{
-
-  padding:9px;
-
+  padding:8px;
   background:#292929;
-
   border-radius:8px;
 }
 
 .card-label{
-
-  margin-bottom:7px;
-
+  margin-bottom:6px;
   color:#fff;
-
-  font-size:18px !important;
-
+  font-size:17px !important;
   font-weight:900;
 }
 
 .card-text-input{
-
   width:100%;
-
-  min-height:48px;
-
-  margin-bottom:8px;
-
-  padding:8px;
-
+  min-height:44px;
+  margin-bottom:7px;
+  padding:7px;
   border:1px solid #666;
-
   border-radius:7px;
-
   background:#333;
-
   color:#fff;
-
-  font-size:18px !important;
+  font-size:17px !important;
 }
 
 .preview{
-
   width:100%;
-
   aspect-ratio:1/1;
-
-  margin-bottom:8px;
-
+  margin-bottom:7px;
   border-radius:7px;
-
   background:#333;
-
   color:#fff;
 
   display:flex;
-
   justify-content:center;
   align-items:center;
 
   text-align:center;
-
   overflow:hidden;
 
-  font-size:18px !important;
-
+  font-size:17px !important;
   font-weight:900;
 }
 
 .preview img{
-
   width:100%;
   height:100%;
-
   object-fit:cover;
 }
 
 .image-label{
-
   display:block;
-
   width:100%;
-
-  min-height:48px;
-
-  padding:11px 4px;
-
+  min-height:45px;
+  padding:10px 3px;
   border-radius:7px;
-
   background:#444;
-
   color:#fff;
-
   text-align:center;
-
-  font-size:17px !important;
-
+  font-size:16px !important;
   font-weight:900;
-
   line-height:1.3;
 }
 
 .image-input{
-
   display:none;
 }
 
 
-/* =====================================================
-   GIFTS SETTINGS
-===================================================== */
+/* =========================
+   GIFT SETTINGS
+========================= */
 
 .gift-setting-row{
-
   display:grid;
-
-  grid-template-columns:
-    1fr
-    90px;
-
-  gap:9px;
-
-  margin-bottom:10px;
+  grid-template-columns:1fr 85px;
+  gap:8px;
+  margin-bottom:9px;
 }
 
 .gift-name-input,
 .gift-count-input{
-
   width:100%;
-
-  min-height:50px;
-
-  padding:9px;
-
+  min-height:47px;
+  padding:8px;
   border:1px solid #666;
-
   border-radius:7px;
-
   background:#333;
-
   color:#fff;
-
-  font-size:18px !important;
+  font-size:17px !important;
 }
 
 .gift-count-input{
-
   text-align:center;
-
   font-weight:900;
 }
 
 
-/* =====================================================
-   COMPLETE IMAGE SETTING
-===================================================== */
+/* =========================
+   COMPLETE IMAGE
+========================= */
 
 .complete-preview{
-
   width:100%;
-
-  height:170px;
-
-  margin-bottom:10px;
+  height:160px;
+  margin-bottom:9px;
 
   border-radius:9px;
-
   background:#333;
 
   color:#aaa;
 
   display:flex;
-
   justify-content:center;
   align-items:center;
 
   text-align:center;
-
   overflow:hidden;
 
-  font-size:16px !important;
+  font-size:15px !important;
 }
 
 .complete-preview img{
-
   width:100%;
   height:100%;
-
   object-fit:contain;
 }
 
 .complete-label{
-
   display:block;
-
-  min-height:52px;
-
-  padding:13px;
-
+  min-height:50px;
+  padding:12px;
   border-radius:8px;
-
   background:#444;
-
   color:#fff;
-
   text-align:center;
-
-  font-size:18px !important;
-
+  font-size:17px !important;
   font-weight:900;
 }
 
 .complete-input{
-
   display:none;
 }
 
 
-/* =====================================================
+/* =========================
    SETTING BUTTONS
-===================================================== */
+========================= */
 
 .save-btn,
 .close-btn{
-
   width:100%;
-
-  min-height:56px;
-
-  margin-top:9px;
-
-  padding:13px;
-
+  min-height:54px;
+  margin-top:8px;
+  padding:12px;
   border:0;
-
   border-radius:9px;
-
-  font-size:19px !important;
-
+  font-size:18px !important;
   font-weight:900;
 }
 
 .save-btn{
-
   background:#ffd400;
-
   color:#111;
 }
 
 .close-btn{
-
   background:#444;
-
   color:#fff;
 }
 
 
-/* =====================================================
+/* =========================
    COMPLETE SCREEN
-===================================================== */
+========================= */
 
 #completeScreen{
-
   position:fixed;
-
   inset:0;
-
   z-index:6000;
 
   display:none;
@@ -1079,163 +702,85 @@ input{
   justify-content:center;
   align-items:center;
 
-  padding:15px;
+  padding:14px;
 
   background:rgba(0,0,0,.96);
 }
 
 #completeScreen.show{
-
   display:flex;
 }
 
 .complete-box{
-
   width:100%;
-
   max-width:600px;
-
   text-align:center;
 }
 
 .complete-title{
-
-  margin-bottom:12px;
-
+  margin-bottom:11px;
   color:#ffd400;
-
-  font-size:34px;
-
+  font-size:32px;
   font-weight:900;
 }
 
 #completeImage{
-
   width:100%;
-
   max-height:70vh;
-
   object-fit:contain;
-
   border:3px solid #fff;
-
   border-radius:9px;
-
   background:#222;
 }
 
 .complete-message{
-
-  margin-top:10px;
-
+  margin-top:9px;
   color:#fff;
-
-  font-size:17px;
+  font-size:16px;
 }
 
 .complete-close{
-
   width:100%;
-
-  margin-top:12px;
-
-  padding:14px;
-
+  margin-top:11px;
+  padding:13px;
   border:0;
-
   border-radius:9px;
-
   background:#ffd400;
-
   color:#111;
-
   font-size:18px;
-
   font-weight:900;
 }
 
 
-/* =====================================================
+/* =========================
    SMALL SCREEN
-===================================================== */
+========================= */
 
 @media(max-height:650px){
 
   #settings{
-
-    padding-top:9px;
+    padding-top:8px;
   }
 
   .settings-title{
-
-    font-size:26px !important;
-
-    margin-bottom:11px;
-  }
-
-  .section{
-
-    padding:11px;
-
+    font-size:25px !important;
     margin-bottom:9px;
   }
 
-  .section-title{
-
-    font-size:20px !important;
-  }
-
-  .pair-header{
-
-    font-size:18px !important;
-  }
-
-  .card-label{
-
-    font-size:16px !important;
-  }
-
-  .pair-name,
-  .card-text-input,
-  .gift-name-input,
-  .gift-count-input{
-
-    font-size:17px !important;
-
-    min-height:44px;
-  }
-
-  .image-label{
-
-    font-size:16px !important;
-  }
-
-}
-
-
-/* =====================================================
-   VERY NARROW
-===================================================== */
-
-@media(max-width:350px){
-
-  .settings-title{
-
-    font-size:25px !important;
+  .section{
+    padding:10px;
+    margin-bottom:8px;
   }
 
   .section-title{
-
     font-size:19px !important;
   }
 
   .pair-header{
-
     font-size:17px !important;
   }
 
   .card-label{
-
     font-size:15px !important;
   }
 
@@ -1243,10 +788,13 @@ input{
   .card-text-input,
   .gift-name-input,
   .gift-count-input{
-
     font-size:16px !important;
+    min-height:42px;
   }
 
+  .image-label{
+    font-size:15px !important;
+  }
 }
 
 </style>
@@ -1264,11 +812,10 @@ input{
 
   <div id="game">
 
-
     <div class="header">
 
       <div class="title">
-        🎴 ギフト神経衰弱
+        数字カード神経衰弱
       </div>
 
       <div
@@ -1300,12 +847,12 @@ input{
     </div>
 
 
-    <!-- 候補 -->
+    <!-- 候補パネル -->
 
     <div id="candidateArea">
 
       <div class="candidate-title">
-        🎁 候補カードから選んでね！
+        候補カードから選んでね！
       </div>
 
       <div
@@ -1316,7 +863,7 @@ input{
     </div>
 
 
-    <!-- ボード -->
+    <!-- カード -->
 
     <div class="board-area">
 
@@ -1331,7 +878,6 @@ input{
     <!-- 下部 -->
 
     <div class="bottom">
-
 
       <div class="gifts">
 
@@ -1372,25 +918,24 @@ input{
           class="control start"
           id="startBtn"
         >
-          🎮 開始
+          開始
         </button>
 
         <button
           class="control reset"
           id="resetBtn"
         >
-          🔄 リセット
+          リセット
         </button>
 
         <button
           class="control setting"
           id="settingBtn"
         >
-          ⚙️ 設定
+          設定
         </button>
 
       </div>
-
 
     </div>
 
@@ -1407,9 +952,8 @@ input{
 
   <div class="settings-inner">
 
-
     <div class="settings-title">
-      ⚙️ ゲーム設定
+      ゲーム設定
     </div>
 
 
@@ -1418,7 +962,7 @@ input{
     <div class="section">
 
       <div class="section-title">
-        🎴 カード枚数
+        カード枚数
       </div>
 
       <div class="count-grid">
@@ -1461,15 +1005,13 @@ input{
     <div class="section">
 
       <div class="section-title">
-        🔗 ペアカード設定
+        ペアカード設定
       </div>
 
       <div class="gift-info">
-
         例えば「京都」と「八ツ橋」を<br>
         1つのペアにできます。<br>
-        文字でも画像でも設定できます。
-
+        文字または画像を設定できます。
       </div>
 
       <div id="pairList"></div>
@@ -1482,14 +1024,11 @@ input{
     <div class="section">
 
       <div class="section-title">
-        🎁 指定ギフト設定
+        指定ギフト設定
       </div>
 
       <div class="gift-info">
-
-        ギフト名と候補カード枚数を<br>
-        自由に変更できます。
-
+        ギフト名と候補枚数を変更できます。
       </div>
 
 
@@ -1499,7 +1038,6 @@ input{
           class="gift-name-input"
           id="giftName0"
           value="ハートミー"
-          placeholder="ギフト名"
         >
 
         <input
@@ -1519,7 +1057,6 @@ input{
           class="gift-name-input"
           id="giftName1"
           value="ドーナツ"
-          placeholder="ギフト名"
         >
 
         <input
@@ -1539,7 +1076,6 @@ input{
           class="gift-name-input"
           id="giftName2"
           value="ギフトA"
-          placeholder="ギフト名"
         >
 
         <input
@@ -1559,7 +1095,6 @@ input{
           class="gift-name-input"
           id="giftName3"
           value="特別ギフト"
-          placeholder="ギフト名"
         >
 
         <input
@@ -1580,19 +1115,19 @@ input{
     <div class="section">
 
       <div class="section-title">
-        🖼️ 完成画像
+        全部揃ったときの完成画像
       </div>
 
       <div
         class="complete-preview"
         id="completePreview"
       >
-        ここに完成画像が表示されます
+        完成画像を設定してください
       </div>
 
       <label class="complete-label">
 
-        📷 完成画像を選択
+        完成画像を選択
 
         <input
           class="complete-input"
@@ -1610,7 +1145,7 @@ input{
       class="save-btn"
       id="saveBtn"
     >
-      💾 保存してゲーム開始
+      保存してゲーム開始
     </button>
 
 
@@ -1618,9 +1153,8 @@ input{
       class="close-btn"
       id="closeBtn"
     >
-      ✕ 閉じる
+      閉じる
     </button>
-
 
   </div>
 
@@ -1636,7 +1170,7 @@ input{
   <div class="complete-box">
 
     <div class="complete-title">
-      🎉 全部完成！ 🎉
+      全部完成！
     </div>
 
     <img
@@ -1652,7 +1186,7 @@ input{
       class="complete-close"
       id="completeClose"
     >
-      🔄 もう一度ゲームする
+      もう一度ゲームする
     </button>
 
   </div>
@@ -1663,7 +1197,7 @@ input{
 <script>
 
 /* =====================================================
-   DATA
+   VARIABLES
 ===================================================== */
 
 let cardCount = 16;
@@ -1671,7 +1205,6 @@ let cardCount = 16;
 let matchedPairs = 0;
 
 let firstCard = null;
-
 let secondCard = null;
 
 let lockBoard = false;
@@ -1796,7 +1329,7 @@ function shuffle(array){
 
 
 /* =====================================================
-   SETTINGS OPEN
+   SETTINGS
 ===================================================== */
 
 function openSettings(){
@@ -1809,10 +1342,6 @@ function openSettings(){
 
 }
 
-
-/* =====================================================
-   SETTINGS CLOSE
-===================================================== */
 
 function closeSettings(){
 
@@ -1846,9 +1375,7 @@ function createPairSettings(){
   ){
 
     if(!pairs[i]){
-
       pairs[i]=["",""];
-
     }
 
 
@@ -1865,14 +1392,13 @@ function createPairSettings(){
     const box =
       document.createElement("div");
 
-    box.className =
-      "pair-box";
+    box.className="pair-box";
 
 
-    box.innerHTML = `
+    box.innerHTML=`
 
       <div class="pair-header">
-        🔗 ペア ${i+1}
+        ペア ${i+1}
       </div>
 
 
@@ -1892,14 +1418,12 @@ function createPairSettings(){
             カード①
           </div>
 
-
           <input
             class="card-text-input"
             id="pairA${i}"
             value="${esc(pairs[i][0])}"
             placeholder="京都"
           >
-
 
           <div
             class="preview"
@@ -1908,10 +1432,9 @@ function createPairSettings(){
             ${esc(pairs[i][0])}
           </div>
 
-
           <label class="image-label">
 
-            📷 画像を設定
+            画像を設定
 
             <input
               class="image-input"
@@ -1932,14 +1455,12 @@ function createPairSettings(){
             カード②
           </div>
 
-
           <input
             class="card-text-input"
             id="pairB${i}"
             value="${esc(pairs[i][1])}"
             placeholder="八ツ橋"
           >
-
 
           <div
             class="preview"
@@ -1948,10 +1469,9 @@ function createPairSettings(){
             ${esc(pairs[i][1])}
           </div>
 
-
           <label class="image-label">
 
-            📷 画像を設定
+            画像を設定
 
             <input
               class="image-input"
@@ -1965,7 +1485,6 @@ function createPairSettings(){
 
         </div>
 
-
       </div>
 
     `;
@@ -1974,17 +1493,13 @@ function createPairSettings(){
     list.appendChild(box);
 
 
-    /*
-       既存画像
-    */
-
     if(pairImages[i].a){
 
       document
         .getElementById(
           `previewA${i}`
         )
-        .innerHTML =
+        .innerHTML=
         `<img src="${pairImages[i].a}" alt="">`;
 
     }
@@ -1996,15 +1511,11 @@ function createPairSettings(){
         .getElementById(
           `previewB${i}`
         )
-        .innerHTML =
+        .innerHTML=
         `<img src="${pairImages[i].b}" alt="">`;
 
     }
 
-
-    /*
-       文字プレビュー
-    */
 
     const inputA =
       document.getElementById(
@@ -2027,8 +1538,7 @@ function createPairSettings(){
             .getElementById(
               `previewA${i}`
             )
-            .textContent =
-            this.value;
+            .textContent=this.value;
 
         }
 
@@ -2046,8 +1556,7 @@ function createPairSettings(){
             .getElementById(
               `previewB${i}`
             )
-            .textContent =
-            this.value;
+            .textContent=this.value;
 
         }
 
@@ -2057,10 +1566,6 @@ function createPairSettings(){
   }
 
 
-  /*
-     画像
-  */
-
   document
     .querySelectorAll(".image-input")
     .forEach(input=>{
@@ -2069,8 +1574,7 @@ function createPairSettings(){
         "change",
         function(){
 
-          const file =
-            this.files[0];
+          const file=this.files[0];
 
           if(!file)return;
 
@@ -2080,7 +1584,6 @@ function createPairSettings(){
               this.dataset.index
             );
 
-
           const side =
             this.dataset.side;
 
@@ -2089,25 +1592,24 @@ function createPairSettings(){
             new FileReader();
 
 
-          reader.onload =
-            function(e){
+          reader.onload=function(e){
 
-              pairImages[index][side] =
-                e.target.result;
-
-
-              const preview =
-                document.getElementById(
-                  side === "a"
-                  ? `previewA${index}`
-                  : `previewB${index}`
-                );
+            pairImages[index][side] =
+              e.target.result;
 
 
-              preview.innerHTML =
-                `<img src="${e.target.result}" alt="">`;
+            const preview =
+              document.getElementById(
+                side==="a"
+                ? `previewA${index}`
+                : `previewB${index}`
+              );
 
-            };
+
+            preview.innerHTML =
+              `<img src="${e.target.result}" alt="">`;
+
+          };
 
 
           reader.readAsDataURL(file);
@@ -2121,7 +1623,7 @@ function createPairSettings(){
 
 
 /* =====================================================
-   CARD COUNT
+   COUNT BUTTONS
 ===================================================== */
 
 document
@@ -2170,8 +1672,7 @@ document
     "change",
     function(){
 
-      const file =
-        this.files[0];
+      const file=this.files[0];
 
       if(!file)return;
 
@@ -2180,21 +1681,20 @@ document
         new FileReader();
 
 
-      reader.onload =
-        function(e){
+      reader.onload=function(e){
 
-          completeImageData =
-            e.target.result;
+        completeImageData =
+          e.target.result;
 
 
-          document
-            .getElementById(
-              "completePreview"
-            )
-            .innerHTML =
-            `<img src="${completeImageData}" alt="">`;
+        document
+          .getElementById(
+            "completePreview"
+          )
+          .innerHTML=
+          `<img src="${completeImageData}" alt="">`;
 
-        };
+      };
 
 
       reader.readAsDataURL(file);
@@ -2204,7 +1704,7 @@ document
 
 
 /* =====================================================
-   SAVE SETTINGS
+   SAVE
 ===================================================== */
 
 function saveSettings(){
@@ -2212,10 +1712,6 @@ function saveSettings(){
   const count =
     cardCount / 2;
 
-
-  /*
-     ペア
-  */
 
   for(
     let i=0;
@@ -2252,10 +1748,6 @@ function saveSettings(){
   }
 
 
-  /*
-     ギフト
-  */
-
   for(
     let i=0;
     i<4;
@@ -2266,7 +1758,6 @@ function saveSettings(){
       document.getElementById(
         `giftName${i}`
       );
-
 
     const countInput =
       document.getElementById(
@@ -2300,7 +1791,7 @@ function saveSettings(){
 
 
 /* =====================================================
-   UPDATE GIFT BUTTONS
+   GIFT BUTTONS
 ===================================================== */
 
 function updateGiftButtons(){
@@ -2331,7 +1822,7 @@ function createCards(){
   board.innerHTML="";
 
   board.className =
-    "c" + cardCount;
+    "c"+cardCount;
 
 
   const data=[];
@@ -2354,10 +1845,6 @@ function createCards(){
       };
 
 
-    /*
-       カードA
-    */
-
     data.push({
 
       pairId:i,
@@ -2368,10 +1855,6 @@ function createCards(){
 
     });
 
-
-    /*
-       カードB
-    */
 
     data.push({
 
@@ -2386,16 +1869,8 @@ function createCards(){
   }
 
 
-  /*
-     シャッフル
-  */
-
   shuffle(data);
 
-
-  /*
-     描画
-  */
 
   data.forEach(
     (item,index)=>{
@@ -2404,12 +1879,14 @@ function createCards(){
         document.createElement("div");
 
 
-      card.className =
-        "card";
+      card.className="card";
 
 
-      card.dataset.index =
-        index;
+      /*
+         ★ カード番号
+      */
+
+      card.dataset.index=index;
 
 
       card.dataset.pairId =
@@ -2421,7 +1898,7 @@ function createCards(){
 
       if(item.image){
 
-        front =
+        front=
           `<img
             src="${item.image}"
             alt=""
@@ -2429,7 +1906,7 @@ function createCards(){
 
       }else{
 
-        front =
+        front=
           `<div class="card-text">
             ${esc(item.text)}
           </div>`;
@@ -2437,24 +1914,30 @@ function createCards(){
       }
 
 
-      card.innerHTML = `
+      card.innerHTML=`
 
         <div class="card-inner">
 
+
+          <!-- ★ 数字の裏面 -->
+
           <div class="card-back">
 
-            <div class="card-back-mark">
-              🎴
+            <div class="card-back-number">
+              ${index+1}
             </div>
 
           </div>
 
+
+          <!-- 表面 -->
 
           <div class="card-front">
 
             ${front}
 
           </div>
+
 
         </div>
 
@@ -2511,8 +1994,8 @@ function selectCard(card){
   */
 
   if(
-    selectedGift !== null &&
-    candidateIndexes.length > 0
+    selectedGift!==null &&
+    candidateIndexes.length>0
   ){
 
     const index =
@@ -2529,8 +2012,8 @@ function selectCard(card){
         .getElementById(
           "message"
         )
-        .textContent =
-        "候補カードから選んでね！";
+        .textContent=
+        "候補の数字から選んでね！";
 
       return;
 
@@ -2546,15 +2029,14 @@ function selectCard(card){
 
   if(!firstCard){
 
-    firstCard =
-      card;
+    firstCard=card;
 
 
     document
       .getElementById(
         "statusMain"
       )
-      .textContent =
+      .textContent=
       "もう1枚選んでね！";
 
     return;
@@ -2562,13 +2044,8 @@ function selectCard(card){
   }
 
 
-  secondCard =
-    card;
+  secondCard=card;
 
-
-  /*
-     2枚選んだら候補を消す
-  */
 
   clearCandidates();
 
@@ -2578,7 +2055,7 @@ function selectCard(card){
 
 
 /* =====================================================
-   CHECK MATCH
+   MATCH
 ===================================================== */
 
 function checkMatch(){
@@ -2596,7 +2073,7 @@ function checkMatch(){
 
 
   if(
-    firstPair === secondPair
+    firstPair===secondPair
   ){
 
     firstCard.classList.add(
@@ -2612,7 +2089,6 @@ function checkMatch(){
 
 
     firstCard=null;
-
     secondCard=null;
 
 
@@ -2623,16 +2099,12 @@ function checkMatch(){
       .getElementById(
         "statusMain"
       )
-      .textContent =
-      "🎉 ペア成立！";
+      .textContent=
+      "ペア成立！";
 
-
-    /*
-       全部完成
-    */
 
     if(
-      matchedPairs >=
+      matchedPairs>=
       cardCount/2
     ){
 
@@ -2652,8 +2124,8 @@ function checkMatch(){
       .getElementById(
         "statusMain"
       )
-      .textContent =
-      "❌ もう一度！";
+      .textContent=
+      "もう一度！";
 
 
     setTimeout(
@@ -2678,7 +2150,6 @@ function checkMatch(){
 
 
         firstCard=null;
-
         secondCard=null;
 
         lockBoard=false;
@@ -2688,7 +2159,7 @@ function checkMatch(){
           .getElementById(
             "statusMain"
           )
-          .textContent =
+          .textContent=
           "もう一度選んでね！";
 
       },
@@ -2701,32 +2172,7 @@ function checkMatch(){
 
 
 /* =====================================================
-   GIFT BUTTON
-===================================================== */
-
-document
-  .querySelectorAll(".gift-btn")
-  .forEach(btn=>{
-
-    btn.addEventListener(
-      "click",
-      function(){
-
-        activateGift(
-          Number(
-            this.dataset.gift
-          )
-        );
-
-      }
-    );
-
-  });
-
-
-/* =====================================================
    ★ GIFT CANDIDATES
-   ここが今回の重要修正版
 ===================================================== */
 
 function activateGift(giftIndex){
@@ -2734,13 +2180,9 @@ function activateGift(giftIndex){
   if(lockBoard)return;
 
 
-  selectedGift =
+  selectedGift=
     giftIndex;
 
-
-  /*
-     ボタン表示
-  */
 
   document
     .querySelectorAll(".gift-btn")
@@ -2766,13 +2208,11 @@ function activateGift(giftIndex){
   }
 
 
-  /*
-     使用可能なカード
-  */
-
   const cards =
     Array.from(
-      document.querySelectorAll(".card")
+      document.querySelectorAll(
+        ".card"
+      )
     );
 
 
@@ -2809,17 +2249,13 @@ function activateGift(giftIndex){
 
 
   if(
-    available.length < 2
+    available.length<2
   ){
 
     return;
 
   }
 
-
-  /*
-     候補枚数
-  */
 
   let candidateCount =
     Number(
@@ -2853,9 +2289,7 @@ function activateGift(giftIndex){
 
 
   /*
-     =========================================
-     ★ ペアごとにグループ化
-     =========================================
+     ペアごとに分類
   */
 
   const pairMap={};
@@ -2882,16 +2316,13 @@ function activateGift(giftIndex){
 
 
   /*
-     =========================================
-     ★ 完成しているペアだけ抽出
-     =========================================
+     完成しているペア
   */
 
   const completePairs =
     Object.values(pairMap)
       .filter(
-        pair =>
-          pair.length >= 2
+        pair=>pair.length>=2
       );
 
 
@@ -2899,40 +2330,30 @@ function activateGift(giftIndex){
 
 
   /*
-     =========================================
-     ★ 必ず1組を最初に入れる
-     =========================================
+     ★ 必ず正解ペアを1組入れる
   */
 
   if(
-    completePairs.length > 0
+    completePairs.length>0
   ){
 
     const pair =
       completePairs[
         Math.floor(
-          Math.random() *
+          Math.random()*
           completePairs.length
         )
       ];
 
 
-    selected.push(
-      pair[0]
-    );
-
-
-    selected.push(
-      pair[1]
-    );
+    selected.push(pair[0]);
+    selected.push(pair[1]);
 
   }
 
 
   /*
-     =========================================
-     残りをランダム追加
-     =========================================
+     残りを追加
   */
 
   const used =
@@ -2956,9 +2377,9 @@ function activateGift(giftIndex){
 
 
   while(
-    selected.length <
+    selected.length<
     candidateCount &&
-    remaining.length > 0
+    remaining.length>0
   ){
 
     selected.push(
@@ -2967,12 +2388,6 @@ function activateGift(giftIndex){
 
   }
 
-
-  /*
-     =========================================
-     ★ 最終候補をシャッフル
-     =========================================
-  */
 
   shuffle(selected);
 
@@ -2983,10 +2398,6 @@ function activateGift(giftIndex){
     );
 
 
-  /*
-     表示
-  */
-
   showCandidates();
 
 
@@ -2994,7 +2405,7 @@ function activateGift(giftIndex){
     .getElementById(
       "statusMain"
     )
-    .textContent =
+    .textContent=
     "候補から2枚選んでね！";
 
 
@@ -3002,15 +2413,15 @@ function activateGift(giftIndex){
     .getElementById(
       "message"
     )
-    .textContent =
-    gifts[giftIndex].name +
+    .textContent=
+    gifts[giftIndex].name+
     "：候補が表示されました！";
 
 }
 
 
 /* =====================================================
-   SHOW CANDIDATES
+   ★ CANDIDATE PANEL
 ===================================================== */
 
 function showCandidates(){
@@ -3039,16 +2450,15 @@ function showCandidates(){
         );
 
 
-      button.className =
+      button.className=
         "candidate";
 
 
       /*
-         ★ 候補番号
-         ボード上の位置と同じ番号
+         ★ 大きな数字
       */
 
-      button.textContent =
+      button.textContent=
         index+1;
 
 
@@ -3062,9 +2472,7 @@ function showCandidates(){
             );
 
 
-          if(
-            cards[index]
-          ){
+          if(cards[index]){
 
             selectCard(
               cards[index]
@@ -3084,7 +2492,7 @@ function showCandidates(){
   );
 
 
-  area.style.display =
+  area.style.display=
     "flex";
 
 }
@@ -3105,12 +2513,14 @@ function clearCandidates(){
     .getElementById(
       "candidateArea"
     )
-    .style.display =
+    .style.display=
     "none";
 
 
   document
-    .querySelectorAll(".gift-btn")
+    .querySelectorAll(
+      ".gift-btn"
+    )
     .forEach(btn=>{
       btn.classList.remove(
         "active"
@@ -3130,17 +2540,17 @@ function updateStatus(){
     .getElementById(
       "statusSub"
     )
-    .textContent =
-    "ペア " +
-    matchedPairs +
-    " / " +
+    .textContent=
+    "ペア "+
+    matchedPairs+
+    " / "+
     (cardCount/2);
 
 }
 
 
 /* =====================================================
-   START GAME
+   START
 ===================================================== */
 
 function startGame(){
@@ -3164,7 +2574,7 @@ function startGame(){
     .getElementById(
       "statusMain"
     )
-    .textContent =
+    .textContent=
     "ギフトを選んでね！";
 
 
@@ -3172,7 +2582,7 @@ function startGame(){
     .getElementById(
       "message"
     )
-    .textContent =
+    .textContent=
     "指定ギフトで候補を絞れます！";
 
 }
@@ -3196,14 +2606,12 @@ function showComplete(){
     );
 
 
-  if(
-    completeImageData
-  ){
+  if(completeImageData){
 
-    image.src =
+    image.src=
       completeImageData;
 
-    image.style.display =
+    image.style.display=
       "block";
 
   }else{
@@ -3212,7 +2620,7 @@ function showComplete(){
       "src"
     );
 
-    image.style.display =
+    image.style.display=
       "none";
 
   }
@@ -3226,71 +2634,63 @@ function showComplete(){
 
 
 /* =====================================================
-   BUTTON EVENTS
+   EVENTS
 ===================================================== */
 
 document
-  .getElementById("settingBtn")
+  .getElementById(
+    "settingBtn"
+  )
   .addEventListener(
     "click",
-    function(){
-
-      openSettings();
-
-    }
+    openSettings
   );
 
 
 document
-  .getElementById("closeBtn")
+  .getElementById(
+    "closeBtn"
+  )
   .addEventListener(
     "click",
-    function(){
-
-      closeSettings();
-
-    }
+    closeSettings
   );
 
 
 document
-  .getElementById("saveBtn")
+  .getElementById(
+    "saveBtn"
+  )
   .addEventListener(
     "click",
-    function(){
-
-      saveSettings();
-
-    }
+    saveSettings
   );
 
 
 document
-  .getElementById("startBtn")
+  .getElementById(
+    "startBtn"
+  )
   .addEventListener(
     "click",
-    function(){
-
-      startGame();
-
-    }
+    startGame
   );
 
 
 document
-  .getElementById("resetBtn")
+  .getElementById(
+    "resetBtn"
+  )
   .addEventListener(
     "click",
-    function(){
-
-      startGame();
-
-    }
+    startGame
   );
 
 
 document
-  .getElementById("completeClose")
+  .getElementById(
+    "completeClose"
+  )
   .addEventListener(
     "click",
     function(){
@@ -3303,11 +2703,32 @@ document
           "show"
         );
 
-
       startGame();
 
     }
   );
+
+
+document
+  .querySelectorAll(
+    ".gift-btn"
+  )
+  .forEach(btn=>{
+
+    btn.addEventListener(
+      "click",
+      function(){
+
+        activateGift(
+          Number(
+            this.dataset.gift
+          )
+        );
+
+      }
+    );
+
+  });
 
 
 /* =====================================================
