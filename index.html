@@ -12,17 +12,24 @@
   -webkit-tap-highlight-color:transparent;
 }
 
-html,body{
+html,
+body{
   margin:0;
   padding:0;
   width:100%;
   height:100%;
   overflow:hidden;
   background:#000;
-  font-family:-apple-system,BlinkMacSystemFont,"Yu Gothic",sans-serif;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Helvetica Neue",
+    "Yu Gothic",
+    sans-serif;
 }
 
-button,input{
+button,
+input{
   font:inherit;
 }
 
@@ -30,12 +37,13 @@ button{
   touch-action:manipulation;
 }
 
-/* =========================
-   9:16 GAME
-========================= */
+/* ========================================
+   9:16 STAGE
+======================================== */
 
 #stage{
   position:fixed;
+
   width:min(100vw,56.25vh);
   height:min(100vh,177.7778vw);
 
@@ -44,18 +52,22 @@ button{
 
   transform:translate(-50%,-50%);
 
-  background:#101010;
+  background:#111;
 
   overflow:hidden;
 
   z-index:1;
 }
 
+/* ========================================
+   GAME
+======================================== */
+
 #game{
   width:100%;
   height:100%;
 
-  padding:1.2%;
+  padding:1.4%;
 
   display:flex;
   flex-direction:column;
@@ -63,21 +75,22 @@ button{
   overflow:hidden;
 }
 
-/* =========================
+/* ========================================
    HEADER
-========================= */
+======================================== */
 
 .header{
-  flex:0 0 6%;
+  flex:0 0 7%;
 
   min-height:0;
 
-  text-align:center;
-
   display:flex;
   flex-direction:column;
+
   justify-content:center;
   align-items:center;
+
+  text-align:center;
 
   overflow:hidden;
 }
@@ -85,29 +98,34 @@ button{
 .title{
   font-size:5%;
   font-weight:900;
+
   line-height:1;
+
   white-space:nowrap;
 }
 
 .subtitle{
-  margin-top:.8%;
-  font-size:2.2%;
+  margin-top:1%;
+
+  font-size:2.3%;
+
   color:#aaa;
+
   white-space:nowrap;
 }
 
-/* =========================
+/* ========================================
    STATUS
-========================= */
+======================================== */
 
 .status{
-  flex:0 0 6%;
+  flex:0 0 7%;
 
   min-height:0;
 
-  border-radius:8px;
-
   background:#222;
+
+  border-radius:8px;
 
   display:flex;
   flex-direction:column;
@@ -119,23 +137,27 @@ button{
 }
 
 .status-main{
-  font-size:3%;
+  font-size:3.2%;
+
   font-weight:900;
+
   line-height:1;
 }
 
 .status-sub{
-  margin-top:.7%;
-  font-size:2%;
+  margin-top:1%;
+
   color:#aaa;
+
+  font-size:2.1%;
 }
 
-/* =========================
-   CANDIDATES
-========================= */
+/* ========================================
+   CANDIDATE AREA
+======================================== */
 
 #candidateArea{
-  flex:0 0 9%;
+  flex:0 0 10%;
 
   min-height:0;
 
@@ -146,15 +168,17 @@ button{
 }
 
 .candidate-title{
-  flex:0 0 27%;
+  flex:0 0 30%;
 
   display:flex;
-  align-items:center;
+
   justify-content:center;
+  align-items:center;
 
   color:#ffd400;
 
   font-size:2.5%;
+
   font-weight:900;
 
   white-space:nowrap;
@@ -166,51 +190,57 @@ button{
   min-height:0;
 
   display:flex;
-  align-items:center;
-  justify-content:center;
 
-  gap:.5%;
+  justify-content:center;
+  align-items:center;
+
+  gap:.8%;
 
   overflow:hidden;
 }
 
 .candidate{
-  height:92%;
+  height:90%;
   aspect-ratio:1/1;
 
   flex:0 1 auto;
 
   border:2px solid #ffd400;
 
-  border-radius:12%;
+  border-radius:10px;
 
   background:#333;
 
   color:#fff;
 
   display:flex;
-  align-items:center;
+
   justify-content:center;
+  align-items:center;
 
   font-size:4.8%;
+
   font-weight:900;
 
-  text-shadow:0 2px 3px #000;
-
-  box-shadow:0 0 7px rgba(255,212,0,.5);
+  box-shadow:
+    0 0 8px rgba(255,212,0,.4);
 
   overflow:hidden;
+
+  cursor:pointer;
 }
 
 .candidate:active{
   transform:scale(.9);
+
   background:#ffd400;
+
   color:#111;
 }
 
-/* =========================
+/* ========================================
    BOARD
-========================= */
+======================================== */
 
 .board-area{
   flex:1;
@@ -219,8 +249,8 @@ button{
 
   display:flex;
 
-  align-items:center;
   justify-content:center;
+  align-items:center;
 
   overflow:hidden;
 }
@@ -231,41 +261,48 @@ button{
 
   display:grid;
 
-  align-content:center;
   justify-content:center;
+  align-content:center;
 
   overflow:hidden;
 }
 
 #board.c16{
   grid-template-columns:repeat(4,1fr);
+
   gap:1.2%;
 }
 
 #board.c24{
   grid-template-columns:repeat(6,1fr);
+
   gap:.9%;
 }
 
 #board.c36{
   grid-template-columns:repeat(6,1fr);
+
   gap:.7%;
 }
 
 #board.c48{
   grid-template-columns:repeat(8,1fr);
+
   gap:.55%;
 }
 
-/* =========================
+/* ========================================
    CARD
-========================= */
+======================================== */
 
 .card{
   width:100%;
+
   aspect-ratio:1/1;
 
-  perspective:700px;
+  perspective:800px;
+
+  cursor:pointer;
 
   touch-action:manipulation;
 }
@@ -278,7 +315,8 @@ button{
 
   transform-style:preserve-3d;
 
-  transition:transform .3s;
+  transition:
+    transform .28s ease;
 }
 
 .card.flipped .card-inner,
@@ -292,29 +330,42 @@ button{
 
   inset:0;
 
-  border-radius:8%;
+  border-radius:8px;
 
   overflow:hidden;
 
   backface-visibility:hidden;
 }
 
+/* 裏面 */
+
 .card-back{
-  background:linear-gradient(135deg,#4533c8,#a32bc7);
+  background:
+    linear-gradient(
+      135deg,
+      #4533c8,
+      #a32bc7
+    );
 
   border:2px solid #fff;
 
   display:flex;
-  align-items:center;
+
   justify-content:center;
+  align-items:center;
 }
 
 .card-number{
   color:#fff;
+
   font-size:4%;
+
   font-weight:900;
+
   opacity:.8;
 }
+
+/* 表面 */
 
 .card-front{
   background:#fff;
@@ -322,8 +373,11 @@ button{
   transform:rotateY(180deg);
 
   display:flex;
-  align-items:center;
+
   justify-content:center;
+  align-items:center;
+
+  text-align:center;
 }
 
 .card-front img{
@@ -336,16 +390,15 @@ button{
 .card-text{
   width:100%;
 
-  padding:4%;
+  padding:5%;
 
   color:#111;
 
-  text-align:center;
-
   font-size:7%;
+
   font-weight:900;
 
-  line-height:1.1;
+  line-height:1.15;
 
   word-break:break-word;
 }
@@ -353,12 +406,13 @@ button{
 .card.matched .card-front{
   border:2px solid #ffd400;
 
-  box-shadow:0 0 8px #ffd400;
+  box-shadow:
+    0 0 10px #ffd400;
 }
 
-/* =========================
+/* ========================================
    BOTTOM
-========================= */
+======================================== */
 
 .bottom{
   flex:0 0 13%;
@@ -366,14 +420,15 @@ button{
   min-height:0;
 
   display:flex;
+
   flex-direction:column;
 
   overflow:hidden;
 }
 
-/* =========================
-   GIFTS
-========================= */
+/* ========================================
+   GIFT BUTTONS
+======================================== */
 
 .gifts{
   flex:0 0 48%;
@@ -382,7 +437,8 @@ button{
 
   display:grid;
 
-  grid-template-columns:repeat(4,1fr);
+  grid-template-columns:
+    repeat(4,1fr);
 
   gap:1%;
 
@@ -393,9 +449,7 @@ button{
 
 .gift-btn{
   width:100%;
-  height:72%;
-
-  padding:0;
+  height:75%;
 
   border:0;
 
@@ -412,16 +466,23 @@ button{
   white-space:nowrap;
 
   overflow:hidden;
+
+  padding:0;
 }
 
 .gift-btn.active{
   background:#ffd400;
+
   color:#111;
 }
 
-/* =========================
-   CONTROL BUTTONS
-========================= */
+.gift-btn:active{
+  transform:scale(.96);
+}
+
+/* ========================================
+   CONTROL
+======================================== */
 
 .controls{
   flex:0 0 52%;
@@ -430,7 +491,8 @@ button{
 
   display:grid;
 
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:
+    repeat(3,1fr);
 
   gap:1%;
 
@@ -441,33 +503,36 @@ button{
 
 .control{
   width:100%;
-  height:72%;
-
-  padding:0;
+  height:75%;
 
   border:0;
 
   border-radius:7px;
 
-  font-size:2.4%;
+  font-size:2.5%;
 
   font-weight:900;
 
   white-space:nowrap;
+
+  padding:0;
 }
 
 .start{
   background:#ffd400;
+
   color:#111;
 }
 
 .reset{
   background:#444;
+
   color:#fff;
 }
 
 .setting{
   background:#333;
+
   color:#fff;
 
   position:relative;
@@ -475,9 +540,13 @@ button{
   z-index:100;
 }
 
-/* =========================
+.control:active{
+  transform:scale(.96);
+}
+
+/* ========================================
    SETTINGS
-========================= */
+======================================== */
 
 #settings{
   position:fixed;
@@ -490,13 +559,17 @@ button{
 
   background:#111;
 
+  color:#fff;
+
   overflow-y:auto;
 
+  -webkit-overflow-scrolling:touch;
+
   padding:
-    max(15px,env(safe-area-inset-top))
-    15px
-    max(25px,env(safe-area-inset-bottom))
-    15px;
+    max(14px,env(safe-area-inset-top))
+    14px
+    max(24px,env(safe-area-inset-bottom))
+    14px;
 }
 
 #settings.show{
@@ -504,8 +577,11 @@ button{
 }
 
 .settings-inner{
+  width:100%;
+
   max-width:600px;
-  margin:auto;
+
+  margin:0 auto;
 }
 
 .settings-title{
@@ -517,6 +593,10 @@ button{
 
   margin-bottom:12px;
 }
+
+/* ========================================
+   SETTINGS SECTION
+======================================== */
 
 .section{
   background:#222;
@@ -535,50 +615,54 @@ button{
 
   font-weight:900;
 
-  margin-bottom:8px;
+  margin-bottom:9px;
 }
 
-/* =========================
-   COUNT
-========================= */
+/* ========================================
+   CARD COUNT
+======================================== */
 
 .count-grid{
   display:grid;
 
-  grid-template-columns:repeat(4,1fr);
+  grid-template-columns:
+    repeat(4,1fr);
 
   gap:6px;
 }
 
 .count-btn{
-  padding:10px 2px;
-
   border:0;
 
   border-radius:6px;
 
+  padding:10px 2px;
+
   background:#444;
 
   color:#fff;
+
+  font-size:13px;
 
   font-weight:900;
 }
 
 .count-btn.selected{
   background:#ffd400;
+
   color:#111;
 }
 
-/* =========================
-   PAIRS
-========================= */
+/* ========================================
+   PAIR SETTINGS
+======================================== */
 
 .pair-box{
   background:#171717;
 
-  padding:8px;
-
   border-radius:7px;
+
+  padding:8px;
 
   margin-bottom:8px;
 }
@@ -598,8 +682,6 @@ button{
 
   padding:8px;
 
-  margin-bottom:6px;
-
   border:1px solid #555;
 
   border-radius:5px;
@@ -607,12 +689,15 @@ button{
   background:#333;
 
   color:#fff;
+
+  margin-bottom:7px;
 }
 
 .card-settings{
   display:grid;
 
-  grid-template-columns:repeat(2,1fr);
+  grid-template-columns:
+    repeat(2,1fr);
 
   gap:6px;
 }
@@ -620,9 +705,9 @@ button{
 .card-setting{
   background:#292929;
 
-  padding:6px;
-
   border-radius:6px;
+
+  padding:6px;
 }
 
 .card-label{
@@ -662,24 +747,31 @@ button{
 
   display:flex;
 
-  align-items:center;
   justify-content:center;
+  align-items:center;
 
   text-align:center;
 
   overflow:hidden;
 
   margin-bottom:5px;
+
+  font-size:14px;
+
+  font-weight:900;
 }
 
 .preview img{
   width:100%;
   height:100%;
+
   object-fit:cover;
 }
 
 .image-label{
   display:block;
+
+  width:100%;
 
   padding:8px 2px;
 
@@ -698,14 +790,27 @@ button{
   display:none;
 }
 
-/* =========================
+/* ========================================
    GIFT SETTINGS
-========================= */
+======================================== */
 
-.gift-row{
+.gift-info{
+  color:#aaa;
+
+  text-align:center;
+
+  font-size:11px;
+
+  line-height:1.5;
+
+  margin-bottom:9px;
+}
+
+.gift-setting-row{
   display:grid;
 
-  grid-template-columns:1fr 70px;
+  grid-template-columns:
+    1fr 70px;
 
   gap:7px;
 
@@ -727,17 +832,17 @@ button{
   background:#333;
 
   color:#fff;
+
+  min-width:0;
 }
 
-.gift-row-label{
-  color:#fff;
-
-  font-size:12px;
+.gift-count-input{
+  text-align:center;
 }
 
-/* =========================
+/* ========================================
    COMPLETE IMAGE
-========================= */
+======================================== */
 
 .complete-preview{
   width:100%;
@@ -750,14 +855,18 @@ button{
 
   display:flex;
 
-  align-items:center;
   justify-content:center;
+  align-items:center;
 
   color:#aaa;
 
   overflow:hidden;
 
   margin-bottom:7px;
+
+  text-align:center;
+
+  font-size:12px;
 }
 
 .complete-preview img{
@@ -787,19 +896,19 @@ button{
   display:none;
 }
 
-/* =========================
-   SETTING BUTTONS
-========================= */
+/* ========================================
+   SETTINGS BUTTONS
+======================================== */
 
 .save-btn,
 .close-btn{
   width:100%;
 
-  padding:12px;
-
   border:0;
 
   border-radius:7px;
+
+  padding:12px;
 
   font-weight:900;
 
@@ -808,17 +917,19 @@ button{
 
 .save-btn{
   background:#ffd400;
+
   color:#111;
 }
 
 .close-btn{
   background:#444;
+
   color:#fff;
 }
 
-/* =========================
-   COMPLETE
-========================= */
+/* ========================================
+   COMPLETE SCREEN
+======================================== */
 
 #completeScreen{
   position:fixed;
@@ -829,8 +940,8 @@ button{
 
   display:none;
 
-  align-items:center;
   justify-content:center;
+  align-items:center;
 
   background:rgba(0,0,0,.96);
 
@@ -843,6 +954,7 @@ button{
 
 .complete-box{
   width:100%;
+
   max-width:600px;
 
   text-align:center;
@@ -851,7 +963,8 @@ button{
 .complete-title{
   color:#ffd400;
 
-  font-size:clamp(28px,8vw,50px);
+  font-size:
+    clamp(28px,8vw,50px);
 
   font-weight:900;
 
@@ -861,21 +974,27 @@ button{
 #completeImage{
   width:100%;
 
-  max-height:75vh;
+  max-height:70vh;
 
   object-fit:contain;
 
   border:3px solid #fff;
 
   border-radius:9px;
+
+  background:#222;
+}
+
+.complete-message{
+  color:#fff;
+
+  font-size:14px;
+
+  margin-top:8px;
 }
 
 .complete-close{
   width:100%;
-
-  padding:12px;
-
-  margin-top:10px;
 
   border:0;
 
@@ -885,356 +1004,384 @@ button{
 
   color:#111;
 
+  padding:12px;
+
+  margin-top:10px;
+
   font-weight:900;
+}
+
+/* ========================================
+   SMALL SCREEN SAFETY
+======================================== */
+
+@media(max-height:600px){
+
+  .settings-title{
+    font-size:20px;
+  }
+
+  .section{
+    padding:8px;
+
+    margin-bottom:7px;
+  }
+
+  .pair-box{
+    padding:6px;
+
+    margin-bottom:6px;
+  }
+
+  .complete-preview{
+    height:100px;
+  }
+
 }
 </style>
 </head>
 
 <body>
 
-<!-- =========================
+<!-- ========================================
      9:16 GAME
-========================= -->
+======================================== -->
 
 <div id="stage">
 
-<div id="game">
+  <div id="game">
 
-  <div class="header">
+    <div class="header">
 
-    <div class="title">
-      🎴 ギフト神経衰弱
-    </div>
+      <div class="title">
+        🎴 ギフト神経衰弱
+      </div>
 
-    <div
-      class="subtitle"
-      id="message">
-      指定ギフトで候補を絞れます！
-    </div>
-
-  </div>
-
-
-  <div class="status">
-
-    <div
-      class="status-main"
-      id="statusMain">
-      ゲーム開始！
-    </div>
-
-    <div
-      class="status-sub"
-      id="statusSub">
-      ペア 0 / 8
-    </div>
-
-  </div>
-
-
-  <!-- 候補 -->
-
-  <div id="candidateArea">
-
-    <div class="candidate-title">
-      🎁 候補カードから選んでね！
-    </div>
-
-    <div
-      class="candidates"
-      id="candidates">
-    </div>
-
-  </div>
-
-
-  <!-- カード盤 -->
-
-  <div class="board-area">
-
-    <div
-      id="board"
-      class="c16">
-    </div>
-
-  </div>
-
-
-  <!-- 下部 -->
-
-  <div class="bottom">
-
-    <div class="gifts">
-
-      <button
-        class="gift-btn"
-        data-gift="0">
-        ❤️ ハートミー
-      </button>
-
-      <button
-        class="gift-btn"
-        data-gift="1">
-        🍩 ドーナツ
-      </button>
-
-      <button
-        class="gift-btn"
-        data-gift="2">
-        🎁 ギフトA
-      </button>
-
-      <button
-        class="gift-btn"
-        data-gift="3">
-        ⭐ 特別ギフト
-      </button>
+      <div
+        class="subtitle"
+        id="message">
+        指定ギフトで候補を絞れます！
+      </div>
 
     </div>
 
 
-    <div class="controls">
+    <div class="status">
 
-      <button
-        class="control start"
-        id="startBtn">
-        🎮 開始
-      </button>
+      <div
+        class="status-main"
+        id="statusMain">
+        ゲーム開始！
+      </div>
 
-      <button
-        class="control reset"
-        id="resetBtn">
-        🔄 リセット
-      </button>
+      <div
+        class="status-sub"
+        id="statusSub">
+        ペア 0 / 8
+      </div>
 
-      <button
-        class="control setting"
-        id="settingBtn">
-        ⚙️ 設定
-      </button>
+    </div>
+
+
+    <!-- 候補 -->
+
+    <div id="candidateArea">
+
+      <div class="candidate-title">
+        🎁 候補カードを選んでね！
+      </div>
+
+      <div
+        class="candidates"
+        id="candidates">
+      </div>
+
+    </div>
+
+
+    <!-- カード -->
+
+    <div class="board-area">
+
+      <div
+        id="board"
+        class="c16">
+      </div>
+
+    </div>
+
+
+    <!-- 下部 -->
+
+    <div class="bottom">
+
+      <div class="gifts">
+
+        <button
+          class="gift-btn"
+          data-gift="0">
+          ハートミー
+        </button>
+
+        <button
+          class="gift-btn"
+          data-gift="1">
+          ドーナツ
+        </button>
+
+        <button
+          class="gift-btn"
+          data-gift="2">
+          ギフトA
+        </button>
+
+        <button
+          class="gift-btn"
+          data-gift="3">
+          特別ギフト
+        </button>
+
+      </div>
+
+
+      <div class="controls">
+
+        <button
+          class="control start"
+          id="startBtn">
+          🎮 開始
+        </button>
+
+        <button
+          class="control reset"
+          id="resetBtn">
+          🔄 リセット
+        </button>
+
+        <button
+          class="control setting"
+          id="settingBtn">
+          ⚙️ 設定
+        </button>
+
+      </div>
 
     </div>
 
   </div>
 
 </div>
-</div>
 
 
-<!-- =========================
+<!-- ========================================
      SETTINGS
-========================= -->
+======================================== -->
 
 <div id="settings">
 
-<div class="settings-inner">
+  <div class="settings-inner">
 
-  <div class="settings-title">
-    ⚙️ ゲーム設定
+    <div class="settings-title">
+      ⚙️ ゲーム設定
+    </div>
+
+
+    <!-- 枚数 -->
+
+    <div class="section">
+
+      <div class="section-title">
+        🎴 カード枚数
+      </div>
+
+      <div class="count-grid">
+
+        <button
+          class="count-btn selected"
+          data-count="16">
+          16枚
+        </button>
+
+        <button
+          class="count-btn"
+          data-count="24">
+          24枚
+        </button>
+
+        <button
+          class="count-btn"
+          data-count="36">
+          36枚
+        </button>
+
+        <button
+          class="count-btn"
+          data-count="48">
+          48枚
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- ペア -->
+
+    <div class="section">
+
+      <div class="section-title">
+        🔗 ペアカード設定
+      </div>
+
+      <div
+        class="gift-info">
+        例：カード①「京都」＋カード②「八ツ橋」<br>
+        文字の代わりに画像を設定することもできます。
+      </div>
+
+      <div id="pairList"></div>
+
+    </div>
+
+
+    <!-- ギフト -->
+
+    <div class="section">
+
+      <div class="section-title">
+        🎁 指定ギフト設定
+      </div>
+
+      <div class="gift-info">
+        ギフト名と、ギフトを受け取った時に<br>
+        表示する候補カード数を設定できます。
+      </div>
+
+
+      <div class="gift-setting-row">
+
+        <input
+          class="gift-name-input"
+          id="giftName0"
+          value="ハートミー"
+          placeholder="ギフト名">
+
+        <input
+          class="gift-count-input"
+          id="giftCount0"
+          type="number"
+          min="2"
+          value="4">
+
+      </div>
+
+
+      <div class="gift-setting-row">
+
+        <input
+          class="gift-name-input"
+          id="giftName1"
+          value="ドーナツ"
+          placeholder="ギフト名">
+
+        <input
+          class="gift-count-input"
+          id="giftCount1"
+          type="number"
+          min="2"
+          value="6">
+
+      </div>
+
+
+      <div class="gift-setting-row">
+
+        <input
+          class="gift-name-input"
+          id="giftName2"
+          value="ギフトA"
+          placeholder="ギフト名">
+
+        <input
+          class="gift-count-input"
+          id="giftCount2"
+          type="number"
+          min="2"
+          value="8">
+
+      </div>
+
+
+      <div class="gift-setting-row">
+
+        <input
+          class="gift-name-input"
+          id="giftName3"
+          value="特別ギフト"
+          placeholder="ギフト名">
+
+        <input
+          class="gift-count-input"
+          id="giftCount3"
+          type="number"
+          min="2"
+          value="12">
+
+      </div>
+
+    </div>
+
+
+    <!-- 完成画像 -->
+
+    <div class="section">
+
+      <div class="section-title">
+        🖼️ 全部揃った時の完成画像
+      </div>
+
+      <div
+        id="completePreview"
+        class="complete-preview">
+        ここに完成画像が表示されます
+      </div>
+
+      <label class="complete-label">
+
+        📷 完成画像を選択
+
+        <input
+          id="completeInput"
+          class="complete-input"
+          type="file"
+          accept="image/*">
+
+      </label>
+
+    </div>
+
+
+    <button
+      class="save-btn"
+      id="saveBtn">
+      💾 保存してゲーム開始
+    </button>
+
+
+    <button
+      class="close-btn"
+      id="closeBtn">
+      ✕ 閉じる
+    </button>
+
   </div>
 
-
-  <!-- 枚数 -->
-
-  <div class="section">
-
-    <div class="section-title">
-      🎴 カード枚数
-    </div>
-
-    <div class="count-grid">
-
-      <button
-        class="count-btn selected"
-        data-count="16">
-        16枚
-      </button>
-
-      <button
-        class="count-btn"
-        data-count="24">
-        24枚
-      </button>
-
-      <button
-        class="count-btn"
-        data-count="36">
-        36枚
-      </button>
-
-      <button
-        class="count-btn"
-        data-count="48">
-        48枚
-      </button>
-
-    </div>
-
-  </div>
-
-
-  <!-- ペア -->
-
-  <div class="section">
-
-    <div class="section-title">
-      🔗 ペアカードを設定
-    </div>
-
-    <div id="pairList"></div>
-
-  </div>
-
-
-  <!-- ギフト -->
-
-  <div class="section">
-
-    <div class="section-title">
-      🎁 指定ギフト設定
-    </div>
-
-    <div
-      style="
-      color:#aaa;
-      font-size:11px;
-      text-align:center;
-      margin-bottom:9px;">
-      ギフト名と候補に表示する枚数を自由に設定できます
-    </div>
-
-
-    <!-- ギフト1 -->
-
-    <div class="gift-row">
-
-      <input
-        class="gift-name-input"
-        id="giftName0"
-        value="ハートミー"
-        placeholder="ギフト名">
-
-      <input
-        class="gift-count-input"
-        id="giftCount0"
-        type="number"
-        min="2"
-        value="4">
-
-    </div>
-
-
-    <!-- ギフト2 -->
-
-    <div class="gift-row">
-
-      <input
-        class="gift-name-input"
-        id="giftName1"
-        value="ドーナツ"
-        placeholder="ギフト名">
-
-      <input
-        class="gift-count-input"
-        id="giftCount1"
-        type="number"
-        min="2"
-        value="6">
-
-    </div>
-
-
-    <!-- ギフト3 -->
-
-    <div class="gift-row">
-
-      <input
-        class="gift-name-input"
-        id="giftName2"
-        value="ギフトA"
-        placeholder="ギフト名">
-
-      <input
-        class="gift-count-input"
-        id="giftCount2"
-        type="number"
-        min="2"
-        value="8">
-
-    </div>
-
-
-    <!-- ギフト4 -->
-
-    <div class="gift-row">
-
-      <input
-        class="gift-name-input"
-        id="giftName3"
-        value="特別ギフト"
-        placeholder="ギフト名">
-
-      <input
-        class="gift-count-input"
-        id="giftCount3"
-        type="number"
-        min="2"
-        value="12">
-
-    </div>
-
-  </div>
-
-
-  <!-- 完成画像 -->
-
-  <div class="section">
-
-    <div class="section-title">
-      🖼️ 全部揃った時の完成画像
-    </div>
-
-    <div
-      id="completePreview"
-      class="complete-preview">
-      完成画像を設定できます
-    </div>
-
-    <label class="complete-label">
-
-      📷 完成画像を選択
-
-      <input
-        id="completeInput"
-        class="complete-input"
-        type="file"
-        accept="image/*">
-
-    </label>
-
-  </div>
-
-
-  <button
-    class="save-btn"
-    id="saveBtn">
-    💾 保存してゲーム開始
-  </button>
-
-
-  <button
-    class="close-btn"
-    id="closeBtn">
-    ✕ 閉じる
-  </button>
-
-</div>
 </div>
 
 
-<!-- =========================
+<!-- ========================================
      COMPLETE
-========================= -->
+======================================== -->
 
 <div id="completeScreen">
 
@@ -1248,11 +1395,7 @@ button{
       id="completeImage"
       alt="完成画像">
 
-    <div
-      style="
-      color:#fff;
-      margin-top:8px;
-      font-size:14px;">
+    <div class="complete-message">
       おめでとう！
     </div>
 
@@ -1269,9 +1412,9 @@ button{
 
 <script>
 
-/* =========================================
-   DATA
-========================================= */
+/* ========================================
+   基本設定
+======================================== */
 
 let cardCount = 16;
 
@@ -1290,9 +1433,9 @@ let candidateIndexes = [];
 let completeImageData = null;
 
 
-/* =========================================
-   GIFT DATA
-========================================= */
+/* ========================================
+   ギフト
+======================================== */
 
 let gifts = [
 
@@ -1319,9 +1462,9 @@ let gifts = [
 ];
 
 
-/* =========================================
-   PAIRS
-========================================= */
+/* ========================================
+   ペア
+======================================== */
 
 let pairs = [
 
@@ -1353,16 +1496,16 @@ let pairs = [
 ];
 
 
-/* =========================================
-   IMAGES
-========================================= */
+/* ========================================
+   ペア画像
+======================================== */
 
 let pairImages = [];
 
 
-/* =========================================
-   ESCAPE
-========================================= */
+/* ========================================
+   HTMLエスケープ
+======================================== */
 
 function esc(text){
 
@@ -1375,24 +1518,24 @@ function esc(text){
 }
 
 
-/* =========================================
-   SETTINGS OPEN
-========================================= */
+/* ========================================
+   設定を開く
+======================================== */
 
 function openSettings(){
+
+  createPairSettings();
 
   document
     .getElementById("settings")
     .classList.add("show");
 
-  createPairSettings();
-
 }
 
 
-/* =========================================
-   SETTINGS CLOSE
-========================================= */
+/* ========================================
+   設定を閉じる
+======================================== */
 
 function closeSettings(){
 
@@ -1403,9 +1546,9 @@ function closeSettings(){
 }
 
 
-/* =========================================
-   PAIR SETTINGS
-========================================= */
+/* ========================================
+   ペア設定画面
+======================================== */
 
 function createPairSettings(){
 
@@ -1413,6 +1556,7 @@ function createPairSettings(){
     document.getElementById("pairList");
 
   list.innerHTML = "";
+
 
   const count =
     cardCount / 2;
@@ -1423,6 +1567,13 @@ function createPairSettings(){
     i<count;
     i++
   ){
+
+    if(!pairs[i]){
+
+      pairs[i]=["",""];
+
+    }
+
 
     if(!pairImages[i]){
 
@@ -1435,7 +1586,7 @@ function createPairSettings(){
 
 
     const pair =
-      pairs[i] || ["",""];
+      pairs[i];
 
 
     const box =
@@ -1451,10 +1602,12 @@ function createPairSettings(){
         🔗 ペア ${i+1}
       </div>
 
+
       <input
         class="pair-name"
         id="pairName${i}"
-        placeholder="ペア名（例：京都名物）">
+        placeholder="ペア名（任意）">
+
 
       <div class="card-settings">
 
@@ -1470,15 +1623,17 @@ function createPairSettings(){
             value="${esc(pair[0])}"
             placeholder="京都">
 
+
           <div
             class="preview"
             id="previewA${i}">
             ${esc(pair[0])}
           </div>
 
+
           <label class="image-label">
 
-            📷 画像設定
+            📷 画像を設定
 
             <input
               class="image-input"
@@ -1504,15 +1659,17 @@ function createPairSettings(){
             value="${esc(pair[1])}"
             placeholder="八ツ橋">
 
+
           <div
             class="preview"
             id="previewB${i}">
             ${esc(pair[1])}
           </div>
 
+
           <label class="image-label">
 
-            📷 画像設定
+            📷 画像を設定
 
             <input
               class="image-input"
@@ -1540,7 +1697,7 @@ function createPairSettings(){
           `previewA${i}`
         )
         .innerHTML =
-        `<img src="${pairImages[i].a}">`;
+        `<img src="${pairImages[i].a}" alt="">`;
 
     }
 
@@ -1552,7 +1709,7 @@ function createPairSettings(){
           `previewB${i}`
         )
         .innerHTML =
-        `<img src="${pairImages[i].b}">`;
+        `<img src="${pairImages[i].b}" alt="">`;
 
     }
 
@@ -1561,113 +1718,122 @@ function createPairSettings(){
 
   document
     .querySelectorAll(".image-input")
-    .forEach(input=>{
+    .forEach(
+      input=>{
 
-      input.addEventListener(
-        "change",
-        function(){
+        input.addEventListener(
+          "change",
+          function(){
 
-          const file =
-            this.files[0];
+            const file =
+              this.files[0];
 
-          if(!file)return;
-
-
-          const index =
-            Number(this.dataset.index);
-
-          const side =
-            this.dataset.side;
+            if(!file)return;
 
 
-          const reader =
-            new FileReader();
+            const index =
+              Number(
+                this.dataset.index
+              );
 
 
-          reader.onload =
-            function(e){
-
-              if(!pairImages[index]){
-
-                pairImages[index]={
-                  a:null,
-                  b:null
-                };
-
-              }
+            const side =
+              this.dataset.side;
 
 
-              pairImages[index][side] =
-                e.target.result;
+            const reader =
+              new FileReader();
 
 
-              const preview =
-                document.getElementById(
-                  side === "a"
+            reader.onload =
+              function(e){
+
+                if(!pairImages[index]){
+
+                  pairImages[index]={
+                    a:null,
+                    b:null
+                  };
+
+                }
+
+
+                pairImages[index][side] =
+                  e.target.result;
+
+
+                const preview =
+                  document.getElementById(
+                    side === "a"
                     ? `previewA${index}`
                     : `previewB${index}`
-                );
+                  );
 
 
-              preview.innerHTML =
-                `<img src="${e.target.result}">`;
+                preview.innerHTML =
+                  `<img src="${e.target.result}" alt="">`;
 
-            };
-
-
-          reader.readAsDataURL(file);
-
-        }
-      );
-
-    });
-
-}
+              };
 
 
-/* =========================================
-   COUNT BUTTON
-========================================= */
+            reader.readAsDataURL(file);
 
-document
-  .querySelectorAll(".count-btn")
-  .forEach(btn=>{
-
-    btn.addEventListener(
-      "click",
-      function(){
-
-        document
-          .querySelectorAll(".count-btn")
-          .forEach(b=>{
-            b.classList.remove(
-              "selected"
-            );
-          });
-
-
-        this.classList.add(
-          "selected"
+          }
         );
-
-
-        cardCount =
-          Number(
-            this.dataset.count
-          );
-
-
-        createPairSettings();
 
       }
     );
 
-  });
+}
 
 
-/* =========================================
-   COMPLETE IMAGE
-========================================= */
+/* ========================================
+   枚数変更
+======================================== */
+
+document
+  .querySelectorAll(".count-btn")
+  .forEach(
+    btn=>{
+
+      btn.addEventListener(
+        "click",
+        function(){
+
+          document
+            .querySelectorAll(".count-btn")
+            .forEach(
+              b=>{
+                b.classList.remove(
+                  "selected"
+                );
+              }
+            );
+
+
+          this.classList.add(
+            "selected"
+          );
+
+
+          cardCount =
+            Number(
+              this.dataset.count
+            );
+
+
+          createPairSettings();
+
+        }
+      );
+
+    }
+  );
+
+
+/* ========================================
+   完成画像
+======================================== */
 
 document
   .getElementById("completeInput")
@@ -1697,7 +1863,7 @@ document
               "completePreview"
             )
             .innerHTML =
-            `<img src="${completeImageData}">`;
+            `<img src="${completeImageData}" alt="">`;
 
         };
 
@@ -1708,9 +1874,9 @@ document
   );
 
 
-/* =========================================
-   SAVE
-========================================= */
+/* ========================================
+   設定保存
+======================================== */
 
 function saveSettings(){
 
@@ -1731,22 +1897,32 @@ function saveSettings(){
     }
 
 
-    pairs[i][0] =
-      document
-        .getElementById(
-          `pairA${i}`
-        )
-        .value
-        .trim();
+    const a =
+      document.getElementById(
+        `pairA${i}`
+      );
 
 
-    pairs[i][1] =
-      document
-        .getElementById(
-          `pairB${i}`
-        )
-        .value
-        .trim();
+    const b =
+      document.getElementById(
+        `pairB${i}`
+      );
+
+
+    if(a){
+
+      pairs[i][0] =
+        a.value.trim();
+
+    }
+
+
+    if(b){
+
+      pairs[i][1] =
+        b.value.trim();
+
+    }
 
   }
 
@@ -1757,25 +1933,28 @@ function saveSettings(){
     i++
   ){
 
+    const nameInput =
+      document.getElementById(
+        `giftName${i}`
+      );
+
+
+    const countInput =
+      document.getElementById(
+        `giftCount${i}`
+      );
+
+
     gifts[i].name =
-      document
-        .getElementById(
-          `giftName${i}`
-        )
-        .value
-        .trim() ||
-      "ギフト";
+      nameInput.value.trim()
+      || "ギフト";
 
 
     gifts[i].count =
       Math.max(
         2,
         Number(
-          document
-            .getElementById(
-              `giftCount${i}`
-            )
-            .value
+          countInput.value
         ) || 2
       );
 
@@ -1791,16 +1970,16 @@ function saveSettings(){
 }
 
 
-/* =========================================
-   UPDATE GIFT BUTTONS
-========================================= */
+/* ========================================
+   ギフト表示更新
+======================================== */
 
 function updateGiftButtons(){
 
   document
     .querySelectorAll(".gift-btn")
     .forEach(
-      function(btn,index){
+      (btn,index)=>{
 
         btn.textContent =
           gifts[index].name;
@@ -1811,14 +1990,14 @@ function updateGiftButtons(){
 }
 
 
-/* =========================================
-   SHUFFLE
-========================================= */
+/* ========================================
+   シャッフル
+======================================== */
 
-function shuffle(arr){
+function shuffle(array){
 
   for(
-    let i=arr.length-1;
+    let i=array.length-1;
     i>0;
     i--
   ){
@@ -1830,12 +2009,12 @@ function shuffle(arr){
 
 
     [
-      arr[i],
-      arr[j]
+      array[i],
+      array[j]
     ] =
     [
-      arr[j],
-      arr[i]
+      array[j],
+      array[i]
     ];
 
   }
@@ -1843,9 +2022,9 @@ function shuffle(arr){
 }
 
 
-/* =========================================
-   CREATE CARDS
-========================================= */
+/* ========================================
+   カード作成
+======================================== */
 
 function createCards(){
 
@@ -1906,7 +2085,7 @@ function createCards(){
 
 
   data.forEach(
-    function(item,index){
+    (item,index)=>{
 
       const card =
         document.createElement("div");
@@ -1923,17 +2102,17 @@ function createCards(){
         item.pairId;
 
 
-      let front;
+      let frontHTML;
 
 
       if(item.image){
 
-        front =
+        frontHTML =
           `<img src="${item.image}" alt="">`;
 
       }else{
 
-        front =
+        frontHTML =
           `<div class="card-text">
             ${esc(item.text)}
           </div>`;
@@ -1953,9 +2132,10 @@ function createCards(){
 
           </div>
 
+
           <div class="card-front">
 
-            ${front}
+            ${frontHTML}
 
           </div>
 
@@ -1982,9 +2162,9 @@ function createCards(){
 }
 
 
-/* =========================================
-   SELECT CARD
-========================================= */
+/* ========================================
+   カード選択
+======================================== */
 
 function selectCard(card){
 
@@ -1992,22 +2172,31 @@ function selectCard(card){
 
 
   if(
-    card.classList.contains(
-      "matched"
-    )
-  )return;
+    card.classList.contains("matched")
+  ){
+
+    return;
+
+  }
 
 
   if(
-    card.classList.contains(
-      "flipped"
-    )
-  )return;
+    card.classList.contains("flipped")
+  ){
 
+    return;
+
+  }
+
+
+  /*
+    ギフト候補が有効な場合、
+    候補以外は選択できない
+  */
 
   if(
     selectedGift !== null &&
-    candidateIndexes.length
+    candidateIndexes.length > 0
   ){
 
     const index =
@@ -2017,9 +2206,7 @@ function selectCard(card){
 
 
     if(
-      !candidateIndexes.includes(
-        index
-      )
+      !candidateIndexes.includes(index)
     ){
 
       document
@@ -2046,6 +2233,7 @@ function selectCard(card){
     firstCard =
       card;
 
+
     document
       .getElementById(
         "statusMain"
@@ -2062,34 +2250,46 @@ function selectCard(card){
     card;
 
 
+  /*
+    ★重要
+    2枚目を選択した瞬間に
+    候補表示を消す
+  */
+
+  clearCandidates();
+
+
   checkMatch();
 
 }
 
 
-/* =========================================
-   CHECK
-========================================= */
+/* ========================================
+   ペア判定
+======================================== */
 
 function checkMatch(){
 
-  const a =
+  const firstPair =
     Number(
       firstCard.dataset.pairId
     );
 
 
-  const b =
+  const secondPair =
     Number(
       secondCard.dataset.pairId
     );
 
 
-  if(a===b){
+  if(
+    firstPair === secondPair
+  ){
 
     firstCard.classList.add(
       "matched"
     );
+
 
     secondCard.classList.add(
       "matched"
@@ -2111,14 +2311,13 @@ function checkMatch(){
 
     secondCard=null;
 
-    clearCandidates();
 
     updateStatus();
 
 
     if(
       matchedPairs >=
-      cardCount/2
+      cardCount / 2
     ){
 
       setTimeout(
@@ -2144,13 +2343,22 @@ function checkMatch(){
     setTimeout(
       function(){
 
-        firstCard.classList.remove(
-          "flipped"
-        );
+        if(firstCard){
 
-        secondCard.classList.remove(
-          "flipped"
-        );
+          firstCard.classList.remove(
+            "flipped"
+          );
+
+        }
+
+
+        if(secondCard){
+
+          secondCard.classList.remove(
+            "flipped"
+          );
+
+        }
 
 
         firstCard=null;
@@ -2165,7 +2373,7 @@ function checkMatch(){
             "statusMain"
           )
           .textContent =
-          "もう一度！";
+          "もう一度選んでね！";
 
       },
       850
@@ -2176,60 +2384,69 @@ function checkMatch(){
 }
 
 
-/* =========================================
-   GIFT BUTTONS
-========================================= */
+/* ========================================
+   ギフトボタン
+======================================== */
 
 document
   .querySelectorAll(".gift-btn")
-  .forEach(btn=>{
+  .forEach(
+    btn=>{
 
-    btn.addEventListener(
-      "click",
-      function(){
+      btn.addEventListener(
+        "click",
+        function(){
 
-        activateGift(
-          Number(
-            this.dataset.gift
-          )
-        );
+          activateGift(
+            Number(
+              this.dataset.gift
+            )
+          );
 
-      }
-    );
+        }
+      );
 
-  });
+    }
+  );
 
 
-/* =========================================
-   ACTIVATE GIFT
-========================================= */
+/* ========================================
+   ギフト選択
+======================================== */
 
-function activateGift(gift){
+function activateGift(giftIndex){
+
+  if(lockBoard)return;
+
 
   selectedGift =
-    gift;
+    giftIndex;
 
 
   document
     .querySelectorAll(".gift-btn")
     .forEach(
-      function(btn){
-
+      btn=>{
         btn.classList.remove(
           "active"
         );
-
       }
     );
 
 
-  document
-    .querySelector(
-      `.gift-btn[data-gift="${gift}"]`
-    )
-    .classList.add(
+  const active =
+    document.querySelector(
+      `.gift-btn[data-gift="${giftIndex}"]`
+    );
+
+
+  if(active){
+
+    active.classList.add(
       "active"
     );
+
+  }
 
 
   const available=[];
@@ -2238,7 +2455,7 @@ function activateGift(gift){
   document
     .querySelectorAll(".card")
     .forEach(
-      function(card,index){
+      (card,index)=>{
 
         if(
           !card.classList.contains(
@@ -2264,7 +2481,7 @@ function activateGift(gift){
     available.slice(
       0,
       Math.min(
-        gifts[gift].count,
+        gifts[giftIndex].count,
         available.length
       )
     );
@@ -2280,12 +2497,21 @@ function activateGift(gift){
     .textContent =
     "候補から2枚選んでね！";
 
+
+  document
+    .getElementById(
+      "message"
+    )
+    .textContent =
+    gifts[giftIndex].name +
+    "：候補カードが出ました！";
+
 }
 
 
-/* =========================================
-   SHOW CANDIDATES
-========================================= */
+/* ========================================
+   候補表示
+======================================== */
 
 function showCandidates(){
 
@@ -2304,60 +2530,65 @@ function showCandidates(){
   list.innerHTML="";
 
 
-  candidateIndexes
-    .forEach(
-      function(index){
+  candidateIndexes.forEach(
+    index=>{
 
-        const item =
-          document.createElement(
-            "div"
-          );
-
-
-        item.className =
-          "candidate";
-
-
-        item.textContent =
-          index+1;
-
-
-        item.addEventListener(
-          "click",
-          function(){
-
-            const cards =
-              document.querySelectorAll(
-                ".card"
-              );
-
-
-            if(cards[index]){
-
-              selectCard(
-                cards[index]
-              );
-
-            }
-
-          }
+      const item =
+        document.createElement(
+          "div"
         );
 
 
-        list.appendChild(item);
-
-      }
-    );
+      item.className =
+        "candidate";
 
 
-  area.style.display="flex";
+      /*
+        候補にはカード番号を
+        大きく表示
+      */
+
+      item.textContent =
+        index + 1;
+
+
+      item.addEventListener(
+        "click",
+        function(){
+
+          const cards =
+            document.querySelectorAll(
+              ".card"
+            );
+
+
+          if(cards[index]){
+
+            selectCard(
+              cards[index]
+            );
+
+          }
+
+        }
+      );
+
+
+      list.appendChild(item);
+
+    }
+  );
+
+
+  area.style.display =
+    "flex";
 
 }
 
 
-/* =========================================
-   CLEAR CANDIDATES
-========================================= */
+/* ========================================
+   候補を完全消去
+======================================== */
 
 function clearCandidates(){
 
@@ -2366,31 +2597,32 @@ function clearCandidates(){
   selectedGift=null;
 
 
-  document
-    .getElementById(
+  const area =
+    document.getElementById(
       "candidateArea"
-    )
-    .style.display="none";
+    );
+
+
+  area.style.display =
+    "none";
 
 
   document
     .querySelectorAll(".gift-btn")
     .forEach(
-      function(btn){
-
+      btn=>{
         btn.classList.remove(
           "active"
         );
-
       }
     );
 
 }
 
 
-/* =========================================
-   STATUS
-========================================= */
+/* ========================================
+   ステータス
+======================================== */
 
 function updateStatus(){
 
@@ -2402,14 +2634,14 @@ function updateStatus(){
     "ペア " +
     matchedPairs +
     " / " +
-    cardCount/2;
+    (cardCount / 2);
 
 }
 
 
-/* =========================================
-   START
-========================================= */
+/* ========================================
+   ゲーム開始
+======================================== */
 
 function startGame(){
 
@@ -2446,9 +2678,9 @@ function startGame(){
 }
 
 
-/* =========================================
-   COMPLETE
-========================================= */
+/* ========================================
+   完成画面
+======================================== */
 
 function showComplete(){
 
@@ -2469,11 +2701,17 @@ function showComplete(){
     img.src =
       completeImageData;
 
-    img.style.display="block";
+    img.style.display =
+      "block";
 
   }else{
 
-    img.style.display="none";
+    img.removeAttribute(
+      "src"
+    );
+
+    img.style.display =
+      "none";
 
   }
 
@@ -2485,9 +2723,9 @@ function showComplete(){
 }
 
 
-/* =========================================
-   EVENTS
-========================================= */
+/* ========================================
+   設定ボタン
+======================================== */
 
 document
   .getElementById("settingBtn")
@@ -2505,37 +2743,73 @@ document
   );
 
 
+/* ========================================
+   閉じる
+======================================== */
+
 document
   .getElementById("closeBtn")
   .addEventListener(
     "click",
-    closeSettings
+    function(){
+
+      closeSettings();
+
+    }
   );
 
+
+/* ========================================
+   保存
+======================================== */
 
 document
   .getElementById("saveBtn")
   .addEventListener(
     "click",
-    saveSettings
+    function(){
+
+      saveSettings();
+
+    }
   );
 
+
+/* ========================================
+   開始
+======================================== */
 
 document
   .getElementById("startBtn")
   .addEventListener(
     "click",
-    startGame
+    function(){
+
+      startGame();
+
+    }
   );
 
+
+/* ========================================
+   リセット
+======================================== */
 
 document
   .getElementById("resetBtn")
   .addEventListener(
     "click",
-    startGame
+    function(){
+
+      startGame();
+
+    }
   );
 
+
+/* ========================================
+   完成画面を閉じる
+======================================== */
 
 document
   .getElementById("completeClose")
@@ -2551,15 +2825,16 @@ document
           "show"
         );
 
+
       startGame();
 
     }
   );
 
 
-/* =========================================
-   INITIAL
-========================================= */
+/* ========================================
+   初期化
+======================================== */
 
 updateGiftButtons();
 
