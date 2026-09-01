@@ -2,11 +2,20 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+>
 
 <title>ギフト神経衰弱</title>
 
 <style>
+
+/* ==================================================
+   基本
+================================================== */
+
 *{
   box-sizing:border-box;
   -webkit-tap-highlight-color:transparent;
@@ -14,12 +23,15 @@
 
 html,
 body{
-  margin:0;
-  padding:0;
   width:100%;
   height:100%;
+  margin:0;
+  padding:0;
+
   overflow:hidden;
+
   background:#000;
+
   font-family:
     -apple-system,
     BlinkMacSystemFont,
@@ -30,22 +42,24 @@ body{
 
 button,
 input{
-  font:inherit;
+  font-family:inherit;
 }
 
 button{
   touch-action:manipulation;
 }
 
-/* ========================================
+
+/* ==================================================
    9:16 ステージ
-======================================== */
+================================================== */
 
 #stage{
+
   position:fixed;
 
   width:min(100vw,56.25vh);
-  height:min(100vh,177.7778vw);
+  height:min(100vh,177.777vw);
 
   left:50%;
   top:50%;
@@ -55,20 +69,19 @@ button{
   background:#111;
 
   overflow:hidden;
-
-  z-index:1;
 }
 
 
-/* ========================================
-   ゲーム本体
-======================================== */
+/* ==================================================
+   ゲーム
+================================================== */
 
 #game{
+
   width:100%;
   height:100%;
 
-  padding:1.5%;
+  padding:8px;
 
   display:flex;
   flex-direction:column;
@@ -77,14 +90,13 @@ button{
 }
 
 
-/* ========================================
+/* ==================================================
    ヘッダー
-======================================== */
+================================================== */
 
 .header{
-  flex:0 0 7%;
 
-  min-height:0;
+  flex:0 0 7%;
 
   display:flex;
   flex-direction:column;
@@ -92,13 +104,13 @@ button{
   justify-content:center;
   align-items:center;
 
-  text-align:center;
-
   overflow:hidden;
 }
 
 .title{
-  font-size:5%;
+
+  font-size:22px;
+
   font-weight:900;
 
   line-height:1;
@@ -107,28 +119,28 @@ button{
 }
 
 .subtitle{
-  margin-top:1%;
 
-  font-size:2.5%;
+  margin-top:5px;
 
   color:#aaa;
+
+  font-size:12px;
 
   white-space:nowrap;
 }
 
 
-/* ========================================
+/* ==================================================
    ステータス
-======================================== */
+================================================== */
 
 .status{
-  flex:0 0 7%;
 
-  min-height:0;
+  flex:0 0 7%;
 
   background:#222;
 
-  border-radius:8px;
+  border-radius:9px;
 
   display:flex;
   flex-direction:column;
@@ -140,28 +152,29 @@ button{
 }
 
 .status-main{
-  font-size:3.3%;
+
+  font-size:16px;
 
   font-weight:900;
-
-  line-height:1;
 }
 
 .status-sub{
-  margin-top:1%;
+
+  margin-top:4px;
 
   color:#aaa;
 
-  font-size:2.2%;
+  font-size:12px;
 }
 
 
-/* ========================================
+/* ==================================================
    候補エリア
-======================================== */
+================================================== */
 
 #candidateArea{
-  flex:0 0 10%;
+
+  flex:0 0 11%;
 
   min-height:0;
 
@@ -173,6 +186,7 @@ button{
 }
 
 .candidate-title{
+
   flex:0 0 30%;
 
   display:flex;
@@ -182,14 +196,13 @@ button{
 
   color:#ffd400;
 
-  font-size:2.8%;
+  font-size:14px;
 
   font-weight:900;
-
-  white-space:nowrap;
 }
 
 .candidates{
+
   flex:1;
 
   min-height:0;
@@ -199,21 +212,20 @@ button{
   justify-content:center;
   align-items:center;
 
-  gap:1%;
+  gap:6px;
 
   overflow:hidden;
 }
 
 .candidate{
+
   height:90%;
 
-  aspect-ratio:1/1;
-
-  flex:0 1 auto;
+  aspect-ratio:1 / 1;
 
   border:2px solid #ffd400;
 
-  border-radius:10px;
+  border-radius:9px;
 
   background:#333;
 
@@ -224,19 +236,18 @@ button{
   justify-content:center;
   align-items:center;
 
-  font-size:5.5%;
+  font-size:24px;
 
   font-weight:900;
 
+  cursor:pointer;
+
   box-shadow:
     0 0 8px rgba(255,212,0,.4);
-
-  overflow:hidden;
-
-  cursor:pointer;
 }
 
 .candidate:active{
+
   transform:scale(.9);
 
   background:#ffd400;
@@ -245,11 +256,12 @@ button{
 }
 
 
-/* ========================================
+/* ==================================================
    ボード
-======================================== */
+================================================== */
 
 .board-area{
+
   flex:1;
 
   min-height:0;
@@ -263,6 +275,7 @@ button{
 }
 
 #board{
+
   width:100%;
   height:100%;
 
@@ -275,43 +288,55 @@ button{
 }
 
 #board.c16{
-  grid-template-columns:repeat(4,1fr);
-  gap:1.2%;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap:5px;
 }
 
 #board.c24{
-  grid-template-columns:repeat(6,1fr);
-  gap:.9%;
+
+  grid-template-columns:
+    repeat(6,1fr);
+
+  gap:4px;
 }
 
 #board.c36{
-  grid-template-columns:repeat(6,1fr);
-  gap:.7%;
+
+  grid-template-columns:
+    repeat(6,1fr);
+
+  gap:3px;
 }
 
 #board.c48{
-  grid-template-columns:repeat(8,1fr);
-  gap:.55%;
+
+  grid-template-columns:
+    repeat(8,1fr);
+
+  gap:2px;
 }
 
 
-/* ========================================
+/* ==================================================
    カード
-======================================== */
+================================================== */
 
 .card{
+
   width:100%;
 
-  aspect-ratio:1/1;
+  aspect-ratio:1 / 1;
 
   perspective:800px;
 
   cursor:pointer;
-
-  touch-action:manipulation;
 }
 
 .card-inner{
+
   position:relative;
 
   width:100%;
@@ -325,34 +350,34 @@ button{
 
 .card.flipped .card-inner,
 .card.matched .card-inner{
+
   transform:rotateY(180deg);
 }
 
 .card-front,
 .card-back{
+
   position:absolute;
 
   inset:0;
 
-  border-radius:8px;
+  border-radius:7px;
 
   overflow:hidden;
 
   backface-visibility:hidden;
 }
 
-
-/* 裏 */
-
 .card-back{
+
   background:
     linear-gradient(
       135deg,
-      #4533c8,
-      #a32bc7
+      #4230bd,
+      #a52bc7
     );
 
-  border:2px solid #fff;
+  border:1px solid #fff;
 
   display:flex;
 
@@ -361,19 +386,18 @@ button{
 }
 
 .card-number{
+
   color:#fff;
 
-  font-size:4%;
+  font-size:13px;
 
   font-weight:900;
 
   opacity:.8;
 }
 
-
-/* 表 */
-
 .card-front{
+
   background:#fff;
 
   transform:rotateY(180deg);
@@ -387,6 +411,7 @@ button{
 }
 
 .card-front img{
+
   width:100%;
   height:100%;
 
@@ -394,13 +419,14 @@ button{
 }
 
 .card-text{
+
   width:100%;
 
-  padding:5%;
+  padding:5px;
 
   color:#111;
 
-  font-size:7%;
+  font-size:15px;
 
   font-weight:900;
 
@@ -410,6 +436,7 @@ button{
 }
 
 .card.matched .card-front{
+
   border:2px solid #ffd400;
 
   box-shadow:
@@ -417,11 +444,12 @@ button{
 }
 
 
-/* ========================================
+/* ==================================================
    下部
-======================================== */
+================================================== */
 
 .bottom{
+
   flex:0 0 13%;
 
   min-height:0;
@@ -434,21 +462,20 @@ button{
 }
 
 
-/* ========================================
+/* ==================================================
    ギフト
-======================================== */
+================================================== */
 
 .gifts{
-  flex:0 0 48%;
 
-  min-height:0;
+  flex:0 0 48%;
 
   display:grid;
 
   grid-template-columns:
     repeat(4,1fr);
 
-  gap:1%;
+  gap:5px;
 
   align-items:center;
 
@@ -456,8 +483,9 @@ button{
 }
 
 .gift-btn{
+
   width:100%;
-  height:75%;
+  height:70%;
 
   border:0;
 
@@ -467,7 +495,7 @@ button{
 
   color:#fff;
 
-  font-size:2.1%;
+  font-size:11px;
 
   font-weight:900;
 
@@ -479,78 +507,75 @@ button{
 }
 
 .gift-btn.active{
+
   background:#ffd400;
+
   color:#111;
 }
 
-.gift-btn:active{
-  transform:scale(.96);
-}
 
-
-/* ========================================
-   操作ボタン
-======================================== */
+/* ==================================================
+   操作
+================================================== */
 
 .controls{
-  flex:0 0 52%;
 
-  min-height:0;
+  flex:0 0 52%;
 
   display:grid;
 
   grid-template-columns:
     repeat(3,1fr);
 
-  gap:1%;
+  gap:5px;
 
   align-items:center;
-
-  overflow:hidden;
 }
 
 .control{
+
   width:100%;
-  height:75%;
+  height:70%;
 
   border:0;
 
   border-radius:7px;
 
-  font-size:2.7%;
+  font-size:14px;
 
   font-weight:900;
 
   white-space:nowrap;
-
-  padding:0;
 }
 
 .start{
+
   background:#ffd400;
+
   color:#111;
 }
 
 .reset{
+
   background:#444;
+
   color:#fff;
 }
 
 .setting{
+
   background:#333;
+
   color:#fff;
 }
 
-.control:active{
-  transform:scale(.96);
-}
 
-
-/* ========================================
-   設定パネル
-======================================== */
+/* ==================================================
+   ★ 設定パネル
+================================================== */
 
 #settings{
+
   position:fixed;
 
   inset:0;
@@ -568,17 +593,19 @@ button{
   -webkit-overflow-scrolling:touch;
 
   padding:
-    max(14px,env(safe-area-inset-top))
+    16px
     14px
-    max(24px,env(safe-area-inset-bottom))
+    30px
     14px;
 }
 
 #settings.show{
+
   display:block;
 }
 
 .settings-inner{
+
   width:100%;
 
   max-width:600px;
@@ -587,196 +614,229 @@ button{
 }
 
 
-/* ========================================
-   設定タイトル
-======================================== */
+/* ==================================================
+   ★ 設定タイトル
+================================================== */
 
 .settings-title{
+
   text-align:center;
 
-  font-size:28px;
+  font-size:30px !important;
+
+  line-height:1.2;
 
   font-weight:900;
 
-  margin-bottom:16px;
+  margin:
+    0
+    0
+    18px
+    0;
 }
 
 
-/* ========================================
-   設定セクション
-======================================== */
+/* ==================================================
+   ★ セクション
+================================================== */
 
 .section{
+
   background:#222;
 
-  border-radius:10px;
+  border-radius:12px;
 
-  padding:12px;
+  padding:15px;
 
-  margin-bottom:11px;
+  margin-bottom:13px;
 }
 
 .section-title{
+
   text-align:center;
 
-  font-size:19px;
+  font-size:22px !important;
+
+  line-height:1.3;
 
   font-weight:900;
 
-  margin-bottom:12px;
+  margin:
+    0
+    0
+    14px
+    0;
 }
 
 
-/* ========================================
-   説明
-======================================== */
+/* ==================================================
+   ★ 説明文
+================================================== */
 
 .gift-info{
-  color:#ccc;
+
+  color:#ddd;
 
   text-align:center;
 
-  font-size:14px;
+  font-size:16px !important;
 
-  line-height:1.6;
+  line-height:1.7;
 
-  margin-bottom:12px;
+  margin:
+    0
+    0
+    14px
+    0;
 }
 
 
-/* ========================================
-   カード枚数
-======================================== */
+/* ==================================================
+   ★ 枚数ボタン
+================================================== */
 
 .count-grid{
+
   display:grid;
 
   grid-template-columns:
     repeat(4,1fr);
 
-  gap:7px;
+  gap:8px;
 }
 
 .count-btn{
+
+  min-height:50px;
+
   border:0;
 
-  border-radius:7px;
-
-  padding:12px 3px;
+  border-radius:8px;
 
   background:#444;
 
   color:#fff;
 
-  font-size:16px;
+  font-size:18px !important;
 
   font-weight:900;
 }
 
 .count-btn.selected{
+
   background:#ffd400;
 
   color:#111;
 }
 
 
-/* ========================================
-   ペア設定
-======================================== */
+/* ==================================================
+   ★ ペア設定
+================================================== */
 
 .pair-box{
+
   background:#171717;
 
-  border-radius:8px;
+  border-radius:10px;
 
-  padding:10px;
+  padding:12px;
+
+  margin-bottom:12px;
+}
+
+.pair-header{
+
+  color:#ffd400;
+
+  font-size:20px !important;
+
+  line-height:1.3;
+
+  font-weight:900;
 
   margin-bottom:10px;
 }
 
-.pair-header{
-  color:#ffd400;
-
-  font-size:17px;
-
-  font-weight:900;
-
-  margin-bottom:8px;
-}
-
 .pair-name{
+
   width:100%;
+
+  min-height:50px;
 
   padding:10px;
 
-  min-height:44px;
+  border:1px solid #666;
 
-  border:1px solid #555;
-
-  border-radius:6px;
+  border-radius:7px;
 
   background:#333;
 
   color:#fff;
 
-  font-size:16px;
+  font-size:18px !important;
 
-  margin-bottom:8px;
+  margin-bottom:10px;
 }
 
 .card-settings{
+
   display:grid;
 
   grid-template-columns:
     repeat(2,1fr);
 
-  gap:7px;
+  gap:9px;
 }
 
 .card-setting{
+
   background:#292929;
 
-  border-radius:7px;
+  border-radius:8px;
 
-  padding:7px;
+  padding:9px;
 }
 
 .card-label{
+
   color:#fff;
 
-  font-size:14px;
+  font-size:18px !important;
 
   font-weight:900;
 
-  margin-bottom:6px;
+  margin-bottom:7px;
 }
 
 .card-text-input{
+
   width:100%;
 
-  padding:10px;
+  min-height:48px;
 
-  min-height:44px;
+  padding:9px;
 
-  border:1px solid #555;
+  border:1px solid #666;
 
-  border-radius:6px;
+  border-radius:7px;
 
   background:#333;
 
   color:#fff;
 
-  font-size:16px;
+  font-size:18px !important;
 
-  margin-bottom:6px;
+  margin-bottom:8px;
 }
 
 .preview{
+
   width:100%;
 
-  aspect-ratio:1/1;
+  aspect-ratio:1 / 1;
 
-  border-radius:6px;
+  border-radius:7px;
 
   background:#333;
 
@@ -791,14 +851,15 @@ button{
 
   overflow:hidden;
 
-  margin-bottom:6px;
+  margin-bottom:8px;
 
-  font-size:17px;
+  font-size:18px !important;
 
   font-weight:900;
 }
 
 .preview img{
+
   width:100%;
   height:100%;
 
@@ -806,85 +867,96 @@ button{
 }
 
 .image-label{
+
   display:block;
 
   width:100%;
 
-  padding:11px 3px;
+  min-height:48px;
+
+  padding:11px 4px;
 
   background:#444;
 
-  border-radius:6px;
+  border-radius:7px;
 
   color:#fff;
 
   text-align:center;
 
-  font-size:14px;
+  font-size:17px !important;
+
+  line-height:1.3;
 
   font-weight:900;
 }
 
 .image-input{
+
   display:none;
 }
 
 
-/* ========================================
-   ギフト設定
-======================================== */
+/* ==================================================
+   ★ ギフト設定
+================================================== */
 
 .gift-setting-row{
+
   display:grid;
 
   grid-template-columns:
-    1fr 80px;
+    1fr
+    90px;
 
-  gap:8px;
+  gap:9px;
 
   align-items:center;
 
-  margin-bottom:8px;
+  margin-bottom:10px;
 }
 
 .gift-name-input,
 .gift-count-input{
+
   width:100%;
+
+  min-height:50px;
 
   padding:10px;
 
-  min-height:44px;
+  border:1px solid #666;
 
-  border:1px solid #555;
-
-  border-radius:6px;
+  border-radius:7px;
 
   background:#333;
 
   color:#fff;
 
-  font-size:16px;
+  font-size:18px !important;
 }
 
 .gift-count-input{
+
   text-align:center;
 
   font-weight:900;
 }
 
 
-/* ========================================
-   完成画像
-======================================== */
+/* ==================================================
+   ★ 完成画像
+================================================== */
 
 .complete-preview{
+
   width:100%;
 
-  height:150px;
+  height:170px;
 
   background:#333;
 
-  border-radius:8px;
+  border-radius:9px;
 
   display:flex;
 
@@ -895,14 +967,15 @@ button{
 
   overflow:hidden;
 
-  margin-bottom:8px;
+  margin-bottom:10px;
 
   text-align:center;
 
-  font-size:14px;
+  font-size:16px !important;
 }
 
 .complete-preview img{
+
   width:100%;
   height:100%;
 
@@ -910,69 +983,79 @@ button{
 }
 
 .complete-label{
+
   display:block;
+
+  min-height:52px;
 
   background:#444;
 
   color:#fff;
 
-  padding:12px;
+  padding:13px;
 
-  border-radius:7px;
+  border-radius:8px;
 
   text-align:center;
 
-  font-size:15px;
+  font-size:18px !important;
+
+  line-height:1.3;
 
   font-weight:900;
 }
 
 .complete-input{
+
   display:none;
 }
 
 
-/* ========================================
-   設定ボタン
-======================================== */
+/* ==================================================
+   ★ 設定ボタン
+================================================== */
 
 .save-btn,
 .close-btn{
+
   width:100%;
+
+  min-height:56px;
 
   border:0;
 
-  border-radius:8px;
+  border-radius:9px;
 
   padding:14px;
 
-  min-height:50px;
-
-  font-size:17px;
+  font-size:19px !important;
 
   font-weight:900;
 
-  margin-top:8px;
+  margin-top:9px;
 }
 
 .save-btn{
+
   background:#ffd400;
 
   color:#111;
 }
 
 .close-btn{
+
   background:#444;
 
   color:#fff;
 }
 
 
-/* ========================================
+/* ==================================================
    完成画面
-======================================== */
+================================================== */
 
 #completeScreen{
+
   position:fixed;
 
   inset:0;
@@ -990,10 +1073,12 @@ button{
 }
 
 #completeScreen.show{
+
   display:flex;
 }
 
 .complete-box{
+
   width:100%;
 
   max-width:600px;
@@ -1002,17 +1087,18 @@ button{
 }
 
 .complete-title{
+
   color:#ffd400;
 
-  font-size:
-    clamp(28px,8vw,50px);
+  font-size:34px;
 
   font-weight:900;
 
-  margin-bottom:10px;
+  margin-bottom:12px;
 }
 
 #completeImage{
+
   width:100%;
 
   max-height:70vh;
@@ -1027,88 +1113,141 @@ button{
 }
 
 .complete-message{
+
   color:#fff;
 
-  font-size:15px;
+  font-size:17px;
 
-  margin-top:8px;
+  margin-top:10px;
 }
 
 .complete-close{
+
   width:100%;
 
   border:0;
 
-  border-radius:8px;
+  border-radius:9px;
 
   background:#ffd400;
 
   color:#111;
 
-  padding:13px;
+  padding:14px;
 
-  margin-top:10px;
+  margin-top:12px;
 
-  font-size:16px;
+  font-size:18px;
 
   font-weight:900;
 }
 
 
-/* ========================================
-   小さい画面
-======================================== */
+/* ==================================================
+   小さい端末
+   ※文字を極端に小さくしない
+================================================== */
 
 @media(max-height:650px){
 
+  #settings{
+
+    padding-top:10px;
+  }
+
   .settings-title{
-    font-size:24px;
-    margin-bottom:10px;
+
+    font-size:26px !important;
+
+    margin-bottom:12px;
   }
 
   .section{
-    padding:9px;
-    margin-bottom:8px;
+
+    padding:11px;
+
+    margin-bottom:9px;
   }
 
   .section-title{
-    font-size:17px;
-    margin-bottom:8px;
+
+    font-size:20px !important;
   }
 
-  .pair-box{
-    padding:7px;
-    margin-bottom:7px;
+  .gift-info{
+
+    font-size:15px !important;
   }
 
   .pair-header{
-    font-size:15px;
+
+    font-size:18px !important;
   }
 
   .card-label{
-    font-size:13px;
+
+    font-size:16px !important;
   }
 
   .pair-name,
   .card-text-input,
   .gift-name-input,
   .gift-count-input{
-    font-size:14px;
-    min-height:40px;
-    padding:8px;
+
+    font-size:17px !important;
+
+    min-height:44px;
   }
 
-  .image-label,
+  .image-label{
+
+    font-size:16px !important;
+  }
+
   .complete-label{
-    font-size:13px;
-    padding:9px;
-  }
 
-  .complete-preview{
-    height:100px;
+    font-size:17px !important;
   }
 
 }
+
+
+/* ==================================================
+   横幅が非常に狭い場合
+================================================== */
+
+@media(max-width:350px){
+
+  .settings-title{
+
+    font-size:25px !important;
+  }
+
+  .section-title{
+
+    font-size:19px !important;
+  }
+
+  .pair-header{
+
+    font-size:17px !important;
+  }
+
+  .card-label{
+
+    font-size:15px !important;
+  }
+
+  .pair-name,
+  .card-text-input,
+  .gift-name-input,
+  .gift-count-input{
+
+    font-size:16px !important;
+  }
+
+}
+
 </style>
 </head>
 
@@ -1116,13 +1255,14 @@ button{
 <body>
 
 
-<!-- ========================================
-     ゲーム
-======================================== -->
+<!-- ==================================================
+     ゲーム画面
+================================================== -->
 
 <div id="stage">
 
   <div id="game">
+
 
     <div class="header">
 
@@ -1132,7 +1272,8 @@ button{
 
       <div
         class="subtitle"
-        id="message">
+        id="message"
+      >
         指定ギフトで候補を絞れます！
       </div>
 
@@ -1143,13 +1284,15 @@ button{
 
       <div
         class="status-main"
-        id="statusMain">
+        id="statusMain"
+      >
         ゲーム開始！
       </div>
 
       <div
         class="status-sub"
-        id="statusSub">
+        id="statusSub"
+      >
         ペア 0 / 8
       </div>
 
@@ -1166,8 +1309,8 @@ button{
 
       <div
         class="candidates"
-        id="candidates">
-      </div>
+        id="candidates"
+      ></div>
 
     </div>
 
@@ -1178,39 +1321,44 @@ button{
 
       <div
         id="board"
-        class="c16">
-      </div>
+        class="c16"
+      ></div>
 
     </div>
 
 
-    <!-- 下 -->
+    <!-- 下部 -->
 
     <div class="bottom">
+
 
       <div class="gifts">
 
         <button
           class="gift-btn"
-          data-gift="0">
+          data-gift="0"
+        >
           ハートミー
         </button>
 
         <button
           class="gift-btn"
-          data-gift="1">
+          data-gift="1"
+        >
           ドーナツ
         </button>
 
         <button
           class="gift-btn"
-          data-gift="2">
+          data-gift="2"
+        >
           ギフトA
         </button>
 
         <button
           class="gift-btn"
-          data-gift="3">
+          data-gift="3"
+        >
           特別ギフト
         </button>
 
@@ -1221,23 +1369,27 @@ button{
 
         <button
           class="control start"
-          id="startBtn">
+          id="startBtn"
+        >
           🎮 開始
         </button>
 
         <button
           class="control reset"
-          id="resetBtn">
+          id="resetBtn"
+        >
           🔄 リセット
         </button>
 
         <button
           class="control setting"
-          id="settingBtn">
+          id="settingBtn"
+        >
           ⚙️ 設定
         </button>
 
       </div>
+
 
     </div>
 
@@ -1246,13 +1398,14 @@ button{
 </div>
 
 
-<!-- ========================================
-     設定
-======================================== -->
+<!-- ==================================================
+     設定画面
+================================================== -->
 
 <div id="settings">
 
   <div class="settings-inner">
+
 
     <div class="settings-title">
       ⚙️ ゲーム設定
@@ -1271,25 +1424,29 @@ button{
 
         <button
           class="count-btn selected"
-          data-count="16">
+          data-count="16"
+        >
           16枚
         </button>
 
         <button
           class="count-btn"
-          data-count="24">
+          data-count="24"
+        >
           24枚
         </button>
 
         <button
           class="count-btn"
-          data-count="36">
+          data-count="36"
+        >
           36枚
         </button>
 
         <button
           class="count-btn"
-          data-count="48">
+          data-count="48"
+        >
           48枚
         </button>
 
@@ -1298,7 +1455,7 @@ button{
     </div>
 
 
-    <!-- ペア -->
+    <!-- ペア設定 -->
 
     <div class="section">
 
@@ -1308,8 +1465,9 @@ button{
 
       <div class="gift-info">
 
-        例：カード①「京都」＋カード②「八ツ橋」<br>
-        文字の代わりに画像を設定することもできます。
+        例えば「京都」と「八ツ橋」を<br>
+        1つのペアとして設定できます。<br>
+        カードは文字でも画像でも設定できます。
 
       </div>
 
@@ -1328,8 +1486,9 @@ button{
 
       <div class="gift-info">
 
-        ギフト名と、ギフトを受け取った時に<br>
-        表示する候補カード数を設定できます。
+        ギフト名を自由に変更できます。<br>
+        ギフトを受け取ったときに表示する<br>
+        候補カードの枚数も設定できます。
 
       </div>
 
@@ -1340,14 +1499,16 @@ button{
           class="gift-name-input"
           id="giftName0"
           value="ハートミー"
-          placeholder="ギフト名">
+          placeholder="ギフト名"
+        >
 
         <input
           class="gift-count-input"
           id="giftCount0"
           type="number"
           min="2"
-          value="4">
+          value="4"
+        >
 
       </div>
 
@@ -1358,14 +1519,16 @@ button{
           class="gift-name-input"
           id="giftName1"
           value="ドーナツ"
-          placeholder="ギフト名">
+          placeholder="ギフト名"
+        >
 
         <input
           class="gift-count-input"
           id="giftCount1"
           type="number"
           min="2"
-          value="6">
+          value="6"
+        >
 
       </div>
 
@@ -1376,14 +1539,16 @@ button{
           class="gift-name-input"
           id="giftName2"
           value="ギフトA"
-          placeholder="ギフト名">
+          placeholder="ギフト名"
+        >
 
         <input
           class="gift-count-input"
           id="giftCount2"
           type="number"
           min="2"
-          value="8">
+          value="8"
+        >
 
       </div>
 
@@ -1394,14 +1559,16 @@ button{
           class="gift-name-input"
           id="giftName3"
           value="特別ギフト"
-          placeholder="ギフト名">
+          placeholder="ギフト名"
+        >
 
         <input
           class="gift-count-input"
           id="giftCount3"
           type="number"
           min="2"
-          value="12">
+          value="12"
+        >
 
       </div>
 
@@ -1417,8 +1584,9 @@ button{
       </div>
 
       <div
+        class="complete-preview"
         id="completePreview"
-        class="complete-preview">
+      >
         ここに完成画像が表示されます
       </div>
 
@@ -1427,10 +1595,11 @@ button{
         📷 完成画像を選択
 
         <input
-          id="completeInput"
           class="complete-input"
+          id="completeInput"
           type="file"
-          accept="image/*">
+          accept="image/*"
+        >
 
       </label>
 
@@ -1439,25 +1608,28 @@ button{
 
     <button
       class="save-btn"
-      id="saveBtn">
+      id="saveBtn"
+    >
       💾 保存してゲーム開始
     </button>
 
 
     <button
       class="close-btn"
-      id="closeBtn">
+      id="closeBtn"
+    >
       ✕ 閉じる
     </button>
+
 
   </div>
 
 </div>
 
 
-<!-- ========================================
+<!-- ==================================================
      完成画面
-======================================== -->
+================================================== -->
 
 <div id="completeScreen">
 
@@ -1469,7 +1641,8 @@ button{
 
     <img
       id="completeImage"
-      alt="完成画像">
+      alt="完成画像"
+    >
 
     <div class="complete-message">
       おめでとう！
@@ -1477,7 +1650,8 @@ button{
 
     <button
       class="complete-close"
-      id="completeClose">
+      id="completeClose"
+    >
       🔄 もう一度ゲームする
     </button>
 
@@ -1488,9 +1662,9 @@ button{
 
 <script>
 
-/* ========================================
-   基本設定
-======================================== */
+/* ==================================================
+   基本データ
+================================================== */
 
 let cardCount = 16;
 
@@ -1509,9 +1683,9 @@ let candidateIndexes = [];
 let completeImageData = null;
 
 
-/* ========================================
+/* ==================================================
    ギフト
-======================================== */
+================================================== */
 
 let gifts = [
 
@@ -1538,9 +1712,9 @@ let gifts = [
 ];
 
 
-/* ========================================
+/* ==================================================
    ペア
-======================================== */
+================================================== */
 
 let pairs = [
 
@@ -1572,16 +1746,12 @@ let pairs = [
 ];
 
 
-/* ========================================
-   ペア画像
-======================================== */
-
 let pairImages = [];
 
 
-/* ========================================
+/* ==================================================
    HTMLエスケープ
-======================================== */
+================================================== */
 
 function esc(text){
 
@@ -1594,9 +1764,9 @@ function esc(text){
 }
 
 
-/* ========================================
+/* ==================================================
    設定を開く
-======================================== */
+================================================== */
 
 function openSettings(){
 
@@ -1609,9 +1779,9 @@ function openSettings(){
 }
 
 
-/* ========================================
+/* ==================================================
    設定を閉じる
-======================================== */
+================================================== */
 
 function closeSettings(){
 
@@ -1622,9 +1792,9 @@ function closeSettings(){
 }
 
 
-/* ========================================
-   ペア設定を作る
-======================================== */
+/* ==================================================
+   ペア設定作成
+================================================== */
 
 function createPairSettings(){
 
@@ -1661,10 +1831,6 @@ function createPairSettings(){
     }
 
 
-    const pair =
-      pairs[i];
-
-
     const box =
       document.createElement("div");
 
@@ -1682,10 +1848,12 @@ function createPairSettings(){
       <input
         class="pair-name"
         id="pairName${i}"
-        placeholder="ペア名（任意）">
+        placeholder="ペア名（任意）"
+      >
 
 
       <div class="card-settings">
+
 
         <div class="card-setting">
 
@@ -1693,17 +1861,20 @@ function createPairSettings(){
             カード①
           </div>
 
+
           <input
             class="card-text-input"
             id="pairA${i}"
-            value="${esc(pair[0])}"
-            placeholder="京都">
+            value="${esc(pairs[i][0])}"
+            placeholder="京都"
+          >
 
 
           <div
             class="preview"
-            id="previewA${i}">
-            ${esc(pair[0])}
+            id="previewA${i}"
+          >
+            ${esc(pairs[i][0])}
           </div>
 
 
@@ -1716,7 +1887,8 @@ function createPairSettings(){
               type="file"
               accept="image/*"
               data-index="${i}"
-              data-side="a">
+              data-side="a"
+            >
 
           </label>
 
@@ -1729,17 +1901,20 @@ function createPairSettings(){
             カード②
           </div>
 
+
           <input
             class="card-text-input"
             id="pairB${i}"
-            value="${esc(pair[1])}"
-            placeholder="八ツ橋">
+            value="${esc(pairs[i][1])}"
+            placeholder="八ツ橋"
+          >
 
 
           <div
             class="preview"
-            id="previewB${i}">
-            ${esc(pair[1])}
+            id="previewB${i}"
+          >
+            ${esc(pairs[i][1])}
           </div>
 
 
@@ -1752,11 +1927,13 @@ function createPairSettings(){
               type="file"
               accept="image/*"
               data-index="${i}"
-              data-side="b">
+              data-side="b"
+            >
 
           </label>
 
         </div>
+
 
       </div>
 
@@ -1789,8 +1966,70 @@ function createPairSettings(){
 
     }
 
+
+    /*
+       入力した文字を
+       プレビューに即反映
+    */
+
+    const inputA =
+      document.getElementById(
+        `pairA${i}`
+      );
+
+    const inputB =
+      document.getElementById(
+        `pairB${i}`
+      );
+
+
+    inputA.addEventListener(
+      "input",
+      function(){
+
+        if(
+          !pairImages[i].a
+        ){
+
+          document
+            .getElementById(
+              `previewA${i}`
+            )
+            .textContent =
+            this.value;
+
+        }
+
+      }
+    );
+
+
+    inputB.addEventListener(
+      "input",
+      function(){
+
+        if(
+          !pairImages[i].b
+        ){
+
+          document
+            .getElementById(
+              `previewB${i}`
+            )
+            .textContent =
+            this.value;
+
+        }
+
+      }
+    );
+
   }
 
+
+  /*
+     画像読み込み
+  */
 
   document
     .querySelectorAll(".image-input")
@@ -1824,16 +2063,6 @@ function createPairSettings(){
             reader.onload =
               function(e){
 
-                if(!pairImages[index]){
-
-                  pairImages[index]={
-                    a:null,
-                    b:null
-                  };
-
-                }
-
-
                 pairImages[index][side] =
                   e.target.result;
 
@@ -1863,9 +2092,9 @@ function createPairSettings(){
 }
 
 
-/* ========================================
+/* ==================================================
    枚数変更
-======================================== */
+================================================== */
 
 document
   .querySelectorAll(".count-btn")
@@ -1907,9 +2136,9 @@ document
   );
 
 
-/* ========================================
+/* ==================================================
    完成画像
-======================================== */
+================================================== */
 
 document
   .getElementById("completeInput")
@@ -1950,9 +2179,9 @@ document
   );
 
 
-/* ========================================
+/* ==================================================
    設定保存
-======================================== */
+================================================== */
 
 function saveSettings(){
 
@@ -2046,9 +2275,9 @@ function saveSettings(){
 }
 
 
-/* ========================================
-   ギフト表示
-======================================== */
+/* ==================================================
+   ギフトボタン更新
+================================================== */
 
 function updateGiftButtons(){
 
@@ -2066,9 +2295,9 @@ function updateGiftButtons(){
 }
 
 
-/* ========================================
+/* ==================================================
    シャッフル
-======================================== */
+================================================== */
 
 function shuffle(array){
 
@@ -2098,9 +2327,9 @@ function shuffle(array){
 }
 
 
-/* ========================================
-   カード作成
-======================================== */
+/* ==================================================
+   カード生成
+================================================== */
 
 function createCards(){
 
@@ -2165,6 +2394,7 @@ function createCards(){
 
       const card =
         document.createElement("div");
+
 
       card.className =
         "card";
@@ -2238,9 +2468,9 @@ function createCards(){
 }
 
 
-/* ========================================
+/* ==================================================
    カード選択
-======================================== */
+================================================== */
 
 function selectCard(card){
 
@@ -2264,6 +2494,10 @@ function selectCard(card){
 
   }
 
+
+  /*
+     ギフト候補が設定されている場合
+  */
 
   if(
     selectedGift !== null &&
@@ -2322,21 +2556,20 @@ function selectCard(card){
 
 
   /*
-   * 2枚選んだ瞬間に
-   * 候補表示を消す
-   */
+     2枚目を選んだら
+     候補表示を消す
+  */
 
   clearCandidates();
-
 
   checkMatch();
 
 }
 
 
-/* ========================================
+/* ==================================================
    ペア判定
-======================================== */
+================================================== */
 
 function checkMatch(){
 
@@ -2454,9 +2687,9 @@ function checkMatch(){
 }
 
 
-/* ========================================
+/* ==================================================
    ギフト
-======================================== */
+================================================== */
 
 document
   .querySelectorAll(".gift-btn")
@@ -2480,9 +2713,9 @@ document
   );
 
 
-/* ========================================
+/* ==================================================
    ギフト候補
-======================================== */
+================================================== */
 
 function activateGift(giftIndex){
 
@@ -2579,9 +2812,9 @@ function activateGift(giftIndex){
 }
 
 
-/* ========================================
+/* ==================================================
    候補表示
-======================================== */
+================================================== */
 
 function showCandidates(){
 
@@ -2612,10 +2845,6 @@ function showCandidates(){
       item.className =
         "candidate";
 
-
-      /*
-       * 候補番号を大きく表示
-       */
 
       item.textContent =
         index + 1;
@@ -2655,9 +2884,9 @@ function showCandidates(){
 }
 
 
-/* ========================================
+/* ==================================================
    候補を消す
-======================================== */
+================================================== */
 
 function clearCandidates(){
 
@@ -2687,9 +2916,9 @@ function clearCandidates(){
 }
 
 
-/* ========================================
+/* ==================================================
    ステータス
-======================================== */
+================================================== */
 
 function updateStatus(){
 
@@ -2706,9 +2935,9 @@ function updateStatus(){
 }
 
 
-/* ========================================
+/* ==================================================
    ゲーム開始
-======================================== */
+================================================== */
 
 function startGame(){
 
@@ -2745,9 +2974,9 @@ function startGame(){
 }
 
 
-/* ========================================
-   完成
-======================================== */
+/* ==================================================
+   完成画面
+================================================== */
 
 function showComplete(){
 
@@ -2790,9 +3019,9 @@ function showComplete(){
 }
 
 
-/* ========================================
+/* ==================================================
    設定ボタン
-======================================== */
+================================================== */
 
 document
   .getElementById("settingBtn")
@@ -2810,9 +3039,9 @@ document
   );
 
 
-/* ========================================
+/* ==================================================
    閉じる
-======================================== */
+================================================== */
 
 document
   .getElementById("closeBtn")
@@ -2826,9 +3055,9 @@ document
   );
 
 
-/* ========================================
+/* ==================================================
    保存
-======================================== */
+================================================== */
 
 document
   .getElementById("saveBtn")
@@ -2842,9 +3071,9 @@ document
   );
 
 
-/* ========================================
+/* ==================================================
    開始
-======================================== */
+================================================== */
 
 document
   .getElementById("startBtn")
@@ -2858,9 +3087,9 @@ document
   );
 
 
-/* ========================================
+/* ==================================================
    リセット
-======================================== */
+================================================== */
 
 document
   .getElementById("resetBtn")
@@ -2874,9 +3103,9 @@ document
   );
 
 
-/* ========================================
-   完成画面
-======================================== */
+/* ==================================================
+   完成画面を閉じる
+================================================== */
 
 document
   .getElementById("completeClose")
@@ -2899,9 +3128,9 @@ document
   );
 
 
-/* ========================================
+/* ==================================================
    初期化
-======================================== */
+================================================== */
 
 updateGiftButtons();
 
