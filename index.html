@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-
-<title>神経衰弱ライブゲーム</title>
+<title>神経衰弱ゲーム</title>
 
 <style>
 *{
@@ -12,70 +11,51 @@
   -webkit-tap-highlight-color:transparent;
 }
 
-html,
-body{
+html,body{
   margin:0;
   padding:0;
   width:100%;
   height:100%;
   overflow:hidden;
   background:#000;
+  font-family:-apple-system,BlinkMacSystemFont,"Yu Gothic",sans-serif;
   color:#fff;
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Helvetica Neue",
-    "Yu Gothic",
-    sans-serif;
 }
 
-button,
-input{
+button,input{
   font-family:inherit;
 }
-
-/* =========================================
-   9:16本体
-========================================= */
 
 #stage{
   position:fixed;
   left:50%;
   top:50%;
   transform:translate(-50%,-50%);
-
   width:min(100vw,56.25vh);
   height:min(100vh,177.777vw);
-
-  background:#111;
-
   overflow:hidden;
+  background:#111;
 }
 
 #game{
   width:100%;
   height:100%;
-
-  padding:7px;
-
+  padding:6px;
   display:flex;
   flex-direction:column;
-
   overflow:hidden;
 }
 
-/* =========================================
-   タイトル
-========================================= */
+/* =========================
+   上部
+========================= */
 
 .header{
   flex:0 0 6%;
-
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
-
   overflow:hidden;
 }
 
@@ -83,126 +63,158 @@ input{
   font-size:21px;
   font-weight:900;
   line-height:1;
-  white-space:nowrap;
 }
 
 .subtitle{
-  margin-top:4px;
+  margin-top:3px;
+  font-size:10px;
   color:#aaa;
-  font-size:11px;
   white-space:nowrap;
 }
 
-/* =========================================
-   状態
-========================================= */
+/* =========================
+   ステータス
+========================= */
 
 .status{
   flex:0 0 7%;
-
   background:#222;
-  border-radius:9px;
-
+  border-radius:8px;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
-
   overflow:hidden;
 }
 
 .status-main{
   font-size:15px;
   font-weight:900;
-  white-space:nowrap;
 }
 
 .status-sub{
-  margin-top:3px;
-  color:#aaa;
+  margin-top:2px;
   font-size:11px;
+  color:#aaa;
 }
 
-/* =========================================
-   候補エリア
-========================================= */
+/* =========================
+   ★ 候補エリア
+========================= */
 
 #candidateArea{
-  flex:0 0 12%;
+  flex:0 0 15%;
   min-height:0;
-
   display:none;
   flex-direction:column;
-
   overflow:hidden;
 }
 
 .candidate-title{
   flex:0 0 28%;
-
   display:flex;
-  justify-content:center;
   align-items:center;
-
+  justify-content:center;
   font-size:13px;
   font-weight:900;
 }
 
+/*
+  候補は枚数に応じて
+  自動でグリッド配置
+*/
 .candidates{
   flex:1;
   min-height:0;
 
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  display:grid;
 
-  gap:6px;
+  grid-template-columns:repeat(4,1fr);
+
+  grid-auto-rows:1fr;
+
+  gap:4px;
+
+  padding:2px 12px;
 
   overflow:hidden;
 }
 
-/*
-   候補パネル
-   ※マス本体とは別の色
-*/
-
 .candidate{
-  height:88%;
-  aspect-ratio:1 / 1;
+  width:100%;
+  height:100%;
+  min-width:0;
+  min-height:0;
 
   border:2px solid #ffd400;
-  border-radius:9px;
+  border-radius:8px;
 
   background:#333;
   color:#fff;
 
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
 
-  font-size:25px;
+  font-size:23px;
   font-weight:900;
-
-  box-shadow:0 2px 6px rgba(0,0,0,.35);
 
   cursor:pointer;
 }
 
 .candidate:active{
-  transform:scale(.9);
+  transform:scale(.93);
 }
 
-/* =========================================
+/*
+  2枚
+*/
+.candidates.c2{
+  grid-template-columns:repeat(2,1fr);
+  grid-template-rows:1fr;
+  padding-left:28%;
+  padding-right:28%;
+}
+
+/*
+  4枚
+*/
+.candidates.c4{
+  grid-template-columns:repeat(4,1fr);
+  grid-template-rows:1fr;
+}
+
+/*
+  6枚
+*/
+.candidates.c6{
+  grid-template-columns:repeat(3,1fr);
+  grid-template-rows:repeat(2,1fr);
+  padding-left:18%;
+  padding-right:18%;
+}
+
+/*
+  8枚
+*/
+.candidates.c8{
+  grid-template-columns:repeat(4,1fr);
+  grid-template-rows:repeat(2,1fr);
+  padding-left:10%;
+  padding-right:10%;
+}
+
+/* =========================
    ボード
-========================================= */
+========================= */
 
 .board-area{
   flex:1;
   min-height:0;
 
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
 
   overflow:hidden;
 }
@@ -218,10 +230,6 @@ input{
 
   overflow:hidden;
 }
-
-/* =========================================
-   枚数別
-========================================= */
 
 #board.c16{
   grid-template-columns:repeat(4,1fr);
@@ -243,27 +251,22 @@ input{
   gap:2px;
 }
 
-/* =========================================
+/* =========================
    カード
-========================================= */
+========================= */
 
 .card{
   width:100%;
   aspect-ratio:1 / 1;
-
   perspective:800px;
-
   cursor:pointer;
 }
 
 .card-inner{
   position:relative;
-
   width:100%;
   height:100%;
-
   transform-style:preserve-3d;
-
   transition:transform .28s ease;
 }
 
@@ -272,10 +275,9 @@ input{
   transform:rotateY(180deg);
 }
 
-/* =========================================
-   ★ マスの裏面
-   ★ 紫背景＋白数字
-========================================= */
+/* =========================
+   ★ 紫のマス
+========================= */
 
 .card-back{
   position:absolute;
@@ -287,46 +289,40 @@ input{
   border-radius:7px;
 
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
 
   backface-visibility:hidden;
-
-  box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,.12);
 }
 
 .card-back-number{
   color:#fff;
-
   font-size:28px;
   font-weight:900;
-
-  line-height:1;
 }
 
-/* =========================================
-   カード表
-========================================= */
+/* =========================
+   表
+========================= */
 
 .card-front{
   position:absolute;
   inset:0;
 
   background:#fff;
+  color:#111;
 
   border-radius:7px;
 
   transform:rotateY(180deg);
 
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
 
   text-align:center;
 
   overflow:hidden;
-
   backface-visibility:hidden;
 }
 
@@ -337,62 +333,41 @@ input{
 }
 
 .card-text{
-  width:100%;
   padding:4px;
-
-  color:#111;
-
   font-size:14px;
   font-weight:900;
-
   line-height:1.15;
-
   word-break:break-word;
 }
 
 .card.matched .card-front{
   border:2px solid #ffd400;
-
-  box-shadow:
-    0 0 10px #ffd400;
+  box-shadow:0 0 10px #ffd400;
 }
 
-/* =========================================
+/* =========================
    下部
-========================================= */
+========================= */
 
 .bottom{
   flex:0 0 13%;
   min-height:0;
-
   display:flex;
   flex-direction:column;
-
   overflow:hidden;
 }
 
-/* =========================================
-   ギフト
-========================================= */
-
 .gifts{
   flex:0 0 48%;
-
   display:grid;
   grid-template-columns:repeat(4,1fr);
-
-  gap:5px;
-
+  gap:4px;
   align-items:center;
-
-  overflow:hidden;
 }
 
 .gift-btn{
   width:100%;
   height:70%;
-
-  padding:0;
 
   border:0;
   border-radius:7px;
@@ -400,7 +375,7 @@ input{
   background:#333;
   color:#fff;
 
-  font-size:11px;
+  font-size:10px;
   font-weight:900;
 
   white-space:nowrap;
@@ -412,32 +387,20 @@ input{
   color:#111;
 }
 
-/* =========================================
-   操作
-========================================= */
-
 .controls{
   flex:0 0 52%;
-
   display:grid;
   grid-template-columns:repeat(3,1fr);
-
-  gap:5px;
-
+  gap:4px;
   align-items:center;
 }
 
 .control{
-  width:100%;
   height:70%;
-
   border:0;
   border-radius:7px;
-
   font-size:13px;
   font-weight:900;
-
-  white-space:nowrap;
 }
 
 .start{
@@ -455,14 +418,13 @@ input{
   color:#fff;
 }
 
-/* =========================================
-   設定画面
-========================================= */
+/* =========================
+   設定
+========================= */
 
 #settings{
   position:fixed;
   inset:0;
-
   z-index:5000;
 
   display:none;
@@ -472,9 +434,7 @@ input{
 
   overflow-y:auto;
 
-  -webkit-overflow-scrolling:touch;
-
-  padding:14px 12px 35px;
+  padding:12px;
 }
 
 #settings.show{
@@ -484,75 +444,51 @@ input{
 .settings-inner{
   width:100%;
   max-width:600px;
-
-  margin:0 auto;
+  margin:auto;
 }
 
 .settings-title{
-  margin:0 0 15px;
-
+  margin-bottom:12px;
   text-align:center;
-
-  font-size:28px;
+  font-size:27px;
   font-weight:900;
-
-  line-height:1.2;
 }
 
 .section{
-  margin-bottom:12px;
-
-  padding:14px;
-
+  margin-bottom:10px;
+  padding:12px;
   background:#222;
-
-  border-radius:12px;
+  border-radius:11px;
 }
 
 .section-title{
-  margin:0 0 12px;
-
+  margin-bottom:10px;
   text-align:center;
-
-  font-size:21px;
+  font-size:20px;
   font-weight:900;
-
-  line-height:1.3;
 }
 
 .gift-info{
-  margin:0 0 12px;
-
+  margin-bottom:10px;
   text-align:center;
-
   color:#ddd;
-
-  font-size:15px;
-
-  line-height:1.7;
+  font-size:14px;
+  line-height:1.5;
 }
-
-/* =========================================
-   枚数
-========================================= */
 
 .count-grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-
-  gap:7px;
+  gap:6px;
 }
 
 .count-btn{
-  min-height:50px;
-
+  min-height:48px;
   border:0;
   border-radius:8px;
-
   background:#444;
   color:#fff;
-
-  font-size:18px;
+  font-size:17px;
   font-weight:900;
 }
 
@@ -561,77 +497,30 @@ input{
   color:#111;
 }
 
-/* =========================================
-   ペア
-========================================= */
+/* =========================
+   ペア設定
+========================= */
 
 .pair-box{
-  margin-bottom:11px;
-
-  padding:11px;
-
+  margin-bottom:9px;
+  padding:9px;
   background:#171717;
-
-  border-radius:10px;
+  border-radius:9px;
 }
 
 .pair-header{
-  margin-bottom:9px;
-
-  color:#c77dff;
-
-  font-size:19px;
-  font-weight:900;
-}
-
-.pair-name{
-  width:100%;
-
-  min-height:47px;
-
-  margin-bottom:9px;
-
-  padding:8px;
-
-  border:1px solid #666;
-  border-radius:7px;
-
-  background:#333;
-  color:#fff;
-
-  font-size:17px;
-}
-
-.card-settings{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-
-  gap:8px;
-}
-
-.card-setting{
-  padding:8px;
-
-  background:#292929;
-
-  border-radius:8px;
-}
-
-.card-label{
-  margin-bottom:6px;
-
-  color:#fff;
-
-  font-size:17px;
-  font-weight:900;
-}
-
-.card-text-input{
-  width:100%;
-
-  min-height:44px;
-
   margin-bottom:7px;
+  color:#c77dff;
+  font-size:18px;
+  font-weight:900;
+}
+
+.pair-name,
+.card-text-input,
+.gift-name-input,
+.gift-count-input{
+  width:100%;
+  min-height:44px;
 
   padding:7px;
 
@@ -641,172 +530,143 @@ input{
   background:#333;
   color:#fff;
 
-  font-size:17px;
+  font-size:16px;
+}
+
+.pair-name{
+  margin-bottom:7px;
+}
+
+.card-settings{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:7px;
+}
+
+.card-setting{
+  padding:7px;
+  background:#292929;
+  border-radius:8px;
+}
+
+.card-label{
+  margin-bottom:5px;
+  font-size:15px;
+  font-weight:900;
+}
+
+.card-text-input{
+  margin-bottom:6px;
 }
 
 .preview{
   width:100%;
-
   aspect-ratio:1 / 1;
 
-  margin-bottom:7px;
+  margin-bottom:6px;
 
   border-radius:7px;
 
   background:#333;
-  color:#fff;
 
   display:flex;
-  justify-content:center;
   align-items:center;
-
-  text-align:center;
-
-  overflow:hidden;
-
-  font-size:17px;
-  font-weight:900;
-}
-
-.preview img{
-  width:100%;
-  height:100%;
-
-  object-fit:cover;
-}
-
-.image-label{
-  display:block;
-
-  width:100%;
-
-  min-height:45px;
-
-  padding:10px 3px;
-
-  border-radius:7px;
-
-  background:#444;
-  color:#fff;
-
-  text-align:center;
-
-  font-size:16px;
-  font-weight:900;
-
-  line-height:1.3;
-}
-
-.image-input{
-  display:none;
-}
-
-/* =========================================
-   ギフト設定
-========================================= */
-
-.gift-setting-row{
-  display:grid;
-  grid-template-columns:1fr 85px;
-
-  gap:8px;
-
-  margin-bottom:9px;
-}
-
-.gift-name-input,
-.gift-count-input{
-  width:100%;
-
-  min-height:47px;
-
-  padding:8px;
-
-  border:1px solid #666;
-  border-radius:7px;
-
-  background:#333;
-  color:#fff;
-
-  font-size:17px;
-}
-
-.gift-count-input{
-  text-align:center;
-  font-weight:900;
-}
-
-/* =========================================
-   完成画像設定
-========================================= */
-
-.complete-preview{
-  width:100%;
-  height:160px;
-
-  margin-bottom:9px;
-
-  border-radius:9px;
-
-  background:#333;
-  color:#aaa;
-
-  display:flex;
   justify-content:center;
-  align-items:center;
 
   text-align:center;
 
   overflow:hidden;
 
   font-size:15px;
+  font-weight:900;
+}
+
+.preview img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.image-label,
+.complete-label{
+  display:block;
+
+  min-height:43px;
+
+  padding:10px 5px;
+
+  border-radius:7px;
+
+  background:#444;
+
+  text-align:center;
+
+  font-size:15px;
+  font-weight:900;
+}
+
+.image-input,
+.complete-input{
+  display:none;
+}
+
+/* =========================
+   ギフト設定
+========================= */
+
+.gift-setting-row{
+  display:grid;
+  grid-template-columns:1fr 75px;
+  gap:7px;
+  margin-bottom:7px;
+}
+
+.gift-count-input{
+  text-align:center;
+  font-weight:900;
+}
+
+/* =========================
+   完成画像
+========================= */
+
+.complete-preview{
+  width:100%;
+  height:150px;
+
+  margin-bottom:8px;
+
+  border-radius:8px;
+
+  background:#333;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+
+  overflow:hidden;
+
+  color:#aaa;
+  font-size:14px;
 }
 
 .complete-preview img{
   width:100%;
   height:100%;
-
   object-fit:contain;
 }
-
-.complete-label{
-  display:block;
-
-  min-height:50px;
-
-  padding:12px;
-
-  border-radius:8px;
-
-  background:#444;
-  color:#fff;
-
-  text-align:center;
-
-  font-size:17px;
-  font-weight:900;
-}
-
-.complete-input{
-  display:none;
-}
-
-/* =========================================
-   設定ボタン
-========================================= */
 
 .save-btn,
 .close-btn{
   width:100%;
+  min-height:52px;
 
-  min-height:54px;
-
-  margin-top:8px;
-
-  padding:12px;
+  margin-top:7px;
 
   border:0;
-  border-radius:9px;
+  border-radius:8px;
 
   font-size:18px;
   font-weight:900;
@@ -822,9 +682,9 @@ input{
   color:#fff;
 }
 
-/* =========================================
+/* =========================
    完成画面
-========================================= */
+========================= */
 
 #completeScreen{
   position:fixed;
@@ -834,10 +694,10 @@ input{
 
   display:none;
 
-  justify-content:center;
   align-items:center;
+  justify-content:center;
 
-  padding:14px;
+  padding:12px;
 
   background:rgba(0,0,0,.96);
 }
@@ -848,49 +708,37 @@ input{
 
 .complete-box{
   width:100%;
-  max-width:600px;
-
   text-align:center;
 }
 
 .complete-title{
-  margin-bottom:11px;
-
+  margin-bottom:10px;
   color:#ffd400;
-
-  font-size:32px;
+  font-size:31px;
   font-weight:900;
 }
 
 #completeImage{
   width:100%;
   max-height:70vh;
-
   object-fit:contain;
 
   border:3px solid #fff;
-  border-radius:9px;
-
-  background:#222;
+  border-radius:8px;
 }
 
 .complete-message{
-  margin-top:9px;
-
-  color:#fff;
-
+  margin-top:8px;
   font-size:16px;
 }
 
 .complete-close{
   width:100%;
-
-  margin-top:11px;
-
-  padding:13px;
+  margin-top:10px;
+  padding:12px;
 
   border:0;
-  border-radius:9px;
+  border-radius:8px;
 
   background:#ffd400;
   color:#111;
@@ -899,422 +747,316 @@ input{
   font-weight:900;
 }
 
-/* =========================================
-   小さい画面
-========================================= */
+/* =========================
+   高さが小さい場合
+========================= */
 
 @media(max-height:650px){
 
-  #settings{
-    padding-top:8px;
+  .title{
+    font-size:18px;
+  }
+
+  .candidate{
+    font-size:20px;
+  }
+
+  .card-back-number{
+    font-size:23px;
+  }
+
+  #candidateArea{
+    flex-basis:16%;
   }
 
   .settings-title{
-    font-size:25px;
-    margin-bottom:9px;
+    font-size:24px;
   }
 
   .section{
-    padding:10px;
-    margin-bottom:8px;
-  }
-
-  .section-title{
-    font-size:19px;
-  }
-
-  .pair-header{
-    font-size:17px;
-  }
-
-  .card-label{
-    font-size:15px;
-  }
-
-  .pair-name,
-  .card-text-input,
-  .gift-name-input,
-  .gift-count-input{
-    font-size:16px;
-    min-height:42px;
-  }
-
-  .image-label{
-    font-size:15px;
+    padding:9px;
   }
 
 }
 
+/* =========================
+   非常に小さい画面
+========================= */
+
+@media(max-height:560px){
+
+  .header{
+    flex-basis:5%;
+  }
+
+  .status{
+    flex-basis:6%;
+  }
+
+  #candidateArea{
+    flex-basis:17%;
+  }
+
+  .bottom{
+    flex-basis:12%;
+  }
+
+  .candidate{
+    font-size:18px;
+  }
+
+  .card-back-number{
+    font-size:20px;
+  }
+
+}
 </style>
 </head>
 
 <body>
 
-<!-- =========================================
-     GAME
-========================================= -->
-
 <div id="stage">
 
-  <div id="game">
+<div id="game">
 
-    <div class="header">
+  <div class="header">
+    <div class="title">数字カード神経衰弱</div>
+    <div class="subtitle" id="message">
+      指定ギフトで候補を絞れます！
+    </div>
+  </div>
 
-      <div class="title">
-        数字カード神経衰弱
-      </div>
+  <div class="status">
+    <div class="status-main" id="statusMain">
+      ギフトを選んでね！
+    </div>
 
-      <div
-        class="subtitle"
-        id="message"
-      >
-        指定ギフトで候補を絞れます！
-      </div>
+    <div class="status-sub" id="statusSub">
+      ペア 0 / 8
+    </div>
+  </div>
+
+  <!-- 候補 -->
+  <div id="candidateArea">
+
+    <div class="candidate-title">
+      候補カードから選んでね！
+    </div>
+
+    <div
+      class="candidates"
+      id="candidates">
+    </div>
+
+  </div>
+
+  <!-- ボード -->
+  <div class="board-area">
+    <div id="board" class="c16"></div>
+  </div>
+
+  <!-- 下部 -->
+  <div class="bottom">
+
+    <div class="gifts">
+
+      <button class="gift-btn" data-gift="0">
+        ハートミー
+      </button>
+
+      <button class="gift-btn" data-gift="1">
+        ドーナツ
+      </button>
+
+      <button class="gift-btn" data-gift="2">
+        ギフトA
+      </button>
+
+      <button class="gift-btn" data-gift="3">
+        特別ギフト
+      </button>
 
     </div>
 
+    <div class="controls">
 
-    <div class="status">
+      <button class="control start" id="startBtn">
+        開始
+      </button>
 
-      <div
-        class="status-main"
-        id="statusMain"
-      >
-        ゲーム開始！
-      </div>
+      <button class="control reset" id="resetBtn">
+        リセット
+      </button>
 
-      <div
-        class="status-sub"
-        id="statusSub"
-      >
-        ペア 0 / 8
-      </div>
-
-    </div>
-
-
-    <!-- 候補 -->
-
-    <div id="candidateArea">
-
-      <div class="candidate-title">
-        候補カードから選んでね！
-      </div>
-
-      <div
-        class="candidates"
-        id="candidates"
-      ></div>
-
-    </div>
-
-
-    <!-- マス -->
-
-    <div class="board-area">
-
-      <div
-        id="board"
-        class="c16"
-      ></div>
-
-    </div>
-
-
-    <!-- 下 -->
-
-    <div class="bottom">
-
-      <div class="gifts">
-
-        <button
-          class="gift-btn"
-          data-gift="0"
-        >
-          ハートミー
-        </button>
-
-        <button
-          class="gift-btn"
-          data-gift="1"
-        >
-          ドーナツ
-        </button>
-
-        <button
-          class="gift-btn"
-          data-gift="2"
-        >
-          ギフトA
-        </button>
-
-        <button
-          class="gift-btn"
-          data-gift="3"
-        >
-          特別ギフト
-        </button>
-
-      </div>
-
-
-      <div class="controls">
-
-        <button
-          class="control start"
-          id="startBtn"
-        >
-          開始
-        </button>
-
-        <button
-          class="control reset"
-          id="resetBtn"
-        >
-          リセット
-        </button>
-
-        <button
-          class="control setting"
-          id="settingBtn"
-        >
-          設定
-        </button>
-
-      </div>
+      <button class="control setting" id="settingBtn">
+        設定
+      </button>
 
     </div>
 
   </div>
 
 </div>
+</div>
 
 
-<!-- =========================================
-     SETTINGS
-========================================= -->
+<!-- =========================
+     設定画面
+========================= -->
 
 <div id="settings">
 
-  <div class="settings-inner">
+<div class="settings-inner">
 
-    <div class="settings-title">
-      ゲーム設定
+  <div class="settings-title">
+    ゲーム設定
+  </div>
+
+  <div class="section">
+
+    <div class="section-title">
+      カード枚数
     </div>
 
+    <div class="count-grid">
 
-    <!-- 枚数 -->
+      <button class="count-btn selected" data-count="16">
+        16枚
+      </button>
 
-    <div class="section">
+      <button class="count-btn" data-count="24">
+        24枚
+      </button>
 
-      <div class="section-title">
-        カード枚数
-      </div>
+      <button class="count-btn" data-count="36">
+        36枚
+      </button>
 
-      <div class="count-grid">
-
-        <button
-          class="count-btn selected"
-          data-count="16"
-        >
-          16枚
-        </button>
-
-        <button
-          class="count-btn"
-          data-count="24"
-        >
-          24枚
-        </button>
-
-        <button
-          class="count-btn"
-          data-count="36"
-        >
-          36枚
-        </button>
-
-        <button
-          class="count-btn"
-          data-count="48"
-        >
-          48枚
-        </button>
-
-      </div>
+      <button class="count-btn" data-count="48">
+        48枚
+      </button>
 
     </div>
-
-
-    <!-- ペア設定 -->
-
-    <div class="section">
-
-      <div class="section-title">
-        ペアカード設定
-      </div>
-
-      <div class="gift-info">
-
-        例：<br>
-        「京都」＋「八ツ橋」<br>
-        「東京」＋「東京タワー」<br>
-        のように自由に設定できます。
-
-      </div>
-
-      <div id="pairList"></div>
-
-    </div>
-
-
-    <!-- ギフト -->
-
-    <div class="section">
-
-      <div class="section-title">
-        指定ギフト設定
-      </div>
-
-      <div class="gift-info">
-
-        ギフト名と候補カード枚数を自由に設定できます。
-
-      </div>
-
-
-      <div class="gift-setting-row">
-
-        <input
-          class="gift-name-input"
-          id="giftName0"
-          value="ハートミー"
-        >
-
-        <input
-          class="gift-count-input"
-          id="giftCount0"
-          type="number"
-          min="2"
-          value="2"
-        >
-
-      </div>
-
-
-      <div class="gift-setting-row">
-
-        <input
-          class="gift-name-input"
-          id="giftName1"
-          value="ドーナツ"
-        >
-
-        <input
-          class="gift-count-input"
-          id="giftCount1"
-          type="number"
-          min="2"
-          value="4"
-        >
-
-      </div>
-
-
-      <div class="gift-setting-row">
-
-        <input
-          class="gift-name-input"
-          id="giftName2"
-          value="ギフトA"
-        >
-
-        <input
-          class="gift-count-input"
-          id="giftCount2"
-          type="number"
-          min="2"
-          value="6"
-        >
-
-      </div>
-
-
-      <div class="gift-setting-row">
-
-        <input
-          class="gift-name-input"
-          id="giftName3"
-          value="特別ギフト"
-        >
-
-        <input
-          class="gift-count-input"
-          id="giftCount3"
-          type="number"
-          min="2"
-          value="8"
-        >
-
-      </div>
-
-    </div>
-
-
-    <!-- 完成画像 -->
-
-    <div class="section">
-
-      <div class="section-title">
-        全部揃ったときの完成画像
-      </div>
-
-      <div
-        class="complete-preview"
-        id="completePreview"
-      >
-        完成画像を設定してください
-      </div>
-
-      <label class="complete-label">
-
-        完成画像を選択
-
-        <input
-          class="complete-input"
-          id="completeInput"
-          type="file"
-          accept="image/*"
-        >
-
-      </label>
-
-    </div>
-
-
-    <button
-      class="save-btn"
-      id="saveBtn"
-    >
-      保存してゲーム開始
-    </button>
-
-
-    <button
-      class="close-btn"
-      id="closeBtn"
-    >
-      閉じる
-    </button>
 
   </div>
 
+
+  <div class="section">
+
+    <div class="section-title">
+      ペアカード設定
+    </div>
+
+    <div class="gift-info">
+      例：京都＋八ツ橋のように
+      自由にペアを設定できます。
+    </div>
+
+    <div id="pairList"></div>
+
+  </div>
+
+
+  <div class="section">
+
+    <div class="section-title">
+      指定ギフト設定
+    </div>
+
+    <div class="gift-info">
+      ギフト名と候補カード枚数を設定できます。
+    </div>
+
+    <div class="gift-setting-row">
+      <input class="gift-name-input"
+             id="giftName0"
+             value="ハートミー">
+
+      <input class="gift-count-input"
+             id="giftCount0"
+             type="number"
+             min="2"
+             value="2">
+    </div>
+
+    <div class="gift-setting-row">
+      <input class="gift-name-input"
+             id="giftName1"
+             value="ドーナツ">
+
+      <input class="gift-count-input"
+             id="giftCount1"
+             type="number"
+             min="2"
+             value="4">
+    </div>
+
+    <div class="gift-setting-row">
+      <input class="gift-name-input"
+             id="giftName2"
+             value="ギフトA">
+
+      <input class="gift-count-input"
+             id="giftCount2"
+             type="number"
+             min="2"
+             value="6">
+    </div>
+
+    <div class="gift-setting-row">
+      <input class="gift-name-input"
+             id="giftName3"
+             value="特別ギフト">
+
+      <input class="gift-count-input"
+             id="giftCount3"
+             type="number"
+             min="2"
+             value="8">
+    </div>
+
+  </div>
+
+
+  <div class="section">
+
+    <div class="section-title">
+      全部揃ったときの完成画像
+    </div>
+
+    <div class="complete-preview"
+         id="completePreview">
+      完成画像を設定してください
+    </div>
+
+    <label class="complete-label">
+      完成画像を選択
+
+      <input
+        class="complete-input"
+        id="completeInput"
+        type="file"
+        accept="image/*">
+    </label>
+
+  </div>
+
+
+  <button class="save-btn" id="saveBtn">
+    保存してゲーム開始
+  </button>
+
+  <button class="close-btn" id="closeBtn">
+    閉じる
+  </button>
+
+</div>
 </div>
 
 
-<!-- =========================================
-     COMPLETE
-========================================= -->
+<!-- =========================
+     完成画面
+========================= -->
 
 <div id="completeScreen">
 
@@ -1324,19 +1066,13 @@ input{
       全部完成！
     </div>
 
-    <img
-      id="completeImage"
-      alt="完成画像"
-    >
+    <img id="completeImage" alt="完成画像">
 
     <div class="complete-message">
       おめでとう！
     </div>
 
-    <button
-      class="complete-close"
-      id="completeClose"
-    >
+    <button class="complete-close" id="completeClose">
       もう一度ゲームする
     </button>
 
@@ -1347,61 +1083,35 @@ input{
 
 <script>
 
-/* =========================================
-   基本データ
-========================================= */
+/* =====================================
+   データ
+===================================== */
 
-let cardCount = 16;
+let cardCount=16;
 
-let matchedPairs = 0;
+let matchedPairs=0;
 
-let firstCard = null;
-let secondCard = null;
+let firstCard=null;
+let secondCard=null;
 
-let lockBoard = false;
+let lockBoard=false;
 
-let selectedGift = null;
+let selectedGift=null;
 
-let candidateIndexes = [];
+let candidateIndexes=[];
 
-let completeImageData = null;
+let completeImageData=null;
 
 
-/* =========================================
-   ギフト
-========================================= */
-
-let gifts = [
-
-  {
-    name:"ハートミー",
-    count:2
-  },
-
-  {
-    name:"ドーナツ",
-    count:4
-  },
-
-  {
-    name:"ギフトA",
-    count:6
-  },
-
-  {
-    name:"特別ギフト",
-    count:8
-  }
-
+let gifts=[
+  {name:"ハートミー",count:2},
+  {name:"ドーナツ",count:4},
+  {name:"ギフトA",count:6},
+  {name:"特別ギフト",count:8}
 ];
 
 
-/* =========================================
-   ペア
-========================================= */
-
-let pairs = [
-
+let pairs=[
   ["京都","八ツ橋"],
   ["東京","東京タワー"],
   ["大阪","たこ焼き"],
@@ -1426,20 +1136,19 @@ let pairs = [
   ["千葉","落花生"],
   ["兵庫","神戸牛"],
   ["長野","そば"]
-
 ];
 
 
-let pairImages = [];
+let pairImages=[];
 
 
-/* =========================================
-   文字エスケープ
-========================================= */
+/* =====================================
+   文字処理
+===================================== */
 
 function esc(text){
 
-  return String(text || "")
+  return String(text||"")
     .replace(/&/g,"&amp;")
     .replace(/"/g,"&quot;")
     .replace(/</g,"&lt;")
@@ -1448,14 +1157,14 @@ function esc(text){
 }
 
 
-/* =========================================
+/* =====================================
    シャッフル
-========================================= */
+===================================== */
 
-function shuffle(array){
+function shuffle(arr){
 
   for(
-    let i=array.length-1;
+    let i=arr.length-1;
     i>0;
     i--
   ){
@@ -1466,11 +1175,11 @@ function shuffle(array){
       );
 
     [
-      array[i],
-      array[j]
+      arr[i],
+      arr[j]
     ]=[
-      array[j],
-      array[i]
+      arr[j],
+      arr[i]
     ];
 
   }
@@ -1478,9 +1187,9 @@ function shuffle(array){
 }
 
 
-/* =========================================
-   設定を開く
-========================================= */
+/* =====================================
+   設定
+===================================== */
 
 function openSettings(){
 
@@ -1493,10 +1202,6 @@ function openSettings(){
 }
 
 
-/* =========================================
-   設定を閉じる
-========================================= */
-
 function closeSettings(){
 
   document
@@ -1506,16 +1211,14 @@ function closeSettings(){
 }
 
 
-/* =========================================
-   ペア設定作成
-========================================= */
+/* =====================================
+   ペア設定
+===================================== */
 
 function createPairSettings(){
 
   const list=
-    document.getElementById(
-      "pairList"
-    );
+    document.getElementById("pairList");
 
   list.innerHTML="";
 
@@ -1536,19 +1239,15 @@ function createPairSettings(){
 
 
     if(!pairImages[i]){
-
       pairImages[i]={
         a:null,
         b:null
       };
-
     }
 
 
     const box=
-      document.createElement(
-        "div"
-      );
+      document.createElement("div");
 
     box.className="pair-box";
 
@@ -1562,8 +1261,7 @@ function createPairSettings(){
       <input
         class="pair-name"
         id="pairName${i}"
-        placeholder="ペア名（任意）"
-      >
+        placeholder="ペア名（任意）">
 
       <div class="card-settings">
 
@@ -1577,18 +1275,15 @@ function createPairSettings(){
             class="card-text-input"
             id="pairA${i}"
             value="${esc(pairs[i][0])}"
-            placeholder="京都"
-          >
+            placeholder="京都">
 
           <div
             class="preview"
-            id="previewA${i}"
-          >
+            id="previewA${i}">
             ${esc(pairs[i][0])}
           </div>
 
           <label class="image-label">
-
             画像を設定
 
             <input
@@ -1596,9 +1291,7 @@ function createPairSettings(){
               type="file"
               accept="image/*"
               data-index="${i}"
-              data-side="a"
-            >
-
+              data-side="a">
           </label>
 
         </div>
@@ -1614,18 +1307,15 @@ function createPairSettings(){
             class="card-text-input"
             id="pairB${i}"
             value="${esc(pairs[i][1])}"
-            placeholder="八ツ橋"
-          >
+            placeholder="八ツ橋">
 
           <div
             class="preview"
-            id="previewB${i}"
-          >
+            id="previewB${i}">
             ${esc(pairs[i][1])}
           </div>
 
           <label class="image-label">
-
             画像を設定
 
             <input
@@ -1633,9 +1323,7 @@ function createPairSettings(){
               type="file"
               accept="image/*"
               data-index="${i}"
-              data-side="b"
-            >
-
+              data-side="b">
           </label>
 
         </div>
@@ -1649,11 +1337,9 @@ function createPairSettings(){
 
     if(pairImages[i].a){
 
-      document
-        .getElementById(
-          `previewA${i}`
-        )
-        .innerHTML=
+      document.getElementById(
+        `previewA${i}`
+      ).innerHTML=
         `<img src="${pairImages[i].a}" alt="">`;
 
     }
@@ -1661,60 +1347,42 @@ function createPairSettings(){
 
     if(pairImages[i].b){
 
-      document
-        .getElementById(
-          `previewB${i}`
-        )
-        .innerHTML=
+      document.getElementById(
+        `previewB${i}`
+      ).innerHTML=
         `<img src="${pairImages[i].b}" alt="">`;
 
     }
 
 
     document
-      .getElementById(
-        `pairA${i}`
-      )
-      .addEventListener(
-        "input",
-        function(){
+      .getElementById(`pairA${i}`)
+      .addEventListener("input",function(){
 
-          if(!pairImages[i].a){
+        if(!pairImages[i].a){
 
-            document
-              .getElementById(
-                `previewA${i}`
-              )
-              .textContent=
-              this.value;
-
-          }
+          document.getElementById(
+            `previewA${i}`
+          ).textContent=this.value;
 
         }
-      );
+
+      });
 
 
     document
-      .getElementById(
-        `pairB${i}`
-      )
-      .addEventListener(
-        "input",
-        function(){
+      .getElementById(`pairB${i}`)
+      .addEventListener("input",function(){
 
-          if(!pairImages[i].b){
+        if(!pairImages[i].b){
 
-            document
-              .getElementById(
-                `previewB${i}`
-              )
-              .textContent=
-              this.value;
-
-          }
+          document.getElementById(
+            `previewB${i}`
+          ).textContent=this.value;
 
         }
-      );
+
+      });
 
   }
 
@@ -1727,16 +1395,13 @@ function createPairSettings(){
         "change",
         function(){
 
-          const file=
-            this.files[0];
+          const file=this.files[0];
 
           if(!file)return;
 
 
           const index=
-            Number(
-              this.dataset.index
-            );
+            Number(this.dataset.index);
 
           const side=
             this.dataset.side;
@@ -1752,15 +1417,14 @@ function createPairSettings(){
               e.target.result;
 
 
-            const preview=
-              document.getElementById(
-                side==="a"
-                ? `previewA${index}`
-                : `previewB${index}`
-              );
+            const id=
+              side==="a"
+              ? `previewA${index}`
+              : `previewB${index}`;
 
 
-            preview.innerHTML=
+            document.getElementById(id)
+              .innerHTML=
               `<img src="${e.target.result}" alt="">`;
 
           };
@@ -1776,9 +1440,9 @@ function createPairSettings(){
 }
 
 
-/* =========================================
-   枚数変更
-========================================= */
+/* =====================================
+   枚数
+===================================== */
 
 document
   .querySelectorAll(".count-btn")
@@ -1791,21 +1455,15 @@ document
         document
           .querySelectorAll(".count-btn")
           .forEach(b=>{
-            b.classList.remove(
-              "selected"
-            );
+            b.classList.remove("selected");
           });
 
 
-        this.classList.add(
-          "selected"
-        );
+        this.classList.add("selected");
 
 
         cardCount=
-          Number(
-            this.dataset.count
-          );
+          Number(this.dataset.count);
 
 
         createPairSettings();
@@ -1816,9 +1474,9 @@ document
   });
 
 
-/* =========================================
+/* =====================================
    完成画像
-========================================= */
+===================================== */
 
 document
   .getElementById("completeInput")
@@ -1826,8 +1484,7 @@ document
     "change",
     function(){
 
-      const file=
-        this.files[0];
+      const file=this.files[0];
 
       if(!file)return;
 
@@ -1842,11 +1499,9 @@ document
           e.target.result;
 
 
-        document
-          .getElementById(
-            "completePreview"
-          )
-          .innerHTML=
+        document.getElementById(
+          "completePreview"
+        ).innerHTML=
           `<img src="${completeImageData}" alt="">`;
 
       };
@@ -1858,9 +1513,9 @@ document
   );
 
 
-/* =========================================
-   設定保存
-========================================= */
+/* =====================================
+   保存
+===================================== */
 
 function saveSettings(){
 
@@ -1875,25 +1530,19 @@ function saveSettings(){
   ){
 
     const a=
-      document.getElementById(
-        `pairA${i}`
-      );
+      document.getElementById(`pairA${i}`);
 
     const b=
-      document.getElementById(
-        `pairB${i}`
-      );
+      document.getElementById(`pairB${i}`);
 
 
     if(a){
-      pairs[i][0]=
-        a.value.trim();
+      pairs[i][0]=a.value.trim();
     }
 
 
     if(b){
-      pairs[i][1]=
-        b.value.trim();
+      pairs[i][1]=b.value.trim();
     }
 
   }
@@ -1905,27 +1554,19 @@ function saveSettings(){
     i++
   ){
 
-    const name=
+    gifts[i].name=
       document.getElementById(
         `giftName${i}`
-      );
-
-    const countInput=
-      document.getElementById(
-        `giftCount${i}`
-      );
-
-
-    gifts[i].name=
-      name.value.trim()
-      ||"ギフト";
+      ).value.trim() || "ギフト";
 
 
     gifts[i].count=
       Math.max(
         2,
         Number(
-          countInput.value
+          document.getElementById(
+            `giftCount${i}`
+          ).value
         )||2
       );
 
@@ -1941,36 +1582,32 @@ function saveSettings(){
 }
 
 
-/* =========================================
-   ギフト表示更新
-========================================= */
+/* =====================================
+   ギフト名表示
+===================================== */
 
 function updateGiftButtons(){
 
   document
     .querySelectorAll(".gift-btn")
-    .forEach(
-      (btn,index)=>{
+    .forEach((btn,index)=>{
 
-        btn.textContent=
-          gifts[index].name;
+      btn.textContent=
+        gifts[index].name;
 
-      }
-    );
+    });
 
 }
 
 
-/* =========================================
+/* =====================================
    カード作成
-========================================= */
+===================================== */
 
 function createCards(){
 
   const board=
-    document.getElementById(
-      "board"
-    );
+    document.getElementById("board");
 
   board.innerHTML="";
 
@@ -1999,24 +1636,16 @@ function createCards(){
 
 
     data.push({
-
       pairId:i,
-
       text:pair[0],
-
       image:images.a
-
     });
 
 
     data.push({
-
       pairId:i,
-
       text:pair[1],
-
       image:images.b
-
     });
 
   }
@@ -2025,90 +1654,75 @@ function createCards(){
   shuffle(data);
 
 
-  data.forEach(
-    (item,index)=>{
+  data.forEach((item,index)=>{
 
-      const card=
-        document.createElement(
-          "div"
-        );
+    const card=
+      document.createElement("div");
 
-      card.className="card";
+    card.className="card";
 
+    card.dataset.index=index;
 
-      /*
-         裏面に表示する数字
-      */
-
-      card.dataset.index=
-        index;
-
-      card.dataset.pairId=
-        item.pairId;
+    card.dataset.pairId=
+      item.pairId;
 
 
-      let front;
+    let front;
 
 
-      if(item.image){
+    if(item.image){
 
-        front=
-          `<img
-            src="${item.image}"
-            alt=""
-          >`;
+      front=
+        `<img src="${item.image}" alt="">`;
 
-      }else{
+    }else{
 
-        front=
-          `<div class="card-text">
-            ${esc(item.text)}
-          </div>`;
+      front=
+        `<div class="card-text">
+          ${esc(item.text)}
+        </div>`;
 
-      }
+    }
 
 
-      card.innerHTML=`
+    card.innerHTML=`
 
-        <div class="card-inner">
+      <div class="card-inner">
 
-          <div class="card-back">
+        <div class="card-back">
 
-            <div class="card-back-number">
-              ${index+1}
-            </div>
-
-          </div>
-
-          <div class="card-front">
-            ${front}
+          <div class="card-back-number">
+            ${index+1}
           </div>
 
         </div>
-      `;
+
+        <div class="card-front">
+          ${front}
+        </div>
+
+      </div>
+    `;
 
 
-      card.addEventListener(
-        "click",
-        function(){
-
-          selectCard(card);
-
-        }
-      );
+    card.addEventListener(
+      "click",
+      function(){
+        selectCard(card);
+      }
+    );
 
 
-      board.appendChild(card);
+    board.appendChild(card);
 
-    }
-  );
+  });
 
 }
 
 
-/* =========================================
+/* =====================================
    カード選択
-========================================= */
+===================================== */
 
 function selectCard(card){
 
@@ -2116,22 +1730,12 @@ function selectCard(card){
 
 
   if(
-    card.classList.contains("matched")
-  ){
-    return;
-  }
-
-
-  if(
+    card.classList.contains("matched") ||
     card.classList.contains("flipped")
   ){
     return;
   }
 
-
-  /*
-     ギフト候補制限
-  */
 
   if(
     selectedGift!==null &&
@@ -2139,20 +1743,16 @@ function selectCard(card){
   ){
 
     const index=
-      Number(
-        card.dataset.index
-      );
+      Number(card.dataset.index);
 
 
     if(
       !candidateIndexes.includes(index)
     ){
 
-      document
-        .getElementById(
-          "message"
-        )
-        .textContent=
+      document.getElementById(
+        "message"
+      ).textContent=
         "候補のカードから選んでね！";
 
       return;
@@ -2162,21 +1762,16 @@ function selectCard(card){
   }
 
 
-  card.classList.add(
-    "flipped"
-  );
+  card.classList.add("flipped");
 
 
   if(!firstCard){
 
     firstCard=card;
 
-
-    document
-      .getElementById(
-        "statusMain"
-      )
-      .textContent=
+    document.getElementById(
+      "statusMain"
+    ).textContent=
       "もう1枚選んでね！";
 
     return;
@@ -2186,7 +1781,6 @@ function selectCard(card){
 
   secondCard=card;
 
-
   clearCandidates();
 
   checkMatch();
@@ -2194,59 +1788,44 @@ function selectCard(card){
 }
 
 
-/* =========================================
-   ペア判定
-========================================= */
+/* =====================================
+   判定
+===================================== */
 
 function checkMatch(){
 
-  const firstPair=
-    Number(
-      firstCard.dataset.pairId
-    );
+  const a=
+    Number(firstCard.dataset.pairId);
+
+  const b=
+    Number(secondCard.dataset.pairId);
 
 
-  const secondPair=
-    Number(
-      secondCard.dataset.pairId
-    );
+  if(a===b){
 
+    firstCard.classList.add("matched");
 
-  if(
-    firstPair===secondPair
-  ){
-
-    firstCard.classList.add(
-      "matched"
-    );
-
-    secondCard.classList.add(
-      "matched"
-    );
+    secondCard.classList.add("matched");
 
 
     matchedPairs++;
 
 
     firstCard=null;
-
     secondCard=null;
 
 
     updateStatus();
 
 
-    document
-      .getElementById(
-        "statusMain"
-      )
-      .textContent=
+    document.getElementById(
+      "statusMain"
+    ).textContent=
       "ペア成立！";
 
 
     if(
-      matchedPairs>=
-      cardCount/2
+      matchedPairs>=cardCount/2
     ){
 
       setTimeout(
@@ -2261,61 +1840,44 @@ function checkMatch(){
     lockBoard=true;
 
 
-    document
-      .getElementById(
-        "statusMain"
-      )
-      .textContent=
+    document.getElementById(
+      "statusMain"
+    ).textContent=
       "残念！";
 
 
-    setTimeout(
-      function(){
+    setTimeout(function(){
 
-        if(firstCard){
+      firstCard.classList.remove(
+        "flipped"
+      );
 
-          firstCard.classList.remove(
-            "flipped"
-          );
-
-        }
-
-
-        if(secondCard){
-
-          secondCard.classList.remove(
-            "flipped"
-          );
-
-        }
+      secondCard.classList.remove(
+        "flipped"
+      );
 
 
-        firstCard=null;
+      firstCard=null;
+      secondCard=null;
 
-        secondCard=null;
-
-        lockBoard=false;
+      lockBoard=false;
 
 
-        document
-          .getElementById(
-            "statusMain"
-          )
-          .textContent=
-          "もう一度選んでね！";
+      document.getElementById(
+        "statusMain"
+      ).textContent=
+        "もう一度選んでね！";
 
-      },
-      850
-    );
+    },850);
 
   }
 
 }
 
 
-/* =========================================
-   ギフト候補作成
-========================================= */
+/* =====================================
+   ★ ギフト候補
+===================================== */
 
 function activateGift(giftIndex){
 
@@ -2329,9 +1891,7 @@ function activateGift(giftIndex){
   document
     .querySelectorAll(".gift-btn")
     .forEach(btn=>{
-      btn.classList.remove(
-        "active"
-      );
+      btn.classList.remove("active");
     });
 
 
@@ -2342,82 +1902,40 @@ function activateGift(giftIndex){
 
 
   if(active){
-
-    active.classList.add(
-      "active"
-    );
-
+    active.classList.add("active");
   }
 
 
   const cards=
     Array.from(
-      document.querySelectorAll(
-        ".card"
-      )
+      document.querySelectorAll(".card")
     );
 
 
   const available=
     cards
-      .map(
-        (card,index)=>({
-
-          card:card,
-
-          index:index,
-
-          pairId:
-            Number(
-              card.dataset.pairId
-            )
-
-        })
-      )
-      .filter(
-        item=>
-
-          !item.card.classList.contains(
-            "matched"
-          )
-
-          &&
-
-          !item.card.classList.contains(
-            "flipped"
-          )
-
+      .map((card,index)=>({
+        card,
+        index,
+        pairId:Number(
+          card.dataset.pairId
+        )
+      }))
+      .filter(item=>
+        !item.card.classList.contains("matched") &&
+        !item.card.classList.contains("flipped")
       );
 
 
-  if(
-    available.length<2
-  ){
-    return;
-  }
+  if(available.length<2)return;
 
 
   let candidateCount=
-    Number(
-      gifts[giftIndex].count
-    );
-
-
-  if(
-    !Number.isFinite(
-      candidateCount
-    )
-  ){
-
-    candidateCount=2;
-
-  }
-
-
-  candidateCount=
     Math.max(
       2,
-      candidateCount
+      Number(
+        gifts[giftIndex].count
+      )||2
     );
 
 
@@ -2429,93 +1947,67 @@ function activateGift(giftIndex){
 
 
   /*
-     ペアごとに整理
+     ペアを探す
   */
 
-  const pairMap={};
+  const map={};
 
 
-  available.forEach(
-    item=>{
+  available.forEach(item=>{
 
-      if(
-        !pairMap[item.pairId]
-      ){
-
-        pairMap[item.pairId]=[];
-
-      }
-
-
-      pairMap[item.pairId].push(
-        item
-      );
-
+    if(!map[item.pairId]){
+      map[item.pairId]=[];
     }
-  );
+
+    map[item.pairId].push(item);
+
+  });
 
 
-  /*
-     まだ揃っていない
-     完成可能なペア
-  */
-
-  const completePairs=
-    Object.values(pairMap)
-      .filter(
-        pair=>pair.length>=2
-      );
+  const possiblePairs=
+    Object.values(map)
+      .filter(pair=>pair.length>=2);
 
 
   let selected=[];
 
 
   /*
-     ★ 候補が2枚でも必ずペア
+     必ず最初に1ペア入れる
   */
 
-  if(
-    completePairs.length>0
-  ){
+  if(possiblePairs.length){
 
     const pair=
-      completePairs[
+      possiblePairs[
         Math.floor(
           Math.random()*
-          completePairs.length
+          possiblePairs.length
         )
       ];
 
 
-    selected.push(
-      pair[0]
-    );
-
-    selected.push(
-      pair[1]
-    );
+    selected.push(pair[0]);
+    selected.push(pair[1]);
 
   }
 
 
   /*
-     残りの候補を追加
+     残りをランダム追加
   */
 
   const used=
     new Set(
       selected.map(
-        item=>item.index
+        x=>x.index
       )
     );
 
 
-  const remaining=
+  let remaining=
     available.filter(
-      item=>
-        !used.has(
-          item.index
-        )
+      x=>!used.has(x.index)
     );
 
 
@@ -2523,9 +2015,8 @@ function activateGift(giftIndex){
 
 
   while(
-    selected.length<
-    candidateCount &&
-    remaining.length>0
+    selected.length<candidateCount &&
+    remaining.length
   ){
 
     selected.push(
@@ -2540,35 +2031,31 @@ function activateGift(giftIndex){
 
   candidateIndexes=
     selected.map(
-      item=>item.index
+      x=>x.index
     );
 
 
   showCandidates();
 
 
-  document
-    .getElementById(
-      "statusMain"
-    )
-    .textContent=
+  document.getElementById(
+    "statusMain"
+  ).textContent=
     "候補から2枚選んでね！";
 
 
-  document
-    .getElementById(
-      "message"
-    )
-    .textContent=
+  document.getElementById(
+    "message"
+  ).textContent=
     gifts[giftIndex].name+
     "：候補が表示されました！";
 
 }
 
 
-/* =========================================
-   候補表示
-========================================= */
+/* =====================================
+   ★ 候補表示
+===================================== */
 
 function showCandidates(){
 
@@ -2587,62 +2074,59 @@ function showCandidates(){
   list.innerHTML="";
 
 
-  candidateIndexes.forEach(
-    index=>{
+  /*
+     枚数クラスを付ける
+     → 2/4/6/8枚を自動配置
+  */
 
-      const button=
-        document.createElement(
-          "div"
-        );
-
-
-      button.className=
-        "candidate";
+  list.className=
+    "candidates c"+
+    candidateIndexes.length;
 
 
-      button.textContent=
-        index+1;
+  candidateIndexes.forEach(index=>{
+
+    const button=
+      document.createElement("div");
 
 
-      button.addEventListener(
-        "click",
-        function(){
+    button.className="candidate";
 
-          const cards=
-            document.querySelectorAll(
-              ".card"
-            );
+    button.textContent=
+      index+1;
 
 
-          if(cards[index]){
+    button.addEventListener(
+      "click",
+      function(){
 
-            selectCard(
-              cards[index]
-            );
+        const cards=
+          document.querySelectorAll(
+            ".card"
+          );
 
-          }
 
+        if(cards[index]){
+          selectCard(cards[index]);
         }
-      );
+
+      }
+    );
 
 
-      list.appendChild(
-        button
-      );
+    list.appendChild(button);
 
-    }
-  );
+  });
 
 
-  area.style.display=
-    "flex";
+  area.style.display="flex";
 
 }
 
 
-/* =========================================
-   候補を消す
-========================================= */
+/* =====================================
+   候補消去
+===================================== */
 
 function clearCandidates(){
 
@@ -2651,56 +2135,46 @@ function clearCandidates(){
   selectedGift=null;
 
 
-  document
-    .getElementById(
-      "candidateArea"
-    )
-    .style.display=
-    "none";
+  document.getElementById(
+    "candidateArea"
+  ).style.display="none";
 
 
   document
-    .querySelectorAll(
-      ".gift-btn"
-    )
+    .querySelectorAll(".gift-btn")
     .forEach(btn=>{
-      btn.classList.remove(
-        "active"
-      );
+      btn.classList.remove("active");
     });
 
 }
 
 
-/* =========================================
-   ステータス
-========================================= */
+/* =====================================
+   状態
+===================================== */
 
 function updateStatus(){
 
-  document
-    .getElementById(
-      "statusSub"
-    )
-    .textContent=
+  document.getElementById(
+    "statusSub"
+  ).textContent=
     "ペア "+
     matchedPairs+
     " / "+
-    (cardCount/2);
+    cardCount/2;
 
 }
 
 
-/* =========================================
-   ゲーム開始
-========================================= */
+/* =====================================
+   開始
+===================================== */
 
 function startGame(){
 
   matchedPairs=0;
 
   firstCard=null;
-
   secondCard=null;
 
   lockBoard=false;
@@ -2712,27 +2186,23 @@ function startGame(){
   updateStatus();
 
 
-  document
-    .getElementById(
-      "statusMain"
-    )
-    .textContent=
+  document.getElementById(
+    "statusMain"
+  ).textContent=
     "ギフトを選んでね！";
 
 
-  document
-    .getElementById(
-      "message"
-    )
-    .textContent=
+  document.getElementById(
+    "message"
+  ).textContent=
     "指定ギフトで候補を絞れます！";
 
 }
 
 
-/* =========================================
-   全部完成
-========================================= */
+/* =====================================
+   完成
+===================================== */
 
 function showComplete(){
 
@@ -2740,7 +2210,6 @@ function showComplete(){
     document.getElementById(
       "completeScreen"
     );
-
 
   const image=
     document.getElementById(
@@ -2753,36 +2222,26 @@ function showComplete(){
     image.src=
       completeImageData;
 
-    image.style.display=
-      "block";
+    image.style.display="block";
 
   }else{
 
-    image.removeAttribute(
-      "src"
-    );
-
-    image.style.display=
-      "none";
+    image.style.display="none";
 
   }
 
 
-  screen.classList.add(
-    "show"
-  );
+  screen.classList.add("show");
 
 }
 
 
-/* =========================================
+/* =====================================
    ボタン
-========================================= */
+===================================== */
 
 document
-  .getElementById(
-    "settingBtn"
-  )
+  .getElementById("settingBtn")
   .addEventListener(
     "click",
     openSettings
@@ -2790,9 +2249,7 @@ document
 
 
 document
-  .getElementById(
-    "closeBtn"
-  )
+  .getElementById("closeBtn")
   .addEventListener(
     "click",
     closeSettings
@@ -2800,9 +2257,7 @@ document
 
 
 document
-  .getElementById(
-    "saveBtn"
-  )
+  .getElementById("saveBtn")
   .addEventListener(
     "click",
     saveSettings
@@ -2810,9 +2265,7 @@ document
 
 
 document
-  .getElementById(
-    "startBtn"
-  )
+  .getElementById("startBtn")
   .addEventListener(
     "click",
     startGame
@@ -2820,9 +2273,7 @@ document
 
 
 document
-  .getElementById(
-    "resetBtn"
-  )
+  .getElementById("resetBtn")
   .addEventListener(
     "click",
     startGame
@@ -2830,9 +2281,7 @@ document
 
 
 document
-  .getElementById(
-    "completeClose"
-  )
+  .getElementById("completeClose")
   .addEventListener(
     "click",
     function(){
@@ -2841,9 +2290,7 @@ document
         .getElementById(
           "completeScreen"
         )
-        .classList.remove(
-          "show"
-        );
+        .classList.remove("show");
 
       startGame();
 
@@ -2852,9 +2299,7 @@ document
 
 
 document
-  .querySelectorAll(
-    ".gift-btn"
-  )
+  .querySelectorAll(".gift-btn")
   .forEach(btn=>{
 
     btn.addEventListener(
@@ -2873,9 +2318,9 @@ document
   });
 
 
-/* =========================================
+/* =====================================
    初期化
-========================================= */
+===================================== */
 
 updateGiftButtons();
 
